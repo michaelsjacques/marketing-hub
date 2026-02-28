@@ -190,18 +190,144 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);-webkit
 .form-input::placeholder{color:var(--text-3)}
 textarea.form-input{min-height:100px;resize:vertical}
 
-/* Responsive */
+/* ═══ RESPONSIVE — MOBILE ═══ */
 @media(max-width:768px){
   .sidebar{display:none}
   .mobile-bar{display:flex !important}
-  .page-inner{padding:20px 16px 100px}
-  .grid-2,.grid-3,.grid-2-1{grid-template-columns:1fr}
+  .page-inner{padding:20px 14px 100px}
+  .page-title{font-size:22px !important}
+  .page-subtitle{font-size:13px !important}
+
+  /* Stack all multi-column grids */
+  .grid-2,.grid-3,.grid-2-1{grid-template-columns:1fr !important;gap:10px !important}
+
+  /* Any inline 4-col grid → 2x2 */
+  [style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr !important}
+  /* Any inline 3-col grid → stack */
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr !important}
+
+  /* CTA blocks */
+  .cta-block{flex-direction:column;gap:12px;padding:20px;text-align:center}
+  .cta-block h3{font-size:16px}
+  .cta-btn{width:100%}
+
+  /* Stat cards tighter */
+  .stat-card{padding:12px}
+  .stat-val{font-size:22px}
+
+  /* Mockup bodies */
+  .mock-body{padding:12px}
+
+  /* Feature list */
+  .feat-item{padding:10px 12px}
+  .feat-item p{font-size:11px}
+
+  /* Card padding */
+  .card-body{padding:12px}
+  .card-head{padding:10px 12px;gap:6px;flex-wrap:wrap}
+
+  /* ─── HOME ─── */
+  #tab-home .grid-3{grid-template-columns:1fr 1fr 1fr !important}
+  #tab-home .stat-card .stat-val{font-size:18px}
+  /* Hide mock sidebar on mobile */
+  .mock-body > div[style*="display:flex;gap:12px"] > div[style*="width:120px"]{display:none}
+
+  /* ─── OVERVIEW TAB ─── */
+  #tab-overview [id="mainChart"]{height:100px !important}
+
+  /* ─── SOCIAL TAB ─── */
+  #socialPreview .card-body{flex-direction:column !important}
+  #socialPreview .card-body > div[style*="width:260px"]{width:100% !important}
+  .cal-cell{min-height:32px}
+
+  /* ─── EMAIL TAB ─── */
+  #emailPreview .card-body{flex-direction:column !important}
+  #emailPreview .card-body > div[style*="width:300px"]{width:100% !important}
+  /* Email row badges */
+  #emailList > div{flex-wrap:wrap}
+  #emailList > div > div[style*="font-size:10px"]{display:none}
+
+  /* ─── PERFORMANCE TAB ─── */
+  #perfChart{height:100px !important}
+  #perfFunnel div > div:first-child{width:56px !important;font-size:8px !important}
+
+  /* ─── APPROVAL HUB ─── */
+  /* Kanban 3-col → stack */
+  #tab-hub [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr !important}
+
+  /* ─── STRATEGY TAB ─── */
+  #auditResults .grid-2{grid-template-columns:1fr !important}
+  /* Audit result score row → keep as flex */
+  #auditResults [style*="display:flex;gap:10px"]{flex-wrap:wrap}
+
+  /* ─── BRAND KIT ─── */
+  /* Color swatch row */
+  #tab-brandkit [style*="display:flex;gap:8px"] > div > div[style*="width:44px"]{width:34px !important;height:34px !important}
+
+  /* ─── CRM TAB ─── */
+  /* Hide table header */
+  #tab-crm .card > div[style*="grid-template-columns:2fr"]{display:none}
+  /* Table rows → card-style stacked */
+  #crmTable > div{grid-template-columns:1fr !important;gap:6px !important;padding:10px 12px !important}
+  #crmTable > div > div:nth-child(2){font-size:10px !important}
+  #crmTable > div > div:nth-child(3),
+  #crmTable > div > div:nth-child(4){display:inline-flex !important;font-size:10px}
+
+  /* ─── LEADS TAB ─── */
+  /* Lead cards - actions wrap */
+  #leadCards [style*="display:flex;gap:8px;margin-top"]{flex-wrap:wrap !important}
+  #leadCards [style*="display:flex;gap:8px;margin-top"] > *{flex:none !important}
+
+  /* ─── INVOICES TAB ─── */
+  /* Hide table header */
+  #tab-invoices .card > div[style*="grid-template-columns:60px"]{display:none}
+  /* Invoice rows → simplified */
+  #invoiceTable > div{grid-template-columns:1fr 1fr !important;gap:6px !important;padding:10px 12px !important}
+  #invoiceTable > div > div:nth-child(1),
+  #invoiceTable > div > div:nth-child(4),
+  #invoiceTable > div > div:nth-child(6){display:none !important}
+  /* Invoice preview → stack */
+  #invoicePreview .card-body{flex-direction:column !important}
+  #invoicePreview .card-body > div[style*="display:flex;justify-content"]{flex-direction:column !important;gap:12px}
+  #invoicePreview [style*="grid-template-columns:3fr"]{grid-template-columns:2fr 1fr 1fr 1fr !important;font-size:11px}
+
+  /* ─── PROPOSALS TAB ─── */
+  #proposalResult .grid-2{grid-template-columns:1fr !important}
+
+  /* ─── WHY US ─── */
+  #tab-whyus .grid-2{grid-template-columns:1fr !important}
+
+  /* ─── CONTACT ─── */
+  #tab-contact .grid-2{grid-template-columns:1fr !important}
+}
+
+/* ═══ EXTRA SMALL — PHONES ═══ */
+@media(max-width:420px){
+  .page-inner{padding:16px 12px 100px}
+  .page-title{font-size:20px !important}
+  .page-subtitle{font-size:12px !important}
+  .cta-block{padding:16px}
+  .cta-block h3{font-size:14px}
+  #tab-home .grid-3{grid-template-columns:1fr !important}
+  #tab-home .stat-card{padding:10px}
+  #tab-home .stat-val{font-size:18px}
+  /* 2x2 grids → stack on tiny phones */
+  [style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr !important}
+  /* Proposal cards 2x2 stays */
+  .cal-cell{min-height:28px}
+  #perfChart{height:80px !important}
+  /* Invoice preview table tighter */
+  #invoicePreview [style*="grid-template-columns:3fr"]{font-size:10px !important}
 }
 
 /* Mobile bar */
-.mobile-bar{display:none;padding:10px 16px;border-bottom:1px solid var(--border);overflow-x:auto;gap:4px;background:var(--bg);flex-shrink:0}
-.mobile-bar button{padding:6px 14px;border-radius:16px;font-size:11px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--text-3);cursor:pointer;white-space:nowrap;font-family:var(--font-body);transition:all 0.15s}
+.mobile-bar{display:none;padding:8px 14px;border-bottom:1px solid var(--border);overflow-x:auto;gap:4px;background:var(--bg);flex-shrink:0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mobile-bar::-webkit-scrollbar{display:none}
+.mobile-bar button{padding:6px 12px;border-radius:16px;font-size:10px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--text-3);cursor:pointer;white-space:nowrap;font-family:var(--font-body);transition:all 0.15s;flex-shrink:0}
 .mobile-bar button.active{background:var(--accent-dim);color:var(--accent);border-color:rgba(77,166,255,0.15)}
+.mobile-bar button.green-tab{color:rgba(34,197,94,0.5);border-color:rgba(34,197,94,0.1)}
+.mobile-bar button.green-tab.active{background:rgba(34,197,94,0.12);color:var(--green);border-color:rgba(34,197,94,0.2)}
+.mobile-bar .mob-sep{width:1px;height:20px;background:var(--border);flex-shrink:0;align-self:center;margin:0 2px}
 
 /* Coming soon badge */
 .coming-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600;background:rgba(77,166,255,0.08);color:var(--accent);border:1px solid rgba(77,166,255,0.12)}
@@ -248,7 +374,7 @@ textarea.form-input{min-height:100px;resize:vertical}
 
             <!-- Stats row -->
             <div class="grid-3" style="margin-top:28px;gap:10px">
-              <div class="stat-card" style="animation:glow-pulse 4s ease infinite"><div class="stat-val">8</div><div class="stat-label">Integrated Modules</div></div>
+              <div class="stat-card" style="animation:glow-pulse 4s ease infinite"><div class="stat-val">12</div><div class="stat-label">Integrated Modules</div></div>
               <div class="stat-card"><div class="stat-val" style="color:var(--green)">80%</div><div class="stat-label">Pre-Built & Ready</div></div>
               <div class="stat-card"><div class="stat-val" style="color:var(--purple)">∞</div><div class="stat-label">AI-Powered Suggestions</div></div>
             </div>
@@ -274,6 +400,11 @@ textarea.form-input{min-height:100px;resize:vertical}
                       <div onclick="goTab('strategy')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">◎ Strategy</div>
                       <div onclick="goTab('brandkit')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">◐ Brand Kit</div>
                       <div onclick="goTab('report')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">☰ Reports</div>
+                      <div style="height:1px;background:var(--border);margin:4px 0"></div>
+                      <div onclick="goTab('crm')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">◉ CRM</div>
+                      <div onclick="goTab('leads')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">◇ Leads</div>
+                      <div onclick="goTab('invoices')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">□ Invoices</div>
+                      <div onclick="goTab('proposals')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">▷ Proposals</div>
                     </div>
                     <div style="flex:1;display:flex;flex-direction:column;gap:10px">
                       <div class="grid-3" style="gap:8px">
@@ -843,6 +974,125 @@ textarea.form-input{min-height:100px;resize:vertical}
             </div>
             <div id="reportContent" style="margin-top:20px;display:none;animation:slideUp 0.4s ease both"></div>
             <div class="cta-block" style="margin-top:32px;animation:slideUp 0.4s ease 0.15s both"><div><h3>Your weekly marketing debrief.</h3><p>AI-generated, fully actionable.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ CRM LIST ══ -->
+        <div id="tab-crm" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(34,197,94,0.1);color:var(--green);border:1px solid rgba(34,197,94,0.2);margin-bottom:12px;letter-spacing:0.5px">◉ BUSINESS SUITE</div>
+              <div class="page-title">CRM List</div>
+              <div class="page-subtitle">Upload, browse, and segment your full contact list. Track anyone as a lead with one click.</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:20px;margin-bottom:16px;animation:slideUp 0.4s ease 0.06s both">
+              <div class="pill-green pill" id="crmCount" style="font-size:10px">0 contacts</div>
+              <button onclick="addCRMContact()" style="padding:6px 14px;background:var(--green);color:#000;border:none;border-radius:var(--r-sm);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-body)">+ Add Contact</button>
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;animation:slideUp 0.4s ease 0.08s both" id="crmSegments">
+              <div class="tag active" onclick="filterCRM('all')" style="cursor:pointer;border-color:rgba(34,197,94,0.2);background:rgba(34,197,94,0.08);color:var(--green)">All</div>
+              <div class="tag" onclick="filterCRM('customer')" style="cursor:pointer">Customers</div>
+              <div class="tag" onclick="filterCRM('prospect')" style="cursor:pointer">Prospects</div>
+              <div class="tag" onclick="filterCRM('partner')" style="cursor:pointer">Partners</div>
+              <div class="tag" onclick="filterCRM('vendor')" style="cursor:pointer">Vendors</div>
+              <div class="tag" onclick="filterCRM('lead')" style="cursor:pointer">Active Leads</div>
+            </div>
+            <div style="margin-bottom:14px;animation:slideUp 0.4s ease 0.1s both"><input type="text" class="form-input" placeholder="Search contacts..." oninput="searchCRM(this.value)" style="font-size:12px;padding:8px 12px"></div>
+            <div class="card" style="overflow:hidden;border-color:rgba(34,197,94,0.1);animation:slideUp 0.4s ease 0.12s both">
+              <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr 80px;gap:8px;padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(34,197,94,0.03)">
+                <div class="label">NAME</div><div class="label">EMAIL</div><div class="label">SEGMENT</div><div class="label">STATUS</div><div class="label">ACTIONS</div>
+              </div>
+              <div id="crmTable" style="max-height:400px;overflow-y:auto"></div>
+            </div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(34,197,94,0.06),rgba(34,197,94,0.02));border-color:rgba(34,197,94,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Your entire contact database.</h3><p>Segment, search, and convert to leads in one click.</p></div><button class="cta-btn" style="background:var(--green);color:#000" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ LEAD MANAGEMENT ══ -->
+        <div id="tab-leads" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(34,197,94,0.1);color:var(--green);border:1px solid rgba(34,197,94,0.2);margin-bottom:12px;letter-spacing:0.5px">◇ BUSINESS SUITE</div>
+              <div class="page-title">Lead Management</div>
+              <div class="page-subtitle">Track leads from your CRM, send automated emails, and advance them through your pipeline.</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:20px;margin-bottom:16px;animation:slideUp 0.4s ease 0.06s both">
+              <div class="pill-green pill" id="leadCount" style="font-size:10px">0 active leads</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:20px;animation:slideUp 0.4s ease 0.08s both">
+              <div style="text-align:center;padding:12px;border-radius:var(--r-sm);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1)"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--accent)" id="lead-new">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">NEW</div></div>
+              <div style="text-align:center;padding:12px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1)"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--amber)" id="lead-contacted">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">CONTACTED</div></div>
+              <div style="text-align:center;padding:12px;border-radius:var(--r-sm);background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.1)"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--purple)" id="lead-engaged">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">ENGAGED</div></div>
+              <div style="text-align:center;padding:12px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1)"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--green)" id="lead-converted">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">CONVERTED</div></div>
+            </div>
+            <div id="leadCards" style="display:flex;flex-direction:column;gap:8px;animation:slideUp 0.4s ease 0.12s both"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(34,197,94,0.06),rgba(34,197,94,0.02));border-color:rgba(34,197,94,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Every lead, managed.</h3><p>Automated emails, pipeline tracking, and conversion monitoring.</p></div><button class="cta-btn" style="background:var(--green);color:#000" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ INVOICES ══ -->
+        <div id="tab-invoices" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(34,197,94,0.1);color:var(--green);border:1px solid rgba(34,197,94,0.2);margin-bottom:12px;letter-spacing:0.5px">□ BUSINESS SUITE</div>
+              <div class="page-title">Invoice Generator</div>
+              <div class="page-subtitle">Send, receive, and track all invoices from clients, partners, and vendors. Click any invoice to preview.</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:20px;margin-bottom:16px;animation:slideUp 0.4s ease 0.06s both">
+              <button onclick="createInvoice()" style="padding:6px 14px;background:var(--green);color:#000;border:none;border-radius:var(--r-sm);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-body)">+ New Invoice</button>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;animation:slideUp 0.4s ease 0.08s both">
+              <div style="padding:12px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--green)" id="inv-paid">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">PAID</div></div>
+              <div style="padding:12px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--amber)" id="inv-pending">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">PENDING</div></div>
+              <div style="padding:12px;border-radius:var(--r-sm);background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--red)" id="inv-overdue">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">OVERDUE</div></div>
+              <div style="padding:12px;border-radius:var(--r-sm);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--accent)" id="inv-total">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">TOTAL</div></div>
+            </div>
+            <div class="card" style="overflow:hidden;border-color:rgba(34,197,94,0.1);animation:slideUp 0.4s ease 0.12s both">
+              <div style="display:grid;grid-template-columns:60px 2fr 1fr 1fr 1fr 80px;gap:8px;padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(34,197,94,0.03)">
+                <div class="label">INV #</div><div class="label">CLIENT / VENDOR</div><div class="label">AMOUNT</div><div class="label">DUE DATE</div><div class="label">STATUS</div><div class="label">TYPE</div>
+              </div>
+              <div id="invoiceTable" style="max-height:360px;overflow-y:auto"></div>
+            </div>
+            <div id="invoicePreview" style="margin-top:16px;display:none;animation:slideUp 0.3s ease both"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(34,197,94,0.06),rgba(34,197,94,0.02));border-color:rgba(34,197,94,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>All invoices, one place.</h3><p>Send, receive, track — never lose an invoice again.</p></div><button class="cta-btn" style="background:var(--green);color:#000" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ PROPOSALS ══ -->
+        <div id="tab-proposals" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(34,197,94,0.1);color:var(--green);border:1px solid rgba(34,197,94,0.2);margin-bottom:12px;letter-spacing:0.5px">▷ BUSINESS SUITE</div>
+              <div class="page-title">Proposal Generator</div>
+              <div class="page-subtitle">Generate proposals for freelancers and vendors — informed by AI suggestions from your marketing data.</div>
+            </div>
+            <div class="label" style="margin-top:20px;margin-bottom:8px;animation:slideUp 0.4s ease 0.06s both">WHAT DO YOU NEED?</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;animation:slideUp 0.4s ease 0.08s both">
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(34,197,94,0.1)" onclick="generateProposal('design')" onmouseenter="this.style.borderColor='rgba(34,197,94,0.3)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(34,197,94,0.1)';this.style.transform=''">
+                <div style="font-size:24px;margin-bottom:8px">🎨</div>
+                <div style="font-family:var(--font-head);font-weight:700;font-size:13px">Design</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:3px">Graphics, branding, creative</div>
+              </div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(34,197,94,0.1)" onclick="generateProposal('photo')" onmouseenter="this.style.borderColor='rgba(34,197,94,0.3)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(34,197,94,0.1)';this.style.transform=''">
+                <div style="font-size:24px;margin-bottom:8px">📷</div>
+                <div style="font-family:var(--font-head);font-weight:700;font-size:13px">Photography</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:3px">Product, lifestyle, events</div>
+              </div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(34,197,94,0.1)" onclick="generateProposal('video')" onmouseenter="this.style.borderColor='rgba(34,197,94,0.3)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(34,197,94,0.1)';this.style.transform=''">
+                <div style="font-size:24px;margin-bottom:8px">🎬</div>
+                <div style="font-family:var(--font-head);font-weight:700;font-size:13px">Video</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:3px">Reels, ads, brand films</div>
+              </div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(34,197,94,0.1)" onclick="generateProposal('content')" onmouseenter="this.style.borderColor='rgba(34,197,94,0.3)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(34,197,94,0.1)';this.style.transform=''">
+                <div style="font-size:24px;margin-bottom:8px">✍️</div>
+                <div style="font-family:var(--font-head);font-weight:700;font-size:13px">Content</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:3px">Copy, blogs, social content</div>
+              </div>
+            </div>
+            <div id="proposalResult" style="display:none;animation:slideUp 0.3s ease both"></div>
+            <div class="label" style="margin-bottom:8px;margin-top:8px;animation:slideUp 0.4s ease 0.12s both">RECENT PROPOSALS</div>
+            <div id="pastProposals" style="display:flex;flex-direction:column;gap:8px;animation:slideUp 0.4s ease 0.14s both"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(34,197,94,0.06),rgba(34,197,94,0.02));border-color:rgba(34,197,94,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>AI-informed proposals, ready to send.</h3><p>Connected to your strategy data for smarter vendor partnerships.</p></div><button class="cta-btn" style="background:var(--green);color:#000" onclick="goTab('contact')">See it Live →</button></div>
           </div>
         </div>
 
@@ -1553,6 +1803,267 @@ function generateReport() {
     animateCount(document.getElementById('rpt-conv'), rand(80,400));
   }, 300);
 }
+
+// ═══ BUSINESS TOOLS ═══
+const CRM_DATA = [];
+const FIRST_NAMES = ['Sarah','James','Maria','David','Lisa','Mike','Emily','Chris','Anna','Robert','Jessica','Tom','Nina','Alex','Rachel','Kevin','Olivia','Marcus','Sophia','Daniel'];
+const LAST_NAMES = ['Johnson','Chen','Williams','Rodriguez','Smith','Patel','Brown','Kim','Garcia','Davis','Martinez','Wilson','Lee','Anderson','Thomas','Taylor','Moore','Jackson','White','Harris'];
+const COMPANIES = ['Acme Corp','Vertex Digital','Bright Solutions','NovaTech','Cascade Media','Peak Performance','BlueStar Agency','Quantum Labs','RedOak Partners','FreshVine Co','Summit Group','CloudBridge','IronGate Inc','Mosaic Creative','TrueNorth Digital'];
+const SEGMENTS = ['customer','prospect','partner','vendor','lead'];
+
+function generateCRMData() {
+  CRM_DATA.length = 0;
+  for (let i = 0; i < 24; i++) {
+    const fn = FIRST_NAMES[rand(0,FIRST_NAMES.length-1)];
+    const ln = LAST_NAMES[rand(0,LAST_NAMES.length-1)];
+    const co = COMPANIES[rand(0,COMPANIES.length-1)];
+    const seg = SEGMENTS[rand(0,SEGMENTS.length-1)];
+    CRM_DATA.push({ id:i, name:fn+' '+ln, email:fn.toLowerCase()+'.'+ln.toLowerCase()+'@'+co.toLowerCase().replace(/\s/g,'')+'.com', company:co, segment:seg, status:['Active','Active','Active','Inactive'][rand(0,3)], lastContact:rand(1,30)+'d ago', isLead:seg==='lead'||Math.random()>0.7 });
+  }
+}
+
+function initCRMTab() {
+  if (!CRM_DATA.length) generateCRMData();
+  renderCRM();
+}
+function initLeadsTab() {
+  if (!CRM_DATA.length) generateCRMData();
+  renderLeads();
+}
+function initInvoicesTab() {
+  renderInvoices();
+}
+function initProposalsTab() {
+  renderPastProposals();
+}
+
+let crmFilter = 'all';
+function filterCRM(seg) {
+  crmFilter = seg;
+  document.querySelectorAll('#crmSegments .tag').forEach(t => { t.classList.remove('active'); t.style.borderColor=''; t.style.background=''; t.style.color=''; });
+  event.target.classList.add('active');
+  event.target.style.borderColor='rgba(34,197,94,0.2)'; event.target.style.background='rgba(34,197,94,0.08)'; event.target.style.color='var(--green)';
+  renderCRM();
+}
+function searchCRM(q) { crmFilter = 'search:'+q; renderCRM(); }
+
+function renderCRM() {
+  let data = CRM_DATA;
+  if (crmFilter.startsWith('search:')) {
+    const q = crmFilter.replace('search:','').toLowerCase();
+    data = data.filter(c => c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || c.company.toLowerCase().includes(q));
+  } else if (crmFilter !== 'all') {
+    data = data.filter(c => c.segment === crmFilter);
+  }
+  document.getElementById('crmCount').textContent = data.length + ' contacts';
+  const table = document.getElementById('crmTable');
+  const segColors = {customer:'var(--green)',prospect:'var(--accent)',partner:'var(--purple)',vendor:'var(--amber)',lead:'var(--cyan)'};
+  const segBgs = {customer:'rgba(34,197,94,0.06)',prospect:'rgba(77,166,255,0.06)',partner:'rgba(167,139,250,0.06)',vendor:'rgba(245,158,11,0.06)',lead:'rgba(0,212,255,0.06)'};
+  table.innerHTML = data.map((c,i) => `
+    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr 80px;gap:8px;padding:9px 14px;border-bottom:1px solid var(--border);transition:all 0.15s;cursor:default;opacity:0;transform:translateX(-8px)" id="crm-row-${i}" onmouseenter="this.style.background='rgba(255,255,255,0.03)'" onmouseleave="this.style.background=''">
+      <div style="display:flex;align-items:center;gap:8px"><div style="width:26px;height:26px;border-radius:50%;background:${segBgs[c.segment]};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:${segColors[c.segment]}">${c.name[0]}</div><div><div style="font-size:12px;font-weight:600">${c.name}</div><div style="font-size:10px;color:var(--text-3)">${c.company}</div></div></div>
+      <div style="font-size:11px;color:var(--text-2);display:flex;align-items:center">${c.email}</div>
+      <div style="display:flex;align-items:center"><span style="font-size:9px;padding:2px 8px;border-radius:8px;background:${segBgs[c.segment]};color:${segColors[c.segment]};font-weight:600;text-transform:capitalize">${c.segment}</span></div>
+      <div style="display:flex;align-items:center;font-size:11px;color:${c.status==='Active'?'var(--green)':'var(--text-3)'}">${c.status}</div>
+      <div style="display:flex;align-items:center;gap:4px">
+        ${!c.isLead ? `<button onclick="trackAsLead(${c.id})" style="padding:3px 8px;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.12);border-radius:4px;color:var(--green);font-size:9px;font-weight:600;cursor:pointer;font-family:var(--font-body)">Track</button>` : `<span style="font-size:9px;color:var(--green);font-weight:600">● Lead</span>`}
+      </div>
+    </div>
+  `).join('');
+  data.forEach((_,i) => { setTimeout(() => { const r=document.getElementById('crm-row-'+i); if(r){r.style.transition='all 0.3s ease';r.style.opacity='1';r.style.transform='translateX(0)';} }, 30+i*20); });
+}
+
+function addCRMContact() {
+  const fn=FIRST_NAMES[rand(0,FIRST_NAMES.length-1)],ln=LAST_NAMES[rand(0,LAST_NAMES.length-1)],co=COMPANIES[rand(0,COMPANIES.length-1)],seg=SEGMENTS[rand(0,SEGMENTS.length-1)];
+  CRM_DATA.unshift({id:CRM_DATA.length,name:fn+' '+ln,email:fn.toLowerCase()+'.'+ln.toLowerCase()+'@'+co.toLowerCase().replace(/\s/g,'')+'.com',company:co,segment:seg,status:'Active',lastContact:'Just now',isLead:false});
+  renderCRM();
+}
+function trackAsLead(id) { const c=CRM_DATA.find(x=>x.id===id); if(c){c.isLead=true;c.segment='lead';} renderCRM(); }
+
+// ═ LEADS ═
+function renderLeads() {
+  const leads = CRM_DATA.filter(c => c.isLead);
+  document.getElementById('leadCount').textContent = leads.length + ' active leads';
+  const stages = ['New','Contacted','Engaged','Converted'];
+  const stageColors = ['var(--accent)','var(--amber)','var(--purple)','var(--green)'];
+  const stageBgs = ['rgba(77,166,255,0.04)','rgba(245,158,11,0.04)','rgba(167,139,250,0.04)','rgba(34,197,94,0.04)'];
+  // Assign random stages
+  leads.forEach(l => { if(!l.leadStage) l.leadStage = stages[rand(0,3)]; if(!l.emailsSent) l.emailsSent = rand(0,5); if(!l.lastOpen) l.lastOpen = rand(0,1)?rand(1,7)+'d ago':'Not yet'; });
+  const counts = {New:0,Contacted:0,Engaged:0,Converted:0};
+  leads.forEach(l => counts[l.leadStage]++);
+  animateCount(document.getElementById('lead-new'),counts.New);
+  animateCount(document.getElementById('lead-contacted'),counts.Contacted);
+  animateCount(document.getElementById('lead-engaged'),counts.Engaged);
+  animateCount(document.getElementById('lead-converted'),counts.Converted);
+
+  const el = document.getElementById('leadCards');
+  el.innerHTML = leads.map((l,i) => {
+    const si = stages.indexOf(l.leadStage);
+    const nextStage = si < 3 ? stages[si+1] : null;
+    return `
+    <div class="card" style="padding:14px;border-color:rgba(34,197,94,0.08);opacity:0;transform:translateY(8px);transition:all 0.3s ease ${i*0.05}s" id="lead-card-${i}">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:50%;background:${stageBgs[si]};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:${stageColors[si]}">${l.name[0]}</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:600">${l.name}</div>
+          <div style="font-size:10px;color:var(--text-3)">${l.company} · ${l.email}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:9px;padding:2px 8px;border-radius:8px;background:${stageBgs[si]};color:${stageColors[si]};font-weight:700">${l.leadStage}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <div style="flex:1;padding:6px 8px;border-radius:4px;background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:10px;text-align:center"><span style="font-weight:700;color:var(--accent)">${l.emailsSent}</span> <span style="color:var(--text-3)">emails sent</span></div>
+        <div style="flex:1;padding:6px 8px;border-radius:4px;background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:10px;text-align:center"><span style="color:var(--text-3)">Last open:</span> <span style="font-weight:700;color:${l.lastOpen==='Not yet'?'var(--text-3)':'var(--green)'}">${l.lastOpen}</span></div>
+        <button onclick="sendLeadEmail(${l.id})" style="padding:4px 12px;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.12);border-radius:4px;color:var(--green);font-size:10px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.12)'" onmouseleave="this.style.background='rgba(34,197,94,0.06)'">✉ Send Email</button>
+        ${nextStage ? `<button onclick="advanceLead(${l.id},'${nextStage}')" style="padding:4px 12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:var(--text-2);font-size:10px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.08)'" onmouseleave="this.style.background='rgba(255,255,255,0.04)'">${nextStage} →</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+  leads.forEach((_,i) => { setTimeout(() => { const el=document.getElementById('lead-card-'+i); if(el){el.style.opacity='1';el.style.transform='translateY(0)';} }, 80+i*40); });
+}
+function sendLeadEmail(id) { const l=CRM_DATA.find(c=>c.id===id); if(l){l.emailsSent=(l.emailsSent||0)+1;} renderLeads(); }
+function advanceLead(id,stage) { const l=CRM_DATA.find(c=>c.id===id); if(l) l.leadStage=stage; renderLeads(); }
+
+// ═ INVOICES ═
+let INVOICES = [];
+function generateInvoices() {
+  INVOICES = [];
+  const types = ['Sent','Received'];
+  const statuses = ['Paid','Pending','Overdue','Paid','Paid','Pending'];
+  for (let i = 0; i < 10; i++) {
+    const type = types[rand(0,1)];
+    const status = statuses[rand(0,statuses.length-1)];
+    const comp = COMPANIES[rand(0,COMPANIES.length-1)];
+    INVOICES.push({ id:1000+i, company:comp, amount:rand(500,12000), date:'Mar '+rand(1,28)+', 2026', status, type, items:[
+      {desc:type==='Sent'?'Marketing services':'Freelance '+['design','photography','video','copywriting'][rand(0,3)], qty:rand(1,20), rate:rand(50,250)},
+      {desc:['Consulting','Revisions','Rush delivery','Additional assets'][rand(0,3)], qty:rand(1,5), rate:rand(75,300)}
+    ]});
+  }
+}
+function renderInvoices() {
+  if (!INVOICES.length) generateInvoices();
+  const paid = INVOICES.filter(i=>i.status==='Paid').reduce((s,i)=>s+i.amount,0);
+  const pending = INVOICES.filter(i=>i.status==='Pending').reduce((s,i)=>s+i.amount,0);
+  const overdue = INVOICES.filter(i=>i.status==='Overdue').reduce((s,i)=>s+i.amount,0);
+  animateCount(document.getElementById('inv-paid'),paid,'$');
+  animateCount(document.getElementById('inv-pending'),pending,'$');
+  animateCount(document.getElementById('inv-overdue'),overdue,'$');
+  animateCount(document.getElementById('inv-total'),paid+pending+overdue,'$');
+  const statusColors={Paid:'var(--green)',Pending:'var(--amber)',Overdue:'var(--red)'};
+  const statusBgs={Paid:'rgba(34,197,94,0.06)',Pending:'rgba(245,158,11,0.06)',Overdue:'rgba(239,68,68,0.06)'};
+  const table = document.getElementById('invoiceTable');
+  table.innerHTML = INVOICES.map((inv,i) => `
+    <div onclick="showInvoicePreview(${i})" style="display:grid;grid-template-columns:60px 2fr 1fr 1fr 1fr 80px;gap:8px;padding:9px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:all 0.15s;opacity:0;transform:translateX(-8px)" id="inv-row-${i}" onmouseenter="this.style.background='rgba(255,255,255,0.03)'" onmouseleave="this.style.background=''">
+      <div style="font-size:11px;font-family:var(--font-mono);color:var(--text-3);display:flex;align-items:center">#${inv.id}</div>
+      <div style="font-size:12px;font-weight:600;display:flex;align-items:center">${inv.company}</div>
+      <div style="font-size:12px;font-weight:700;display:flex;align-items:center">$${inv.amount.toLocaleString()}</div>
+      <div style="font-size:11px;color:var(--text-3);display:flex;align-items:center">${inv.date}</div>
+      <div style="display:flex;align-items:center"><span style="font-size:9px;padding:2px 8px;border-radius:8px;background:${statusBgs[inv.status]};color:${statusColors[inv.status]};font-weight:600">${inv.status}</span></div>
+      <div style="display:flex;align-items:center"><span style="font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,0.04);color:var(--text-3);font-weight:500">${inv.type}</span></div>
+    </div>
+  `).join('');
+  INVOICES.forEach((_,i) => { setTimeout(() => { const r=document.getElementById('inv-row-'+i); if(r){r.style.transition='all 0.3s ease';r.style.opacity='1';r.style.transform='translateX(0)';} }, 40+i*25); });
+}
+function showInvoicePreview(idx) {
+  const inv = INVOICES[idx];
+  const el = document.getElementById('invoicePreview');
+  el.style.display='block'; el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+  const statusColors={Paid:'var(--green)',Pending:'var(--amber)',Overdue:'var(--red)'};
+  el.innerHTML = `
+    <div class="card" style="border-color:rgba(34,197,94,0.15);overflow:hidden">
+      <div class="card-head" style="background:rgba(34,197,94,0.03);display:flex;align-items:center;gap:10px">
+        <span style="font-family:var(--font-head);font-weight:700;font-size:14px">Invoice #${inv.id}</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,0.04);color:var(--text-3)">${inv.type}</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:8px;color:${statusColors[inv.status]};font-weight:700">${inv.status}</span>
+        <button onclick="document.getElementById('invoicePreview').style.display='none'" style="margin-left:auto;background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px">×</button>
+      </div>
+      <div class="card-body">
+        <div style="display:flex;justify-content:space-between;margin-bottom:20px">
+          <div><div class="label" style="margin-bottom:4px">${inv.type==='Sent'?'BILLED TO':'RECEIVED FROM'}</div><div style="font-size:14px;font-weight:700">${inv.company}</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">${inv.date}</div></div>
+          <div style="text-align:right"><div class="label" style="margin-bottom:4px">AMOUNT DUE</div><div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--green)">$${inv.amount.toLocaleString()}</div></div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden">
+          <div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr;gap:8px;padding:8px 12px;background:rgba(34,197,94,0.03);border-bottom:1px solid var(--border)"><div class="label">DESCRIPTION</div><div class="label">QTY</div><div class="label">RATE</div><div class="label">TOTAL</div></div>
+          ${inv.items.map(it => `<div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);font-size:12px"><div style="color:var(--text-2)">${it.desc}</div><div>${it.qty}</div><div>$${it.rate}</div><div style="font-weight:700">$${(it.qty*it.rate).toLocaleString()}</div></div>`).join('')}
+          <div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr;gap:8px;padding:8px 12px;font-size:12px;font-weight:700"><div></div><div></div><div>Total</div><div style="color:var(--green)">$${inv.amount.toLocaleString()}</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+function createInvoice() {
+  const comp=COMPANIES[rand(0,COMPANIES.length-1)];
+  INVOICES.unshift({id:1000+INVOICES.length,company:comp,amount:rand(500,12000),date:'Mar '+rand(1,28)+', 2026',status:'Pending',type:'Sent',items:[{desc:'Marketing services',qty:rand(1,20),rate:rand(50,250)},{desc:'Additional assets',qty:rand(1,5),rate:rand(75,300)}]});
+  renderInvoices();
+}
+
+// ═ PROPOSALS ═
+const PROP_DATA = {
+  design:{title:'Graphic Design Services',icon:'🎨',scope:['Brand identity refresh','Social media template suite (20 templates)','Ad creative set (5 variations)','Email header designs (4)'],timeline:'2-3 weeks',budget:'$2,500 — $4,500',aiNote:'Based on Strategy audit: Competitor A just refreshed their brand. New creative will help differentiate.'},
+  photo:{title:'Photography Services',icon:'📷',scope:['Product photography session (full catalog)','Lifestyle photography (8 scenes)','Team headshots (up to 10 people)','Post-production editing & retouching'],timeline:'1-2 weeks + 1 week editing',budget:'$3,000 — $6,000',aiNote:'Based on Social analysis: Posts with original photography get 4x the engagement vs stock images.'},
+  video:{title:'Video Production Services',icon:'🎬',scope:['Brand story video (60-90 sec)','Social Reels package (6 vertical videos)','Product demo video','Behind-the-scenes content day'],timeline:'3-4 weeks',budget:'$5,000 — $10,000',aiNote:'Based on Performance data: Video Reels are your top-performing format — +45% reach vs avg. Double down.'},
+  content:{title:'Content Creation Services',icon:'✍️',scope:['Blog content strategy + 8 articles','Social media copy calendar (30 days)','Email sequence copywriting (5 emails)','Ad copy variations (15 headlines + descriptions)'],timeline:'2-4 weeks',budget:'$1,800 — $3,500',aiNote:'Based on Website audit: Blog content gaps identified in 5 high-value keywords. Filling these could drive +30% organic traffic.'},
+};
+
+function generateProposal(type) {
+  const p = PROP_DATA[type];
+  const el = document.getElementById('proposalResult');
+  el.style.display='block'; el.innerHTML = `<div class="card" style="padding:24px;text-align:center;border-color:rgba(34,197,94,0.15)"><div style="font-size:20px;animation:pulse 1s infinite">${p.icon}</div><div style="font-size:13px;color:var(--text-2);margin-top:8px">Generating ${p.title} proposal...</div></div>`;
+  el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+  setTimeout(() => {
+    el.innerHTML = `
+    <div class="card" style="border-color:rgba(34,197,94,0.15);overflow:hidden">
+      <div class="card-head" style="background:rgba(34,197,94,0.04)">
+        <span style="font-size:18px">${p.icon}</span>
+        <span style="font-family:var(--font-head);font-weight:700;font-size:14px">${p.title} — Proposal</span>
+        <span class="pill-green pill" style="margin-left:auto;font-size:9px">GENERATED</span>
+      </div>
+      <div class="card-body">
+        <div class="grid-2" style="gap:16px">
+          <div>
+            <div class="label" style="margin-bottom:8px">SCOPE OF WORK</div>
+            <div style="display:flex;flex-direction:column;gap:6px">${p.scope.map((s,i) => `<div style="padding:8px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;display:flex;align-items:center;gap:8px;opacity:0;transform:translateX(-8px);transition:all 0.3s ease ${i*0.08}s" id="scope-${i}"><span style="color:var(--green);font-weight:700">✓</span>${s}</div>`).join('')}</div>
+            <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="padding:10px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1)"><div class="label" style="margin-bottom:3px;color:var(--green)">TIMELINE</div><div style="font-size:13px;font-weight:700">${p.timeline}</div></div>
+              <div style="padding:10px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1)"><div class="label" style="margin-bottom:3px;color:var(--green)">BUDGET RANGE</div><div style="font-size:13px;font-weight:700">${p.budget}</div></div>
+            </div>
+          </div>
+          <div>
+            <div style="padding:14px;border-radius:var(--r-sm);background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);margin-bottom:12px">
+              <div class="label label-accent" style="margin-bottom:6px">✦ AI CONTEXT — WHY THIS MATTERS</div>
+              <div style="font-size:12px;color:var(--text-2);line-height:1.6">${p.aiNote}</div>
+            </div>
+            <div class="label" style="margin-bottom:8px">PROPOSAL ACTIONS</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <button style="width:100%;padding:10px;background:var(--green);color:#000;border:none;border-radius:var(--r-sm);font-weight:700;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all 0.15s" onmouseenter="this.style.filter='brightness(1.1)'" onmouseleave="this.style.filter=''">Send to Vendor / Freelancer</button>
+              <button style="width:100%;padding:10px;background:rgba(255,255,255,0.04);color:var(--text-2);border:1px solid var(--border);border-radius:var(--r-sm);font-weight:600;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.08)'" onmouseleave="this.style.background='rgba(255,255,255,0.04)'">Edit Scope</button>
+              <button style="width:100%;padding:10px;background:rgba(255,255,255,0.04);color:var(--text-2);border:1px solid var(--border);border-radius:var(--r-sm);font-weight:600;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.08)'" onmouseleave="this.style.background='rgba(255,255,255,0.04)'">Download PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+    p.scope.forEach((_,i) => { setTimeout(() => { const el=document.getElementById('scope-'+i); if(el){el.style.opacity='1';el.style.transform='translateX(0)';} }, 100+i*80); });
+  }, 1200);
+}
+
+function renderPastProposals() {
+  const el = document.getElementById('pastProposals');
+  const past = [
+    {icon:'🎬',title:'Video Production — Brand Story',vendor:'Cascade Media',date:'Feb 20, 2026',status:'Accepted',amount:'$7,200'},
+    {icon:'📷',title:'Product Photography',vendor:'FreshVine Co',date:'Feb 12, 2026',status:'Completed',amount:'$4,500'},
+    {icon:'✍️',title:'Blog Content Package',vendor:'RedOak Partners',date:'Jan 28, 2026',status:'Completed',amount:'$2,800'},
+  ];
+  el.innerHTML = past.map((p,i) => `
+    <div style="padding:12px;border-radius:var(--r-sm);border:1px solid rgba(34,197,94,0.08);background:rgba(255,255,255,0.015);display:flex;align-items:center;gap:12px;transition:all 0.15s;opacity:0;transform:translateY(6px)" id="past-prop-${i}" onmouseenter="this.style.borderColor='rgba(34,197,94,0.2)'" onmouseleave="this.style.borderColor='rgba(34,197,94,0.08)'">
+      <div style="font-size:20px">${p.icon}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600">${p.title}</div><div style="font-size:10px;color:var(--text-3)">${p.vendor} · ${p.date}</div></div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:13px;color:var(--green)">${p.amount}</div>
+      <div class="pill-green pill" style="font-size:9px">${p.status}</div>
+    </div>
+  `).join('');
+  past.forEach((_,i) => { setTimeout(() => { const el=document.getElementById('past-prop-'+i); if(el){el.style.opacity='1';el.style.transform='translateY(0)';el.style.transition='all 0.3s ease';} }, 100+i*60); });
+}
 const NAV = [
   { id:'home',       icon:'✦', label:'Home' },
   { id:'_sep1' },
@@ -1564,6 +2075,11 @@ const NAV = [
   { id:'strategy',   icon:'◎', label:'Strategy' },
   { id:'brandkit',   icon:'◐', label:'Brand Kit' },
   { id:'report',     icon:'☰', label:'Weekly Report' },
+  { id:'_sep2' },
+  { id:'crm',        icon:'◉', label:'CRM List',        green:true },
+  { id:'leads',      icon:'◇', label:'Lead Management', green:true },
+  { id:'invoices',   icon:'□', label:'Invoices',        green:true },
+  { id:'proposals',  icon:'▷', label:'Proposals',       green:true },
 ];
 
 const MODULES = [
@@ -1575,6 +2091,10 @@ const MODULES = [
   { id:'strategy',   icon:'◎', name:'Strategy Suite',   desc:'Paid ads, website analysis, competitors, audience segments, events', ai:true },
   { id:'brandkit',   icon:'◐', name:'Brand Kit',        desc:'Logo, colors, tone, keywords, selling points — your brand DNA' },
   { id:'report',     icon:'☰', name:'Weekly Report',   desc:'Comprehensive weekly breakdown with AI-recommended actions', ai:true },
+  { id:'crm',        icon:'◉', name:'CRM List',         desc:'Upload, browse, and segment your full contact list', accent:'green' },
+  { id:'leads',      icon:'◇', name:'Lead Management',  desc:'Track leads, send automated emails, monitor engagement', accent:'green' },
+  { id:'invoices',   icon:'□', name:'Invoices',         desc:'Send, receive, and track all invoices from clients and vendors', accent:'green' },
+  { id:'proposals',  icon:'▷', name:'Proposals',        desc:'Generate proposals for freelancers based on AI suggestions', accent:'green' },
 ];
 
 let activeTab = 'home';
@@ -1590,20 +2110,38 @@ function buildNav() {
       const sep = document.createElement('div');
       sep.className = 'nav-sep';
       sidebar.appendChild(sep);
+      const msep = document.createElement('div');
+      msep.className = 'mob-sep';
+      mobile.appendChild(msep);
       return;
     }
     const btn = document.createElement('button');
     btn.className = 'nav-btn' + (activeTab === item.id ? ' active' : '');
+    if (item.green && activeTab === item.id) {
+      btn.style.background = 'rgba(34,197,94,0.12)';
+      btn.style.color = 'var(--green)';
+      btn.style.borderLeftColor = 'var(--green)';
+    } else if (item.green) {
+      btn.style.color = 'rgba(34,197,94,0.45)';
+    }
     btn.innerHTML = `<span class="nav-icon">${item.icon}</span>${item.label}`;
     btn.onclick = () => goTab(item.id);
     sidebar.appendChild(btn);
 
     const mbtn = document.createElement('button');
-    mbtn.className = activeTab === item.id ? 'active' : '';
+    mbtn.className = (activeTab === item.id ? 'active' : '') + (item.green ? ' green-tab' : '');
     mbtn.textContent = item.label;
     mbtn.onclick = () => goTab(item.id);
     mobile.appendChild(mbtn);
   });
+  // Add CTA buttons to mobile bar
+  const msep2 = document.createElement('div'); msep2.className = 'mob-sep'; mobile.appendChild(msep2);
+  const demoBtn = document.createElement('button');
+  demoBtn.textContent = 'Book Demo'; demoBtn.style.cssText='background:var(--accent);color:#fff;border-color:var(--accent)';
+  demoBtn.onclick = () => goTab('contact'); mobile.appendChild(demoBtn);
+  const whyBtn = document.createElement('button');
+  whyBtn.className = activeTab === 'whyus' ? 'active' : '';
+  whyBtn.textContent = 'Why Us?'; whyBtn.onclick = () => goTab('whyus'); mobile.appendChild(whyBtn);
 }
 
 function buildModuleGrid() {
@@ -1618,9 +2156,9 @@ function buildModuleGrid() {
     card.onclick = () => goTab(m.id);
     card.innerHTML = `
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <div style="width:32px;height:32px;border-radius:8px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:14px">${m.icon}</div>
+        <div style="width:32px;height:32px;border-radius:8px;background:${m.accent==='green'?'rgba(34,197,94,0.1)':'var(--accent-dim)'};display:flex;align-items:center;justify-content:center;font-size:14px">${m.icon}</div>
         <div style="font-family:var(--font-head);font-weight:700;font-size:14px">${m.name}</div>
-        ${m.ai ? '<span class="pill-accent pill" style="margin-left:auto;font-size:8px">✦ AI</span>' : ''}
+        ${m.ai ? '<span class="pill-accent pill" style="margin-left:auto;font-size:8px">✦ AI</span>' : m.accent==='green' ? '<span class="pill-green pill" style="margin-left:auto;font-size:8px">⬢ NEW</span>' : ''}
       </div>
       <p style="font-size:12px;color:var(--text-3);line-height:1.5">${m.desc}</p>
     `;
@@ -1642,6 +2180,12 @@ function goTab(id) {
   }
   document.getElementById('mainScroll').scrollTop = 0;
   buildNav();
+  // Scroll mobile bar to active tab
+  setTimeout(() => {
+    const mb = document.getElementById('mobileBar');
+    const act = mb.querySelector('.active');
+    if (act) act.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  }, 50);
   // Fire overview data when switching to overview tab
   if (id === 'overview') setTimeout(regenerateAll, 150);
   if (id === 'social') setTimeout(initSocialTab, 150);
@@ -1649,6 +2193,11 @@ function goTab(id) {
   if (id === 'performance') setTimeout(initPerfTab, 150);
   if (id === 'hub') setTimeout(initHubTab, 150);
   if (id === 'report') { document.getElementById('reportContent').style.display='none'; }
+  if (id === 'business') setTimeout(initBusinessTab, 150);
+  if (id === 'crm') setTimeout(initCRMTab, 150);
+  if (id === 'leads') setTimeout(initLeadsTab, 150);
+  if (id === 'invoices') setTimeout(initInvoicesTab, 150);
+  if (id === 'proposals') setTimeout(initProposalsTab, 150);
 }
 
 function handleSubmit(e) {
