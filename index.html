@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Marketing Hub — Your Entire Marketing Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0D0D;
+  --bg2:#111111;
+  --surface:#181818;
+  --surface2:#202020;
+  --surface3:#282828;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --text:#EDEDED;
+  --text-2:rgba(237,237,237,0.5);
+  --text-3:rgba(237,237,237,0.25);
+  --accent:#4DA6FF;
+  --accent-dim:rgba(77,166,255,0.12);
+  --accent-glow:rgba(77,166,255,0.08);
+  --green:#22c55e;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --purple:#a78bfa;
+  --cyan:#00d4ff;
+  --font-head:'Inter',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --r:10px;--r-sm:7px;--r-lg:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.07);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.14)}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:0.25}50%{opacity:0.55}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 12px rgba(77,166,255,0.05)}50%{box-shadow:0 0 24px rgba(77,166,255,0.12)}}
+@keyframes dot-pulse{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes count{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.stagger > *{opacity:0;transform:translateY(12px);animation:slideUp 0.5s ease forwards}
+.stagger > *:nth-child(1){animation-delay:0.05s}
+.stagger > *:nth-child(2){animation-delay:0.1s}
+.stagger > *:nth-child(3){animation-delay:0.15s}
+.stagger > *:nth-child(4){animation-delay:0.2s}
+.stagger > *:nth-child(5){animation-delay:0.25s}
+.stagger > *:nth-child(6){animation-delay:0.3s}
+.stagger > *:nth-child(7){animation-delay:0.35s}
+.stagger > *:nth-child(8){animation-delay:0.4s}
+.stagger > *:nth-child(9){animation-delay:0.45s}
+.stagger > *:nth-child(10){animation-delay:0.5s}
+.stagger > *:nth-child(11){animation-delay:0.55s}
+.stagger > *:nth-child(12){animation-delay:0.6s}
+
+/* ═══ LAYOUT ═══ */
+.app{height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.app-body{flex:1;display:flex;overflow:hidden}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{width:210px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0 10px}
+.sidebar-brand{padding:16px 6px 14px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.sidebar-brand-inner{display:flex;align-items:center;gap:9px}
+.sidebar-logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#0066cc);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;color:#fff}
+.sidebar-brand-text h1{font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:-0.3px}
+.sidebar-brand-text span{font-size:9px;color:var(--text-3);font-family:var(--font-mono);letter-spacing:0.8px;display:block;margin-top:1px}
+
+.sidebar-nav{flex:1;display:flex;flex-direction:column;gap:1px;padding-top:4px}
+.nav-btn{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:var(--r-sm);font-size:13px;font-weight:400;cursor:pointer;border:none;text-align:left;width:100%;background:transparent;color:rgba(237,237,237,0.45);border-left:2px solid transparent;transition:all 0.12s;font-family:var(--font-body)}
+.nav-btn:hover{background:rgba(255,255,255,0.04);color:rgba(237,237,237,0.65)}
+.nav-btn.active{background:var(--accent-dim);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
+.nav-btn .nav-icon{font-size:13px;opacity:0.5;width:16px;text-align:center;transition:opacity 0.12s}
+.nav-btn.active .nav-icon{opacity:1}
+.nav-sep{height:1px;background:var(--border);margin:8px 0}
+
+.sidebar-bottom{padding:10px 0 12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
+.sidebar-cta{padding:8px 10px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-weight:600;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all 0.2s;text-align:center;letter-spacing:0.2px}
+.sidebar-cta:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.sidebar-link{padding:6px 10px;background:transparent;color:var(--text-3);border:1px solid var(--border);border-radius:var(--r-sm);font-weight:500;font-size:11px;cursor:pointer;width:100%;transition:all 0.15s;font-family:var(--font-body);text-align:center}
+.sidebar-link:hover{color:var(--text-2);border-color:var(--border2)}
+
+/* ═══ MAIN CONTENT ═══ */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.main-scroll{flex:1;overflow-y:auto;overflow-x:hidden}
+.page{display:none;animation:fadeIn 0.3s ease}
+.page.active{display:block}
+.page-inner{max-width:1000px;padding:32px 40px 80px}
+
+/* ═══ COMMON ELEMENTS ═══ */
+.label{font-family:var(--font-mono);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1.3px;color:var(--text-3)}
+.label-accent{color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.card:hover{border-color:var(--border2)}
+.card-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.card-body{padding:16px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(255,255,255,0.06);color:var(--text-2);border:1px solid var(--border)}
+.pill-accent{background:var(--accent-dim);color:var(--accent);border-color:rgba(77,166,255,0.15)}
+.pill-green{background:rgba(34,197,94,0.08);color:var(--green);border-color:rgba(34,197,94,0.15)}
+
+.page-title{font-family:var(--font-head);font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1.1}
+.page-subtitle{font-size:14px;color:var(--text-2);line-height:1.6;margin-top:8px;max-width:600px}
+
+.gradient-text{background:linear-gradient(90deg,var(--accent),var(--cyan),var(--accent));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
+
+/* Feature list items */
+.feat-list{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.feat-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);transition:all 0.2s}
+.feat-item:hover{background:rgba(255,255,255,0.04);border-color:var(--border2)}
+.feat-check{width:18px;height:18px;border-radius:50%;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;color:var(--accent);font-size:10px}
+.feat-item h4{font-size:13px;font-weight:600;margin-bottom:2px}
+.feat-item p{font-size:12px;color:var(--text-3);line-height:1.5}
+
+/* Mockup blocks */
+.mock{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all 0.3s}
+.mock:hover{border-color:var(--border2);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.mock-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2)}
+.mock-dot{width:8px;height:8px;border-radius:50%}
+.mock-label{margin-left:auto;font-size:9px;color:var(--text-3);font-family:var(--font-mono);letter-spacing:0.5px}
+.mock-body{padding:16px}
+
+/* Grid layout helpers */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+
+/* Stat cards */
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:all 0.2s}
+.stat-card:hover{border-color:var(--border2)}
+.stat-val{font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--accent);letter-spacing:-1px}
+.stat-label{font-size:11px;color:var(--text-3);margin-top:2px}
+
+/* CTA block */
+.cta-block{background:linear-gradient(135deg,rgba(77,166,255,0.06),rgba(77,166,255,0.02));border:1px solid rgba(77,166,255,0.12);border-radius:var(--r-lg);padding:28px;margin-top:32px;display:flex;align-items:center;gap:20px}
+.cta-block h3{font-family:var(--font-head);font-size:18px;font-weight:700;flex:1}
+.cta-block p{font-size:13px;color:var(--text-2);margin-top:4px}
+.cta-btn{padding:10px 28px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--font-head);font-weight:700;font-size:13px;cursor:pointer;transition:all 0.2s;flex-shrink:0;white-space:nowrap}
+.cta-btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+
+/* Mini chart bars */
+.bars{display:flex;align-items:flex-end;gap:4px;height:80px;padding-top:8px}
+.bar{flex:1;border-radius:3px 3px 0 0;transition:height 0.6s ease;background:linear-gradient(180deg,var(--accent),rgba(77,166,255,0.3))}
+.bar.green{background:linear-gradient(180deg,var(--green),rgba(34,197,94,0.3))}
+.bar.purple{background:linear-gradient(180deg,var(--purple),rgba(167,139,250,0.3))}
+.bar.amber{background:linear-gradient(180deg,var(--amber),rgba(245,158,11,0.3))}
+
+/* Status dots */
+.status{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600}
+.status-dot{width:6px;height:6px;border-radius:50%}
+
+/* Mockup calendar */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-head{font-size:8px;font-family:var(--font-mono);color:var(--text-3);text-align:center;padding:4px 0;letter-spacing:0.5px}
+.cal-cell{aspect-ratio:1;border-radius:4px;border:1px solid var(--border);position:relative;transition:all 0.2s;cursor:default;overflow:hidden}
+.cal-cell:hover{border-color:var(--border2)}
+.cal-cell.has-post{background:var(--accent-dim);border-color:rgba(77,166,255,0.15)}
+.cal-cell.has-post::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.cal-cell.approved{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.12)}
+.cal-cell.approved::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--green)}
+.cal-cell.review{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.12)}
+.cal-cell.review::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--amber)}
+
+/* Tag row */
+.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tag{padding:4px 10px;border-radius:14px;font-size:10px;font-weight:600;font-family:var(--font-mono);letter-spacing:0.5px;border:1px solid var(--border);color:var(--text-3);background:rgba(255,255,255,0.02);transition:all 0.2s;cursor:default}
+.tag:hover{border-color:var(--border2);color:var(--text-2)}
+.tag.active{background:var(--accent-dim);border-color:rgba(77,166,255,0.2);color:var(--accent)}
+
+/* Approval row mock */
+.approval-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);transition:all 0.15s}
+.approval-row:hover{background:rgba(255,255,255,0.03);border-color:var(--border2)}
+.approval-type{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+/* Contact form */
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-label{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3)}
+.form-input{padding:10px 13px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:var(--r-sm);color:var(--text);font-size:13px;font-family:var(--font-body);outline:none;transition:border-color 0.2s}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--text-3)}
+textarea.form-input{min-height:100px;resize:vertical}
+
+/* Responsive */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .mobile-bar{display:flex !important}
+  .page-inner{padding:20px 16px 100px}
+  .grid-2,.grid-3,.grid-2-1{grid-template-columns:1fr}
+}
+
+/* Mobile bar */
+.mobile-bar{display:none;padding:10px 16px;border-bottom:1px solid var(--border);overflow-x:auto;gap:4px;background:var(--bg);flex-shrink:0}
+.mobile-bar button{padding:6px 14px;border-radius:16px;font-size:11px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--text-3);cursor:pointer;white-space:nowrap;font-family:var(--font-body);transition:all 0.15s}
+.mobile-bar button.active{background:var(--accent-dim);color:var(--accent);border-color:rgba(77,166,255,0.15)}
+
+/* Coming soon badge */
+.coming-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600;background:rgba(77,166,255,0.08);color:var(--accent);border:1px solid rgba(77,166,255,0.12)}
+.coming-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);animation:dot-pulse 2s infinite}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Mobile nav -->
+  <div class="mobile-bar" id="mobileBar"></div>
+
+  <div class="app-body">
+    <!-- ═══ SIDEBAR ═══ -->
+    <div class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-inner">
+          <div class="sidebar-logo">✦</div>
+          <div class="sidebar-brand-text">
+            <h1>Marketing Hub</h1>
+            <span>COMMAND CENTER</span>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav" id="sidebarNav"></nav>
+      <div class="sidebar-bottom">
+        <button class="sidebar-cta" onclick="goTab('contact')">Book a Demo</button>
+        <button class="sidebar-link" onclick="goTab('whyus')">Why Us?</button>
+      </div>
+    </div>
+
+    <!-- ═══ MAIN ═══ -->
+    <div class="main">
+      <div class="main-scroll" id="mainScroll">
+
+        <!-- ══ HOME / WELCOME ══ -->
+        <div id="tab-home" class="page">
+          <div class="page-inner stagger">
+            <div>
+              <div class="label label-accent" style="margin-bottom:12px">✦ WELCOME TO THE HUB</div>
+              <div class="page-title" style="font-size:36px;max-width:500px">Your Entire Marketing,<br><span class="gradient-text">One Command Center</span></div>
+              <div class="page-subtitle" style="max-width:540px">One unified platform for social, email, paid ads, performance analytics, competitor intelligence, and AI-powered strategy. Already 80% built — customized for your business.</div>
+            </div>
+
+            <!-- Stats row -->
+            <div class="grid-3" style="margin-top:28px;gap:10px">
+              <div class="stat-card" style="animation:glow-pulse 4s ease infinite"><div class="stat-val">8</div><div class="stat-label">Integrated Modules</div></div>
+              <div class="stat-card"><div class="stat-val" style="color:var(--green)">80%</div><div class="stat-label">Pre-Built & Ready</div></div>
+              <div class="stat-card"><div class="stat-val" style="color:var(--purple)">∞</div><div class="stat-label">AI-Powered Suggestions</div></div>
+            </div>
+
+            <!-- Interactive Hub Preview -->
+            <div style="margin-top:24px">
+              <div class="label" style="margin-bottom:10px">EXPLORE THE PLATFORM</div>
+              <div class="mock">
+                <div class="mock-bar">
+                  <div class="mock-dot" style="background:rgba(255,95,87,0.5)"></div>
+                  <div class="mock-dot" style="background:rgba(255,189,46,0.5)"></div>
+                  <div class="mock-dot" style="background:rgba(39,201,63,0.5)"></div>
+                  <div class="mock-label">Marketing Hub — Control Center</div>
+                </div>
+                <div class="mock-body">
+                  <div style="display:flex;gap:12px">
+                    <div style="width:120px;display:flex;flex-direction:column;gap:4px">
+                      <div onclick="goTab('overview')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;background:var(--accent-dim);color:var(--accent);font-weight:600;border-left:2px solid var(--accent)">◈ Overview</div>
+                      <div onclick="goTab('social')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">▦ Social</div>
+                      <div onclick="goTab('email')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">✉ Email</div>
+                      <div onclick="goTab('performance')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">△ Performance</div>
+                      <div onclick="goTab('hub')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">⬡ Approvals</div>
+                      <div onclick="goTab('strategy')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">◎ Strategy</div>
+                      <div onclick="goTab('brandkit')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">◐ Brand Kit</div>
+                      <div onclick="goTab('report')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">☰ Reports</div>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+                      <div class="grid-3" style="gap:8px">
+                        <div style="background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.08);border-radius:8px;padding:10px"><div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--accent)">12.4K</div><div style="font-size:8px;color:var(--text-3);font-family:var(--font-mono)">IMPRESSIONS</div></div>
+                        <div style="background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);border-radius:8px;padding:10px"><div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--green)">847</div><div style="font-size:8px;color:var(--text-3);font-family:var(--font-mono)">ENGAGEMENTS</div></div>
+                        <div style="background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.08);border-radius:8px;padding:10px"><div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--purple)">6.8%</div><div style="font-size:8px;color:var(--text-3);font-family:var(--font-mono)">CONV. RATE</div></div>
+                      </div>
+                      <div style="flex:1;display:grid;grid-template-columns:2fr 1fr;gap:8px;min-height:80px">
+                        <div style="border-radius:8px;background:rgba(77,166,255,0.03);border:1px solid var(--border);position:relative;overflow:hidden">
+                          <svg style="position:absolute;bottom:0;left:0;right:0;width:100%;height:50px" viewBox="0 0 400 50" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(77,166,255,0.15)"/><stop offset="100%" stop-color="rgba(77,166,255,0)"/></linearGradient></defs><path d="M0,40 Q60,20 120,28 T240,15 T360,25 L400,20 V50 H0Z" fill="url(#cg)"/><path d="M0,40 Q60,20 120,28 T240,15 T360,25 L400,20" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="500" stroke-dashoffset="500" style="animation:draw 2s ease forwards 0.5s"/></svg>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:6px">
+                          <div style="flex:1;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);padding:6px;font-size:8px;color:var(--green)">
+                            <div style="font-weight:700">TOP WIN</div><div style="color:var(--text-3);margin-top:2px">Email +23% CTR</div>
+                          </div>
+                          <div style="flex:1;border-radius:6px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.08);padding:6px;font-size:8px;color:var(--amber)">
+                            <div style="font-weight:700">REVIEW</div><div style="color:var(--text-3);margin-top:2px">3 items pending</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module cards -->
+            <div style="margin-top:28px">
+              <div class="label" style="margin-bottom:10px">ALL MODULES</div>
+              <div class="grid-2" style="gap:10px" id="moduleGrid"></div>
+            </div>
+
+            <div class="cta-block">
+              <div><h3>Ready to see it live?</h3><p>80% built. 100% customizable to your business.</p></div>
+              <button class="cta-btn" onclick="goTab('contact')">Book a Demo →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ OVERVIEW ══ -->
+        <div id="tab-overview" class="page">
+          <div class="page-inner">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;animation:slideUp 0.4s ease forwards">
+              <div>
+                <div class="pill-accent pill" style="margin-bottom:10px">✦ AI-POWERED</div>
+                <div class="page-title">Control Center</div>
+                <div class="page-subtitle" style="margin-top:6px">Click any card or chart to regenerate live data — this is how your real dashboard would look.</div>
+              </div>
+              <button onclick="regenerateAll()" style="padding:8px 20px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--font-head);font-weight:700;font-size:12px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px" onmouseenter="this.style.filter='brightness(1.15)'" onmouseleave="this.style.filter=''"><span id="refreshIcon" style="display:inline-block;transition:transform 0.4s">↻</span> Refresh Data</button>
+            </div>
+
+            <!-- KPI Row -->
+            <div class="grid-3" style="gap:10px;margin-bottom:16px;animation:slideUp 0.4s ease 0.05s both">
+              <div class="stat-card" onclick="animateKPI(this)" style="cursor:pointer;position:relative;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <div><div class="stat-val" id="kpi-impressions">0</div><div class="stat-label">Impressions</div></div>
+                  <div style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:10px;background:rgba(34,197,94,0.08);color:var(--green)" id="kpi-impressions-delta">+0%</div>
+                </div>
+                <div style="margin-top:10px;height:32px;position:relative" id="sparkline-impressions"></div>
+              </div>
+              <div class="stat-card" onclick="animateKPI(this)" style="cursor:pointer;position:relative;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <div><div class="stat-val" style="color:var(--green)" id="kpi-engagement">0</div><div class="stat-label">Engagements</div></div>
+                  <div style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:10px;background:rgba(34,197,94,0.08);color:var(--green)" id="kpi-engagement-delta">+0%</div>
+                </div>
+                <div style="margin-top:10px;height:32px;position:relative" id="sparkline-engagement"></div>
+              </div>
+              <div class="stat-card" onclick="animateKPI(this)" style="cursor:pointer;position:relative;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <div><div class="stat-val" style="color:var(--purple)" id="kpi-conversion">0%</div><div class="stat-label">Conversion Rate</div></div>
+                  <div style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:10px;background:rgba(167,139,250,0.08);color:var(--purple)" id="kpi-conversion-delta">+0%</div>
+                </div>
+                <div style="margin-top:10px;height:32px;position:relative" id="sparkline-conversion"></div>
+              </div>
+            </div>
+
+            <!-- Secondary KPIs -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;animation:slideUp 0.4s ease 0.1s both">
+              <div class="stat-card" onclick="animateKPI(this)" style="cursor:pointer;padding:12px 14px">
+                <div class="stat-val" style="font-size:20px;color:var(--cyan)" id="kpi-clicks">0</div><div class="stat-label">Total Clicks</div>
+              </div>
+              <div class="stat-card" onclick="animateKPI(this)" style="cursor:pointer;padding:12px 14px">
+                <div class="stat-val" style="font-size:20px;color:var(--amber)" id="kpi-cpc">$0.00</div><div class="stat-label">Avg CPC</div>
+              </div>
+              <div class="stat-card" onclick="animateKPI(this)" style="cursor:pointer;padding:12px 14px">
+                <div class="stat-val" style="font-size:20px" id="kpi-sessions">0</div><div class="stat-label">Web Sessions</div>
+              </div>
+              <div class="stat-card" onclick="animateKPI(this)" style="cursor:pointer;padding:12px 14px">
+                <div class="stat-val" style="font-size:20px;color:var(--green)" id="kpi-revenue">$0</div><div class="stat-label">Ad Revenue</div>
+              </div>
+            </div>
+
+            <!-- Main Charts Row -->
+            <div class="grid-2-1" style="gap:16px;margin-bottom:16px;animation:slideUp 0.4s ease 0.15s both">
+              <!-- Performance Chart -->
+              <div class="card" onclick="regenerateChart()" style="cursor:pointer;transition:all 0.2s">
+                <div class="card-head">
+                  <span style="font-family:var(--font-head);font-weight:700;font-size:13px">Weekly Performance</span>
+                  <div style="margin-left:auto;display:flex;gap:8px">
+                    <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--accent)"></div>Social</div>
+                    <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--green)"></div>Email</div>
+                    <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--purple)"></div>Ads</div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+                    <span class="label">MON</span><span class="label">TUE</span><span class="label">WED</span><span class="label">THU</span><span class="label">FRI</span><span class="label">SAT</span><span class="label">SUN</span>
+                  </div>
+                  <div id="mainChart" style="display:flex;align-items:flex-end;gap:6px;height:140px"></div>
+                  <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--text-3)">Click to regenerate data</div>
+                </div>
+              </div>
+
+              <!-- Channel Breakdown -->
+              <div class="card" onclick="regenerateDonut()" style="cursor:pointer;transition:all 0.2s">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Channel Mix</span></div>
+                <div class="card-body" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+                  <div style="position:relative;width:120px;height:120px">
+                    <svg id="donutChart" viewBox="0 0 36 36" style="width:120px;height:120px;transform:rotate(-90deg)"></svg>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column">
+                      <div id="donutTotal" style="font-family:var(--font-head);font-size:18px;font-weight:800">0</div>
+                      <div style="font-size:8px;color:var(--text-3);font-family:var(--font-mono)">TOTAL</div>
+                    </div>
+                  </div>
+                  <div id="donutLegend" style="display:flex;flex-direction:column;gap:6px;width:100%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Campaigns + Top Wins/Losses -->
+            <div class="grid-2" style="gap:16px;margin-bottom:16px;animation:slideUp 0.4s ease 0.2s both">
+              <!-- Live Campaigns -->
+              <div class="card">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Live Campaigns</span><div class="pill-green pill" style="margin-left:auto;font-size:9px">● 3 Active</div></div>
+                <div class="card-body" id="liveCampaigns" style="display:flex;flex-direction:column;gap:8px"></div>
+              </div>
+
+              <!-- Top Wins & Losses -->
+              <div class="card">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Top Wins & Losses</span><span class="label" style="margin-left:auto">LAST 7 DAYS</span></div>
+                <div class="card-body" id="winsLosses" style="display:flex;flex-direction:column;gap:8px"></div>
+              </div>
+            </div>
+
+            <!-- Competitor Pulse + AI Next Steps + Approval Queue -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;animation:slideUp 0.4s ease 0.25s both">
+              <!-- Competitor Pulse -->
+              <div class="card">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Competitor Pulse</span></div>
+                <div class="card-body" id="competitorPulse" style="display:flex;flex-direction:column;gap:8px"></div>
+              </div>
+
+              <!-- AI Next Steps -->
+              <div class="card" style="border-color:rgba(77,166,255,0.12)">
+                <div class="card-head" style="background:rgba(77,166,255,0.03)"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">✦ AI Suggested Steps</span></div>
+                <div class="card-body" id="aiSteps" style="display:flex;flex-direction:column;gap:8px"></div>
+              </div>
+
+              <!-- Approval Queue -->
+              <div class="card">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Approval Queue</span><div class="pill" style="margin-left:auto;font-size:9px;background:rgba(245,158,11,0.08);color:var(--amber);border-color:rgba(245,158,11,0.15)" id="approvalCount">0 pending</div></div>
+                <div class="card-body" id="approvalQueue" style="display:flex;flex-direction:column;gap:8px"></div>
+              </div>
+            </div>
+
+            <!-- Next 2 Weeks -->
+            <div class="card" style="animation:slideUp 0.4s ease 0.3s both">
+              <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Next 2 Weeks</span>
+                <div style="margin-left:auto;display:flex;gap:8px">
+                  <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--accent)"></div>Social</div>
+                  <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--purple)"></div>Email</div>
+                  <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--amber)"></div>Ad Launch</div>
+                </div>
+              </div>
+              <div class="card-body" id="twoWeekTimeline"></div>
+            </div>
+
+            <div class="cta-block" style="animation:slideUp 0.4s ease 0.35s both"><div><h3>This is your marketing nerve center.</h3><p>Everything at a glance — every number you see here is interactive. Click to explore.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ SOCIAL ══ -->
+        <div id="tab-social" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="pill" style="margin-bottom:12px">MOCKUPS + APPROVALS</div>
+              <div class="page-title">Social Calendar</div>
+              <div class="page-subtitle">Click any scheduled day to preview the social post mockup — see exactly how it looks before it goes live.</div>
+            </div>
+            <!-- Calendar -->
+            <div class="mock" style="margin-top:24px;animation:slideUp 0.4s ease 0.08s both">
+              <div class="mock-bar"><div class="mock-dot" style="background:rgba(255,95,87,0.5)"></div><div class="mock-dot" style="background:rgba(255,189,46,0.5)"></div><div class="mock-dot" style="background:rgba(39,201,63,0.5)"></div><div class="mock-label">Social Calendar — March 2026</div></div>
+              <div class="mock-body">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                  <div style="display:flex;gap:8px">
+                    <div class="status"><div class="status-dot" style="background:var(--accent)"></div> Scheduled</div>
+                    <div class="status"><div class="status-dot" style="background:var(--green)"></div> Approved</div>
+                    <div class="status"><div class="status-dot" style="background:var(--amber)"></div> Review</div>
+                  </div>
+                  <div style="font-size:10px;color:var(--text-3)">Click a post to preview ↓</div>
+                </div>
+                <div id="socialCalGrid" class="cal-grid"></div>
+              </div>
+            </div>
+            <!-- Preview popup -->
+            <div id="socialPreview" style="margin-top:16px;display:none;animation:slideUp 0.3s ease both">
+              <div class="card" style="border-color:rgba(77,166,255,0.15);overflow:hidden">
+                <div class="card-head" style="background:rgba(77,166,255,0.03)">
+                  <span style="font-family:var(--font-head);font-weight:700;font-size:13px">✦ Post Preview</span>
+                  <div id="socialPreviewPlatform" class="pill-accent pill" style="margin-left:auto;font-size:9px"></div>
+                  <div id="socialPreviewStatus" class="pill" style="font-size:9px"></div>
+                  <button onclick="document.getElementById('socialPreview').style.display='none'" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px;margin-left:4px">×</button>
+                </div>
+                <div class="card-body" style="display:flex;gap:20px">
+                  <!-- Mockup -->
+                  <div style="width:260px;flex-shrink:0">
+                    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+                      <div style="padding:10px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)">
+                        <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple))"></div>
+                        <div><div id="socialPreviewHandle" style="font-size:11px;font-weight:700"></div><div style="font-size:9px;color:var(--text-3)">Sponsored</div></div>
+                      </div>
+                      <div id="socialPreviewImage" style="aspect-ratio:1;background:linear-gradient(135deg,rgba(77,166,255,0.08),rgba(167,139,250,0.08));display:flex;align-items:center;justify-content:center;font-size:32px"></div>
+                      <div style="padding:12px">
+                        <div id="socialPreviewCaption" style="font-size:12px;line-height:1.5;color:var(--text-2);margin-bottom:8px"></div>
+                        <div id="socialPreviewTags" style="font-size:11px;color:var(--accent)"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Details -->
+                  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+                    <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+                      <div class="label" style="margin-bottom:4px">SCHEDULED FOR</div>
+                      <div id="socialPreviewDate" style="font-size:13px;font-weight:600"></div>
+                    </div>
+                    <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+                      <div class="label" style="margin-bottom:4px">COPY</div>
+                      <div id="socialPreviewCopy" style="font-size:12px;color:var(--text-2);line-height:1.5"></div>
+                    </div>
+                    <div style="padding:12px;border-radius:var(--r-sm);background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1)">
+                      <div class="label label-accent" style="margin-bottom:4px">✦ AI SUGGESTION</div>
+                      <div id="socialPreviewAI" style="font-size:12px;color:var(--text-2);line-height:1.5"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="feat-list" style="margin-top:24px;animation:slideUp 0.4s ease 0.15s both">
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Visual Scheduling</h4><p>Drag-and-drop posts onto a calendar view. See your content strategy across weeks and months.</p></div></div>
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Platform Mockup Previews</h4><p>See exactly how your post looks on Instagram, Facebook, X, and LinkedIn before publishing.</p></div></div>
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Approval Workflows</h4><p>Each post moves through draft → review → approved. Internal teams and clients can review and leave feedback.</p></div></div>
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Editable Copy</h4><p>Edit captions, hashtags, and copy directly in the calendar — no jumping to another tool.</p></div></div>
+            </div>
+            <div class="cta-block" style="animation:slideUp 0.4s ease 0.2s both"><div><h3>Your social content, planned & approved.</h3><p>No more spreadsheets. No more Slack threads for approvals.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ EMAIL ══ -->
+        <div id="tab-email" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="pill" style="margin-bottom:12px">VISUAL EDITOR</div>
+              <div class="page-title">Email Studio</div>
+              <div class="page-subtitle">Click any campaign to pop open a full email preview — mockup rendering, subject lines, and approval status.</div>
+            </div>
+            <!-- Email list -->
+            <div style="margin-top:24px;display:flex;flex-direction:column;gap:8px;animation:slideUp 0.4s ease 0.08s both" id="emailList"></div>
+            <!-- Email preview popup -->
+            <div id="emailPreview" style="margin-top:16px;display:none;animation:slideUp 0.3s ease both">
+              <div class="card" style="border-color:rgba(77,166,255,0.15);overflow:hidden">
+                <div class="card-head" style="background:rgba(77,166,255,0.03)">
+                  <span style="font-family:var(--font-head);font-weight:700;font-size:13px">✦ Email Preview</span>
+                  <div id="emailPreviewStatus" class="pill" style="margin-left:auto;font-size:9px"></div>
+                  <button onclick="document.getElementById('emailPreview').style.display='none'" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px;margin-left:4px">×</button>
+                </div>
+                <div class="card-body" style="display:flex;gap:24px">
+                  <!-- Email mockup -->
+                  <div style="width:300px;flex-shrink:0">
+                    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:20px;max-width:300px">
+                      <div id="emailHero" style="height:100px;border-radius:8px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:16px;font-weight:700"></div>
+                      <div id="emailSubject" style="font-family:var(--font-head);font-size:15px;font-weight:700;margin-bottom:10px"></div>
+                      <div style="height:5px;background:rgba(255,255,255,0.06);border-radius:3px;width:100%;margin-bottom:5px"></div>
+                      <div style="height:5px;background:rgba(255,255,255,0.04);border-radius:3px;width:85%;margin-bottom:5px"></div>
+                      <div style="height:5px;background:rgba(255,255,255,0.04);border-radius:3px;width:70%;margin-bottom:14px"></div>
+                      <div id="emailCTA" style="height:32px;border-radius:16px;width:120px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700"></div>
+                    </div>
+                  </div>
+                  <!-- Details -->
+                  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+                    <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+                      <div class="label" style="margin-bottom:4px">SUBJECT LINE</div>
+                      <div id="emailPreviewSubject" style="font-size:14px;font-weight:600"></div>
+                    </div>
+                    <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+                      <div class="label" style="margin-bottom:4px">PREVIEW TEXT</div>
+                      <div id="emailPreviewPretext" style="font-size:12px;color:var(--text-2)"></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                      <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+                        <div class="label" style="margin-bottom:4px">SEND DATE</div>
+                        <div id="emailPreviewDate" style="font-size:12px;font-weight:600"></div>
+                      </div>
+                      <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+                        <div class="label" style="margin-bottom:4px">AUDIENCE</div>
+                        <div id="emailPreviewAudience" style="font-size:12px;font-weight:600"></div>
+                      </div>
+                    </div>
+                    <div style="padding:12px;border-radius:var(--r-sm);background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1)">
+                      <div class="label label-accent" style="margin-bottom:4px">✦ AI SUGGESTION</div>
+                      <div id="emailPreviewAI" style="font-size:12px;color:var(--text-2);line-height:1.5"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="feat-list" style="margin-top:24px;animation:slideUp 0.4s ease 0.15s both">
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Full Email Mockup Rendering</h4><p>See exactly how your email looks in inbox — rendered previews, not just code.</p></div></div>
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Editable Copy with Version Tracking</h4><p>Edit subject lines, body copy, and CTAs with full revision history.</p></div></div>
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Approval States & Client Review</h4><p>Same approval workflow as social — draft, review, approved — with client review mode.</p></div></div>
+            </div>
+            <div class="cta-block" style="animation:slideUp 0.4s ease 0.2s both"><div><h3>Email campaigns, streamlined.</h3><p>Preview, edit, approve — all in one place.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ PERFORMANCE ══ -->
+        <div id="tab-performance" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="pill-accent pill" style="margin-bottom:12px">✦ AI-ENHANCED</div>
+              <div class="page-title">Performance Analytics</div>
+              <div class="page-subtitle">Every marketing channel — unified. Every data point — actionable. AI tells you what's working, what's not, and exactly what to do next.</div>
+            </div>
+
+            <!-- Multi-channel callout cards -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px;animation:slideUp 0.4s ease 0.06s both">
+              <div class="card" style="padding:14px;border-left:2px solid var(--accent)">
+                <div style="font-size:10px;font-family:var(--font-mono);color:var(--accent);letter-spacing:1px;margin-bottom:4px">SOCIAL</div>
+                <div style="font-family:var(--font-head);font-size:20px;font-weight:800" id="perf-social">0</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:2px">Total reach across platforms</div>
+              </div>
+              <div class="card" style="padding:14px;border-left:2px solid var(--purple)">
+                <div style="font-size:10px;font-family:var(--font-mono);color:var(--purple);letter-spacing:1px;margin-bottom:4px">EMAIL</div>
+                <div style="font-family:var(--font-head);font-size:20px;font-weight:800" id="perf-email" style="color:var(--purple)">0%</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:2px">Open rate this week</div>
+              </div>
+              <div class="card" style="padding:14px;border-left:2px solid var(--amber)">
+                <div style="font-size:10px;font-family:var(--font-mono);color:var(--amber);letter-spacing:1px;margin-bottom:4px">PAID ADS</div>
+                <div style="font-family:var(--font-head);font-size:20px;font-weight:800" id="perf-ads">$0</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:2px">ROAS this period</div>
+              </div>
+              <div class="card" style="padding:14px;border-left:2px solid var(--cyan)">
+                <div style="font-size:10px;font-family:var(--font-mono);color:var(--cyan);letter-spacing:1px;margin-bottom:4px">WEBSITE</div>
+                <div style="font-family:var(--font-head);font-size:20px;font-weight:800" id="perf-web">0</div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:2px">Sessions from marketing</div>
+              </div>
+            </div>
+
+            <!-- Conversions + Web Traffic -->
+            <div class="grid-2" style="gap:16px;margin-top:16px;animation:slideUp 0.4s ease 0.12s both">
+              <div class="card">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Conversion Funnel</span><span class="label" style="margin-left:auto">MARKETING → WEBSITE → CONVERT</span></div>
+                <div class="card-body" id="perfFunnel"></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Web Traffic by Source</span><span class="pill" style="margin-left:auto;font-size:9px;background:rgba(0,212,255,0.08);color:var(--cyan);border-color:rgba(0,212,255,0.15)">LINKED</span></div>
+                <div class="card-body" id="perfTraffic"></div>
+              </div>
+            </div>
+
+            <!-- Performance chart -->
+            <div class="card" style="margin-top:16px;animation:slideUp 0.4s ease 0.18s both;cursor:pointer" onclick="initPerfTab()">
+              <div class="card-head">
+                <span style="font-family:var(--font-head);font-weight:700;font-size:13px">Cross-Channel Performance</span>
+                <div style="margin-left:auto;display:flex;gap:6px">
+                  <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--accent)"></div>Social</div>
+                  <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--purple)"></div>Email</div>
+                  <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--amber)"></div>Paid Ads</div>
+                  <div class="status" style="font-size:9px"><div class="status-dot" style="background:var(--cyan)"></div>Web</div>
+                </div>
+              </div>
+              <div class="card-body" id="perfChart" style="height:160px;display:flex;align-items:flex-end;gap:8px"></div>
+            </div>
+
+            <!-- AI Suggestions - prominent -->
+            <div class="card" style="margin-top:16px;border-color:rgba(77,166,255,0.15);animation:slideUp 0.4s ease 0.24s both">
+              <div class="card-head" style="background:rgba(77,166,255,0.04)">
+                <span style="font-family:var(--font-head);font-weight:700;font-size:13px">✦ AI Optimization Suggestions</span>
+                <span class="pill-accent pill" style="margin-left:auto;font-size:9px">POWERED BY AI</span>
+              </div>
+              <div class="card-body" id="perfAI" style="display:flex;flex-direction:column;gap:8px"></div>
+            </div>
+
+            <div class="cta-block" style="animation:slideUp 0.4s ease 0.3s both"><div><h3>Multi-channel analytics with AI that tells you what to do next.</h3><p>Not just dashboards — actionable intelligence.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ APPROVAL HUB ══ -->
+        <div id="tab-hub" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="pill" style="margin-bottom:12px">FULL WORKFLOW</div>
+              <div class="page-title">Approval Hub</div>
+              <div class="page-subtitle">Drag-style approval management for all marketing media. Click any item to move it through the pipeline.</div>
+            </div>
+            <!-- Kanban-style columns -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px;animation:slideUp 0.4s ease 0.08s both">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div><div class="label">NEEDS REVIEW</div><div class="pill" style="font-size:9px;margin-left:auto" id="hubReviewCount">0</div></div>
+                <div id="hubReview" style="display:flex;flex-direction:column;gap:8px;min-height:200px"></div>
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div><div class="label">IN PROGRESS</div><div class="pill" style="font-size:9px;margin-left:auto" id="hubProgressCount">0</div></div>
+                <div id="hubProgress" style="display:flex;flex-direction:column;gap:8px;min-height:200px"></div>
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green)"></div><div class="label">APPROVED</div><div class="pill" style="font-size:9px;margin-left:auto" id="hubApprovedCount">0</div></div>
+                <div id="hubApproved" style="display:flex;flex-direction:column;gap:8px;min-height:200px"></div>
+              </div>
+            </div>
+            <div class="feat-list" style="margin-top:32px;animation:slideUp 0.4s ease 0.15s both">
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Print, OOH, Retail & More</h4><p>Every non-digital marketing asset gets its own approval workflow — brochures, billboards, in-store displays, event materials.</p></div></div>
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Ticketing System</h4><p>Submit, track, and manage requests with status tracking and comment threads.</p></div></div>
+              <div class="feat-item"><div class="feat-check">✓</div><div><h4>Client Review Mode</h4><p>External stakeholders can review and approve without needing full hub access.</p></div></div>
+            </div>
+            <div class="cta-block" style="animation:slideUp 0.4s ease 0.2s both"><div><h3>Every approval, one pipeline.</h3><p>Click cards above to move them through the workflow.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ STRATEGY ══ -->
+        <div id="tab-strategy" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="pill-accent pill" style="margin-bottom:12px">✦ 5 AUDIT MODULES</div>
+              <div class="page-title">Strategy Suite</div>
+              <div class="page-subtitle">Run unlimited audits across paid ads, your website, and competitors — every audit generates specific suggestions to counter threats and optimize your position.</div>
+            </div>
+
+            <!-- Audit runner -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;animation:slideUp 0.4s ease 0.08s both">
+              <div class="card" style="padding:20px;cursor:pointer;transition:all 0.2s" onclick="runAudit('ads')" id="auditAds" onmouseenter="this.style.borderColor='var(--border2)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='';this.style.transform=''">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                  <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:16px">📣</div>
+                  <div><div style="font-family:var(--font-head);font-weight:700;font-size:14px">Paid Ads</div><div style="font-size:10px;color:var(--text-3)">Campaign audit</div></div>
+                </div>
+                <button style="width:100%;padding:8px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-weight:600;font-size:11px;cursor:pointer;font-family:var(--font-body)">Run Audit →</button>
+              </div>
+              <div class="card" style="padding:20px;cursor:pointer;transition:all 0.2s" onclick="runAudit('web')" id="auditWeb" onmouseenter="this.style.borderColor='var(--border2)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='';this.style.transform=''">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                  <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,212,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🌐</div>
+                  <div><div style="font-family:var(--font-head);font-weight:700;font-size:14px">Website</div><div style="font-size:10px;color:var(--text-3)">SEO / UX / Performance</div></div>
+                </div>
+                <button style="width:100%;padding:8px;background:var(--cyan);color:#000;border:none;border-radius:var(--r-sm);font-weight:600;font-size:11px;cursor:pointer;font-family:var(--font-body)">Run Audit →</button>
+              </div>
+              <div class="card" style="padding:20px;cursor:pointer;transition:all 0.2s" onclick="runAudit('comp')" id="auditComp" onmouseenter="this.style.borderColor='var(--border2)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='';this.style.transform=''">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                  <div style="width:36px;height:36px;border-radius:10px;background:rgba(167,139,250,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🔍</div>
+                  <div><div style="font-family:var(--font-head);font-weight:700;font-size:14px">Competitors</div><div style="font-size:10px;color:var(--text-3)">Landscape analysis</div></div>
+                </div>
+                <button style="width:100%;padding:8px;background:var(--purple);color:#fff;border:none;border-radius:var(--r-sm);font-weight:600;font-size:11px;cursor:pointer;font-family:var(--font-body)">Run Audit →</button>
+              </div>
+            </div>
+
+            <!-- Audit results -->
+            <div id="auditResults" style="margin-top:16px;display:none;animation:slideUp 0.3s ease both"></div>
+
+            <!-- Emphasis on audit power -->
+            <div class="card" style="margin-top:24px;padding:20px;border-color:rgba(77,166,255,0.12);background:rgba(77,166,255,0.02);animation:slideUp 0.4s ease 0.15s both">
+              <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+                <div style="font-family:var(--font-head);font-size:32px;font-weight:800;color:var(--accent)">∞</div>
+                <div><div style="font-family:var(--font-head);font-weight:700;font-size:16px">Unlimited Audits. Unlimited Suggestions.</div><div style="font-size:13px;color:var(--text-2);margin-top:4px">Every audit generates counter-strategies and optimizations specific to your business.</div></div>
+              </div>
+              <div class="grid-2" style="gap:8px">
+                <div style="padding:10px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;color:var(--text-2)"><span style="color:var(--accent);font-weight:700">Paid Ads →</span> Generate campaigns from goals, get budget allocation recs, creative direction, targeting suggestions</div>
+                <div style="padding:10px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;color:var(--text-2)"><span style="color:var(--cyan);font-weight:700">Website →</span> Per-page SEO, UX & performance scores with specific fix-it suggestions for every issue found</div>
+                <div style="padding:10px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;color:var(--text-2)"><span style="color:var(--purple);font-weight:700">Competitors →</span> Full landscape analysis — their strategy, your gaps, and counter-moves to take advantage</div>
+                <div style="padding:10px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;color:var(--text-2)"><span style="color:var(--amber);font-weight:700">Audience + Events →</span> Custom gameplans per segment, industry calendar integration for proactive planning</div>
+              </div>
+            </div>
+
+            <div class="cta-block" style="animation:slideUp 0.4s ease 0.2s both"><div><h3>Strategy powered by unlimited intelligence.</h3><p>Run audits as often as you want. Every one generates actionable counter-moves.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ BRAND KIT ══ -->
+        <div id="tab-brandkit" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="pill" style="margin-bottom:12px">BRAND DNA</div>
+              <div class="page-title">Brand Kit</div>
+              <div class="page-subtitle">Upload your identity. The AI uses everything here to ensure every output is perfectly on-brand.</div>
+            </div>
+            <!-- Live brand preview -->
+            <div class="grid-2" style="gap:16px;margin-top:24px;animation:slideUp 0.4s ease 0.08s both">
+              <!-- Logo & Colors -->
+              <div class="card" style="overflow:hidden">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Logo & Colors</span></div>
+                <div class="card-body">
+                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+                    <div style="width:72px;height:72px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#0066cc);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-family:var(--font-head);font-weight:800;box-shadow:0 4px 20px rgba(77,166,255,0.2)">YB</div>
+                    <div><div style="font-family:var(--font-head);font-weight:700;font-size:16px">Your Brand</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">Primary logo · Uploaded</div></div>
+                  </div>
+                  <div class="label" style="margin-bottom:8px">BRAND COLORS</div>
+                  <div style="display:flex;gap:8px">
+                    <div style="text-align:center"><div style="width:44px;height:44px;border-radius:10px;background:#4DA6FF;margin-bottom:4px;border:2px solid rgba(255,255,255,0.1)"></div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">#4DA6FF</div></div>
+                    <div style="text-align:center"><div style="width:44px;height:44px;border-radius:10px;background:#0D0D0D;margin-bottom:4px;border:2px solid rgba(255,255,255,0.1)"></div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">#0D0D0D</div></div>
+                    <div style="text-align:center"><div style="width:44px;height:44px;border-radius:10px;background:#EDEDED;margin-bottom:4px;border:2px solid rgba(255,255,255,0.1)"></div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">#EDEDED</div></div>
+                    <div style="text-align:center"><div style="width:44px;height:44px;border-radius:10px;background:#22c55e;margin-bottom:4px;border:2px solid rgba(255,255,255,0.1)"></div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">#22C55E</div></div>
+                    <div style="text-align:center;cursor:pointer" onclick="this.querySelector('div').style.background='hsl('+Math.random()*360+',70%,60%)'"><div style="width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.06);margin-bottom:4px;border:2px dashed rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text-3);transition:all 0.2s">+</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">Add</div></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Tone & Voice -->
+              <div class="card" style="overflow:hidden">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Tone & Voice</span></div>
+                <div class="card-body">
+                  <div class="label" style="margin-bottom:8px">BRAND TONE</div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+                    <div class="tag active">Professional</div><div class="tag active">Confident</div><div class="tag active">Approachable</div><div class="tag">Playful</div><div class="tag">Technical</div><div class="tag">Bold</div>
+                  </div>
+                  <div class="label" style="margin-bottom:8px">VOICE EXAMPLES</div>
+                  <div style="padding:10px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;color:var(--text-2);line-height:1.5;font-style:italic;margin-bottom:8px">"We make complex marketing simple — no jargon, just results."</div>
+                  <div style="padding:10px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:12px;color:var(--text-2);line-height:1.5;font-style:italic">"Your growth is our obsession. Let's make it happen."</div>
+                </div>
+              </div>
+            </div>
+            <div class="grid-2" style="gap:16px;margin-top:16px;animation:slideUp 0.4s ease 0.15s both">
+              <!-- Keywords -->
+              <div class="card" style="overflow:hidden">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Keywords & SEO Targets</span></div>
+                <div class="card-body">
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <div class="pill-accent pill" style="font-size:10px">marketing automation</div>
+                    <div class="pill-accent pill" style="font-size:10px">unified dashboard</div>
+                    <div class="pill-accent pill" style="font-size:10px">AI marketing</div>
+                    <div class="pill-accent pill" style="font-size:10px">social scheduling</div>
+                    <div class="pill-accent pill" style="font-size:10px">email campaigns</div>
+                    <div class="pill-accent pill" style="font-size:10px">competitor analysis</div>
+                    <div class="pill-accent pill" style="font-size:10px">performance analytics</div>
+                    <div class="pill" style="font-size:10px;cursor:pointer;border-style:dashed">+ Add keyword</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Selling Points -->
+              <div class="card" style="overflow:hidden">
+                <div class="card-head"><span style="font-family:var(--font-head);font-weight:700;font-size:13px">Key Selling Points</span></div>
+                <div class="card-body" style="display:flex;flex-direction:column;gap:8px">
+                  <div style="padding:8px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">①</span> 80% pre-built, 20% customized to your business</div>
+                  <div style="padding:8px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">②</span> Replaces 5-8 fragmented marketing tools</div>
+                  <div style="padding:8px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">③</span> AI-powered suggestions in every module</div>
+                  <div style="padding:8px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);font-size:12px;display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">④</span> Complete visibility across all channels</div>
+                </div>
+              </div>
+            </div>
+            <div class="cta-block" style="animation:slideUp 0.4s ease 0.2s both"><div><h3>Your brand, the system's foundation.</h3><p>Everything the AI needs to stay perfectly on-brand.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ WEEKLY REPORT ══ -->
+        <div id="tab-report" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="pill-accent pill" style="margin-bottom:12px">✦ AI-GENERATED</div>
+              <div class="page-title">Weekly Report</div>
+              <div class="page-subtitle">A comprehensive AI-generated breakdown — click "Generate Report" to see it populate with dummy data.</div>
+            </div>
+            <div style="margin-top:20px;text-align:center;animation:slideUp 0.4s ease 0.08s both">
+              <button onclick="generateReport()" style="padding:10px 28px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--font-head);font-weight:700;font-size:13px;cursor:pointer;transition:all 0.2s" onmouseenter="this.style.filter='brightness(1.15)'" onmouseleave="this.style.filter=''">✦ Generate Report →</button>
+            </div>
+            <div id="reportContent" style="margin-top:20px;display:none;animation:slideUp 0.4s ease both"></div>
+            <div class="cta-block" style="margin-top:32px;animation:slideUp 0.4s ease 0.15s both"><div><h3>Your weekly marketing debrief.</h3><p>AI-generated, fully actionable.</p></div><button class="cta-btn" onclick="goTab('contact')">See it Live →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ WHY US ══ -->
+        <div id="tab-whyus" class="page">
+          <div class="page-inner stagger">
+            <div>
+              <div class="label label-accent" style="margin-bottom:12px">✦ WHY MARKETING HUB</div>
+              <div class="page-title">Not Another Tool.<br><span class="gradient-text">The Only Tool.</span></div>
+              <div class="page-subtitle">Marketing teams juggle 10+ platforms. We replaced them all with one intelligent hub — plus AI analysis like it's never been done before.</div>
+            </div>
+            <div class="grid-2" style="margin-top:24px;gap:10px">
+              <div class="card" style="padding:24px;position:relative;overflow:hidden"><div style="position:absolute;top:8px;right:16px;font-family:var(--font-head);font-size:48px;font-weight:800;color:rgba(255,255,255,0.03)">01</div><h3 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:8px">One Platform, Zero Fragmentation</h3><p style="font-size:13px;color:var(--text-2);line-height:1.6">Social, email, ads, analytics, competitors, approvals, and strategy — all in one dashboard. No more Hootsuite + Mailchimp + GA + SEMrush + Asana.</p></div>
+              <div class="card" style="padding:24px;position:relative;overflow:hidden"><div style="position:absolute;top:8px;right:16px;font-family:var(--font-head);font-size:48px;font-weight:800;color:rgba(255,255,255,0.03)">02</div><h3 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:8px">AI That Actually Helps</h3><p style="font-size:13px;color:var(--text-2);line-height:1.6">Every module has AI suggestions — copy improvements, SEO fixes, competitive moves, budget optimizations. Like a strategist on call 24/7.</p></div>
+              <div class="card" style="padding:24px;position:relative;overflow:hidden"><div style="position:absolute;top:8px;right:16px;font-family:var(--font-head);font-size:48px;font-weight:800;color:rgba(255,255,255,0.03)">03</div><h3 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:8px">80% Built, 20% You</h3><p style="font-size:13px;color:var(--text-2);line-height:1.6">Production-grade software that's ready to go. The final 20% is customized to your industry, workflows, and team structure.</p></div>
+              <div class="card" style="padding:24px;position:relative;overflow:hidden"><div style="position:absolute;top:8px;right:16px;font-family:var(--font-head);font-size:48px;font-weight:800;color:rgba(255,255,255,0.03)">04</div><h3 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:8px">Complete Visibility</h3><p style="font-size:13px;color:var(--text-2);line-height:1.6">From competitor activity last week to which email subject lines drove conversions — see everything in one place.</p></div>
+              <div class="card" style="padding:24px;position:relative;overflow:hidden"><div style="position:absolute;top:8px;right:16px;font-family:var(--font-head);font-size:48px;font-weight:800;color:rgba(255,255,255,0.03)">05</div><h3 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:8px">Built-In Approvals</h3><p style="font-size:13px;color:var(--text-2);line-height:1.6">Social, email, print, OOH, retail — every approval runs through one unified system with client review mode.</p></div>
+              <div class="card" style="padding:24px;position:relative;overflow:hidden"><div style="position:absolute;top:8px;right:16px;font-family:var(--font-head);font-size:48px;font-weight:800;color:rgba(255,255,255,0.03)">06</div><h3 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:8px">Always Evolving</h3><p style="font-size:13px;color:var(--text-2);line-height:1.6">Landing page generators, AI social content, advanced automation — already in development. Your hub keeps getting smarter.</p></div>
+            </div>
+            <div style="margin-top:24px"><div class="label" style="margin-bottom:10px">COMING SOON</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <div class="coming-badge">Landing Page Generator</div>
+                <div class="coming-badge">AI Social Content</div>
+                <div class="coming-badge">Advanced Automation</div>
+              </div>
+            </div>
+            <div class="cta-block"><div><h3>Stop juggling tools. Start commanding.</h3><p>Replace your entire marketing stack.</p></div><button class="cta-btn" onclick="goTab('contact')">Get Started →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ CONTACT ══ -->
+        <div id="tab-contact" class="page">
+          <div class="page-inner stagger">
+            <div>
+              <div class="label label-accent" style="margin-bottom:12px">✦ GET IN TOUCH</div>
+              <div class="page-title">Let's Build <span class="gradient-text">Your Hub</span></div>
+              <div class="page-subtitle">Tell us about your business and we'll show you how the Marketing Hub gets customized for your specific needs.</div>
+            </div>
+            <div class="grid-2" style="margin-top:24px;gap:32px;align-items:start">
+              <form style="display:flex;flex-direction:column;gap:16px" onsubmit="handleSubmit(event)">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                  <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="Jane" required></div>
+                  <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Doe" required></div>
+                </div>
+                <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-input" placeholder="Your company name" required></div>
+                <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="jane@company.com" required></div>
+                <div class="form-group"><label class="form-label">Biggest Marketing Challenge</label><textarea class="form-input" placeholder="Tell us about your current marketing setup, pain points, and what you'd love to see unified..."></textarea></div>
+                <div class="form-group"><label class="form-label">How'd You Hear About Us?</label><select class="form-input" style="cursor:pointer"><option value="">Select one...</option><option>Referral</option><option>Social Media</option><option>Search</option><option>Other</option></select></div>
+                <button type="submit" class="cta-btn" style="align-self:flex-start;padding:12px 36px">Book a Demo →</button>
+              </form>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div class="card" style="padding:20px"><h4 style="font-family:var(--font-head);font-weight:700;font-size:14px;margin-bottom:6px">What Happens Next?</h4><p style="font-size:12px;color:var(--text-3);line-height:1.6">We'll schedule a 30-min call to understand your stack, then give you a live walkthrough customized to your scenario.</p></div>
+                <div class="card" style="padding:20px"><h4 style="font-family:var(--font-head);font-weight:700;font-size:14px;margin-bottom:6px">Already 80% Built</h4><p style="font-size:12px;color:var(--text-3);line-height:1.6">This isn't vaporware. Eight production-ready modules. The final 20% is tailored to your business.</p></div>
+                <div class="card" style="padding:20px"><h4 style="font-family:var(--font-head);font-weight:700;font-size:14px;margin-bottom:6px">What's Coming</h4><p style="font-size:12px;color:var(--text-3);line-height:1.6">Landing page generators, AI social content, and advanced automation — actively in development.</p></div>
+                <div style="padding:24px;background:linear-gradient(135deg,rgba(77,166,255,0.06),rgba(77,166,255,0.02));border:1px solid rgba(77,166,255,0.12);border-radius:var(--r);text-align:center">
+                  <div style="font-size:24px;margin-bottom:8px">✦</div>
+                  <div style="font-family:var(--font-head);font-weight:700;font-size:15px">Marketing Hub</div>
+                  <div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);letter-spacing:1px;margin-top:2px">YOUR COMMAND CENTER</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ OVERVIEW INTERACTIVE DATA ENGINE ═══
+function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function randF(min, max) { return (Math.random() * (max - min) + min).toFixed(1); }
+function fmt(n) { return n >= 1000 ? (n/1000).toFixed(1) + 'K' : n.toString(); }
+
+function animateCount(el, target, prefix='', suffix='', duration=800) {
+  const start = performance.now();
+  const from = 0;
+  el.style.transition = 'none';
+  el.style.transform = 'translateY(6px)';
+  el.style.opacity = '0';
+  requestAnimationFrame(() => {
+    el.style.transition = 'all 0.3s ease';
+    el.style.transform = 'translateY(0)';
+    el.style.opacity = '1';
+  });
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = from + (target - from) * ease;
+    if (typeof target === 'number' && target > 100) {
+      el.textContent = prefix + fmt(Math.round(val)) + suffix;
+    } else if (suffix === '%') {
+      el.textContent = prefix + val.toFixed(1) + suffix;
+    } else {
+      el.textContent = prefix + (target < 10 ? val.toFixed(2) : Math.round(val).toLocaleString()) + suffix;
+    }
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = prefix + (typeof target === 'number' && target > 100 ? fmt(target) : target < 10 ? target.toFixed(2) : target.toLocaleString()) + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+function makeSparkline(container, count, color) {
+  container.innerHTML = '';
+  const pts = [];
+  for (let i = 0; i < count; i++) pts.push(rand(15, 85));
+  const w = container.offsetWidth || 200;
+  const h = 32;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  svg.setAttribute('preserveAspectRatio', 'none');
+  svg.style.cssText = `width:100%;height:100%;display:block`;
+
+  const step = w / (count - 1);
+  let d = `M0,${h - pts[0] * h / 100}`;
+  for (let i = 1; i < count; i++) {
+    const x = i * step;
+    const y = h - pts[i] * h / 100;
+    const px = (i - 1) * step;
+    const py = h - pts[i - 1] * h / 100;
+    const cx1 = px + step * 0.4, cx2 = x - step * 0.4;
+    d += ` C${cx1},${py} ${cx2},${y} ${x},${y}`;
+  }
+
+  const grad = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  grad.innerHTML = `<linearGradient id="sg-${container.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity="0.2"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient>`;
+  svg.appendChild(grad);
+
+  const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  area.setAttribute('d', d + ` L${w},${h} L0,${h}Z`);
+  area.setAttribute('fill', `url(#sg-${container.id})`);
+  svg.appendChild(area);
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line.setAttribute('d', d);
+  line.setAttribute('fill', 'none');
+  line.setAttribute('stroke', color);
+  line.setAttribute('stroke-width', '1.5');
+  const len = line.getTotalLength?.() || 500;
+  line.style.strokeDasharray = len;
+  line.style.strokeDashoffset = len;
+  line.style.transition = 'stroke-dashoffset 1s ease';
+  svg.appendChild(line);
+  container.appendChild(svg);
+  requestAnimationFrame(() => { line.style.strokeDashoffset = '0'; });
+}
+
+function generateMainChart() {
+  const el = document.getElementById('mainChart');
+  el.innerHTML = '';
+  const colors = ['var(--accent)', 'var(--green)', 'var(--purple)'];
+  for (let day = 0; day < 7; day++) {
+    const group = document.createElement('div');
+    group.style.cssText = 'flex:1;display:flex;gap:2px;align-items:flex-end;height:100%';
+    colors.forEach((c, ci) => {
+      const bar = document.createElement('div');
+      const h = rand(15, 95);
+      bar.style.cssText = `flex:1;height:0%;background:${c};border-radius:3px 3px 0 0;transition:height 0.6s cubic-bezier(0.16,1,0.3,1);opacity:0.8;cursor:pointer`;
+      bar.style.transitionDelay = `${day * 0.05 + ci * 0.02}s`;
+      bar.title = `${['Social','Email','Ads'][ci]}: ${h}%`;
+      bar.onmouseenter = function(){ this.style.opacity='1'; this.style.filter='brightness(1.2)'; };
+      bar.onmouseleave = function(){ this.style.opacity='0.8'; this.style.filter=''; };
+      group.appendChild(bar);
+      requestAnimationFrame(() => { requestAnimationFrame(() => { bar.style.height = h + '%'; }); });
+    });
+    el.appendChild(group);
+  }
+}
+
+function generateDonut() {
+  const svg = document.getElementById('donutChart');
+  const legend = document.getElementById('donutLegend');
+  svg.innerHTML = '';
+  legend.innerHTML = '';
+  const channels = [
+    { name: 'Social', color: 'var(--accent)', hex: '#4DA6FF' },
+    { name: 'Email', color: 'var(--green)', hex: '#22c55e' },
+    { name: 'Paid Ads', color: 'var(--purple)', hex: '#a78bfa' },
+    { name: 'Website', color: 'var(--cyan)', hex: '#00d4ff' }
+  ];
+  const vals = channels.map(() => rand(15, 40));
+  const total = vals.reduce((a, b) => a + b, 0);
+  let offset = 0;
+  channels.forEach((ch, i) => {
+    const pct = vals[i] / total * 100;
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', '18'); circle.setAttribute('cy', '18'); circle.setAttribute('r', '15.915');
+    circle.setAttribute('fill', 'none'); circle.setAttribute('stroke', ch.hex);
+    circle.setAttribute('stroke-width', '2.5');
+    circle.setAttribute('stroke-dasharray', `${pct} ${100 - pct}`);
+    circle.setAttribute('stroke-dashoffset', `${-offset}`);
+    circle.style.transition = 'all 0.8s ease';
+    circle.style.transitionDelay = `${i * 0.1}s`;
+    svg.appendChild(circle);
+    offset += pct;
+
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;font-size:11px';
+    row.innerHTML = `<div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:2px;background:${ch.hex}"></div><span style="color:var(--text-2)">${ch.name}</span></div><span style="font-family:var(--font-head);font-weight:700;color:var(--text)">${vals[i]}%</span>`;
+    legend.appendChild(row);
+  });
+  animateCount(document.getElementById('donutTotal'), total, '', '', 600);
+}
+
+function generateLiveCampaigns() {
+  const el = document.getElementById('liveCampaigns');
+  const campaigns = [
+    { name: 'Q1 Brand Awareness', platform: 'Meta + Google', budget: rand(1500, 4000), spent: rand(40, 85), status: 'live' },
+    { name: 'Spring Retargeting', platform: 'Google Ads', budget: rand(800, 2500), spent: rand(20, 60), status: 'live' },
+    { name: 'Evergreen Lead Gen', platform: 'LinkedIn', budget: rand(500, 1500), spent: rand(50, 90), status: 'live' }
+  ];
+  el.innerHTML = campaigns.map(c => `
+    <div style="padding:10px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);transition:all 0.15s" onmouseenter="this.style.borderColor='var(--border2)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:12px;font-weight:600">${c.name}</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(34,197,94,0.08);color:var(--green);font-weight:700">LIVE</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-3);margin-bottom:8px">${c.platform} · $${c.budget.toLocaleString()}/mo</div>
+      <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
+        <div style="height:100%;width:${c.spent}%;background:var(--accent);border-radius:2px;transition:width 1s ease"></div>
+      </div>
+      <div style="font-size:9px;color:var(--text-3);margin-top:4px">${c.spent}% of budget spent</div>
+    </div>
+  `).join('');
+}
+
+function generateWinsLosses() {
+  const el = document.getElementById('winsLosses');
+  const wins = [
+    { text: 'Email open rate', val: '+' + rand(12, 35) + '%', type: 'win' },
+    { text: 'IG reel reach vs avg', val: '+' + rand(20, 60) + '%', type: 'win' },
+    { text: 'Google Ads CPA', val: '-' + rand(5, 18) + '%', type: 'win' },
+  ];
+  const losses = [
+    { text: 'Facebook organic reach', val: '-' + rand(8, 25) + '%', type: 'loss' },
+    { text: 'LinkedIn post engagement', val: '-' + rand(5, 15) + '%', type: 'loss' },
+  ];
+  el.innerHTML = [...wins, ...losses].map(item => `
+    <div style="padding:8px 10px;border-radius:var(--r-sm);background:${item.type === 'win' ? 'rgba(34,197,94,0.04)' : 'rgba(239,68,68,0.04)'};border:1px solid ${item.type === 'win' ? 'rgba(34,197,94,0.08)' : 'rgba(239,68,68,0.08)'};display:flex;align-items:center;gap:8px;font-size:12px">
+      <span style="font-weight:700;color:${item.type === 'win' ? 'var(--green)' : 'var(--red)'};min-width:42px">${item.type === 'win' ? '↑' : '↓'} ${item.val}</span>
+      <span style="color:var(--text-2)">${item.text}</span>
+    </div>
+  `).join('');
+}
+
+function generateCompetitorPulse() {
+  const el = document.getElementById('competitorPulse');
+  const items = [
+    { name: 'Competitor A', action: 'Launched new video ad series on TikTok', tag: 'Content' },
+    { name: 'Competitor B', action: 'Increased Google Ads budget by ~30%', tag: 'Paid' },
+    { name: 'Competitor C', action: 'Published 2 blog posts on industry trends', tag: 'SEO' },
+  ];
+  el.innerHTML = items.map(c => `
+    <div style="padding:8px 10px;border-radius:var(--r-sm);border:1px solid var(--border);font-size:11px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px">
+        <span style="font-weight:600;color:var(--text)">${c.name}</span>
+        <span style="font-size:9px;padding:2px 6px;border-radius:8px;background:rgba(255,255,255,0.04);color:var(--text-3);border:1px solid var(--border)">${c.tag}</span>
+      </div>
+      <div style="color:var(--text-3);line-height:1.4">${c.action}</div>
+    </div>
+  `).join('');
+}
+
+function generateAISteps() {
+  const el = document.getElementById('aiSteps');
+  const steps = [
+    'Increase IG Reels to 3x/week — strong engagement trend',
+    'Shift $' + rand(100, 400) + ' from Facebook to Google — better CPA',
+    'A/B test email subject lines — open rate plateau detected',
+    'Publish competitor response blog post — gap identified',
+  ];
+  el.innerHTML = steps.map(s => `
+    <div style="padding:8px 10px;border-radius:var(--r-sm);background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:11px;color:var(--text-2);line-height:1.4;display:flex;gap:8px">
+      <span style="color:var(--accent);flex-shrink:0;font-weight:700">✦</span>${s}
+    </div>
+  `).join('');
+}
+
+function generateApprovals() {
+  const el = document.getElementById('approvalQueue');
+  const items = [
+    { title: 'IG carousel — Spring Collection', type: 'Social', time: '2h ago' },
+    { title: 'March newsletter final', type: 'Email', time: '5h ago' },
+    { title: 'Print brochure v2', type: 'Print', time: '1d ago' },
+  ];
+  el.innerHTML = items.map(a => `
+    <div style="padding:8px 10px;border-radius:var(--r-sm);border:1px solid rgba(245,158,11,0.1);background:rgba(245,158,11,0.03);display:flex;align-items:center;gap:8px;font-size:11px">
+      <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0"></div>
+      <div style="flex:1">
+        <div style="font-weight:600;color:var(--text)">${a.title}</div>
+        <div style="color:var(--text-3);font-size:10px">${a.type} · ${a.time}</div>
+      </div>
+      <span style="font-size:9px;color:var(--amber);font-weight:600">REVIEW</span>
+    </div>
+  `).join('');
+  document.getElementById('approvalCount').textContent = items.length + ' pending';
+}
+
+function generateTimeline() {
+  const el = document.getElementById('twoWeekTimeline');
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun','Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const types = ['social','email','ad','','social','','','social','email','social','','ad','',''];
+  const colors = { social: 'var(--accent)', email: 'var(--purple)', ad: 'var(--amber)' };
+  const bgColors = { social: 'rgba(77,166,255,0.08)', email: 'rgba(167,139,250,0.08)', ad: 'rgba(245,158,11,0.08)' };
+  const borderColors = { social: 'rgba(77,166,255,0.15)', email: 'rgba(167,139,250,0.15)', ad: 'rgba(245,158,11,0.15)' };
+
+  el.innerHTML = `<div style="display:grid;grid-template-columns:repeat(14,1fr);gap:4px">${days.map((d, i) => {
+    const t = types[i];
+    const bg = t ? bgColors[t] : 'transparent';
+    const bc = t ? borderColors[t] : 'var(--border)';
+    const dot = t ? `<div style="width:4px;height:4px;border-radius:50%;background:${colors[t]};margin:0 auto"></div>` : '';
+    return `<div style="text-align:center;padding:8px 0;border-radius:6px;border:1px solid ${bc};background:${bg};transition:all 0.2s;cursor:default" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform=''">
+      <div style="font-size:8px;font-family:var(--font-mono);color:var(--text-3);margin-bottom:4px">${d}</div>
+      <div style="font-size:10px;font-weight:600;color:var(--text-2);margin-bottom:4px">${i + 1}</div>
+      ${dot}
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function animateKPI(card) {
+  card.style.transform = 'scale(0.97)';
+  card.style.transition = 'transform 0.15s ease';
+  setTimeout(() => { card.style.transform = 'scale(1)'; }, 150);
+  generateKPIs();
+}
+
+function generateKPIs() {
+  const imp = rand(8000, 28000);
+  const eng = rand(400, 2200);
+  const conv = parseFloat(randF(3.0, 9.5));
+  const clicks = rand(1500, 8000);
+  const cpc = parseFloat(randF(0.8, 2.5));
+  const sessions = rand(3000, 15000);
+  const revenue = rand(1200, 8500);
+
+  animateCount(document.getElementById('kpi-impressions'), imp);
+  animateCount(document.getElementById('kpi-engagement'), eng);
+  animateCount(document.getElementById('kpi-conversion'), conv, '', '%');
+  animateCount(document.getElementById('kpi-clicks'), clicks);
+  animateCount(document.getElementById('kpi-cpc'), cpc, '$');
+  animateCount(document.getElementById('kpi-sessions'), sessions);
+  animateCount(document.getElementById('kpi-revenue'), revenue, '$');
+
+  document.getElementById('kpi-impressions-delta').textContent = '+' + rand(5, 32) + '%';
+  document.getElementById('kpi-engagement-delta').textContent = '+' + rand(3, 28) + '%';
+  document.getElementById('kpi-conversion-delta').textContent = '+' + randF(0.3, 2.5) + '%';
+
+  makeSparkline(document.getElementById('sparkline-impressions'), 12, '#4DA6FF');
+  makeSparkline(document.getElementById('sparkline-engagement'), 12, '#22c55e');
+  makeSparkline(document.getElementById('sparkline-conversion'), 12, '#a78bfa');
+}
+
+function regenerateChart() { generateMainChart(); }
+function regenerateDonut() { generateDonut(); }
+
+function regenerateAll() {
+  const icon = document.getElementById('refreshIcon');
+  icon.style.transform = 'rotate(360deg)';
+  setTimeout(() => { icon.style.transition = 'none'; icon.style.transform = 'rotate(0deg)'; requestAnimationFrame(() => { icon.style.transition = 'transform 0.4s'; }); }, 400);
+  generateKPIs();
+  generateMainChart();
+  generateDonut();
+  generateLiveCampaigns();
+  generateWinsLosses();
+  generateCompetitorPulse();
+  generateAISteps();
+  generateApprovals();
+  generateTimeline();
+}
+
+// ═══ SOCIAL TAB ═══
+const SOCIAL_POSTS = [
+  { platform:'Instagram', handle:'@yourbrand', status:'Approved', statusColor:'var(--green)', emoji:'📸', caption:'Spring is here and so is our new collection. Explore fresh styles designed for the season ahead.', tags:'#SpringCollection #NewArrivals #StyleUpdate', ai:'Try adding a carousel — multi-image posts see 3x more saves than single images.', copy:'Unveil spring with pieces that move. New collection — link in bio.' },
+  { platform:'Facebook', handle:'Your Brand', status:'Scheduled', statusColor:'var(--accent)', emoji:'🎯', caption:'Ready to level up your marketing? See how teams are replacing 5+ tools with one hub.', tags:'#MarketingTech #Automation', ai:'Posts with questions get 2x more comments. Try ending with a question.', copy:'What if one platform could replace your entire marketing stack? Now it can.' },
+  { platform:'LinkedIn', handle:'Your Brand Inc.', status:'In Review', statusColor:'var(--amber)', emoji:'💼', caption:'The future of marketing isn\'t more tools — it\'s smarter tools. Here\'s how we built a unified command center.', tags:'#MarTech #AI #Innovation', ai:'LinkedIn articles under 1,000 words get 36% more engagement. Consider trimming.', copy:'We analyzed 50+ marketing teams. The ones winning? They stopped juggling tools.' },
+  { platform:'X (Twitter)', handle:'@yourbrand', status:'Draft', statusColor:'var(--text-3)', emoji:'🐦', caption:'Marketing shouldn\'t require 8 tabs. One dashboard. Every channel. AI suggestions built in.', tags:'#MarketingHub #OnePlace', ai:'Tweets with numbers get 17% more engagement. Add a stat.', copy:'8 modules. 1 dashboard. 0 tab switching. That\'s the hub.' },
+];
+
+function initSocialTab() {
+  const grid = document.getElementById('socialCalGrid');
+  if (!grid) return;
+  const days = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+  const cells = [];
+  // headers
+  grid.innerHTML = days.map(d => `<div class="cal-head">${d}</div>`).join('');
+  // 4 weeks of cells
+  const postSlots = [0,1,3,4,7,8,10,11,14,15,17,18,21,22,24,25];
+  for (let i = 0; i < 28; i++) {
+    const hasPost = postSlots.includes(i);
+    const postIdx = hasPost ? Math.floor(Math.random() * SOCIAL_POSTS.length) : -1;
+    const states = ['has-post','approved','review','has-post','approved'];
+    const cls = hasPost ? states[i % states.length] : '';
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell ' + cls;
+    cell.style.cssText = 'opacity:0;transform:scale(0.8);transition:all 0.3s ease;cursor:' + (hasPost ? 'pointer' : 'default');
+    if (hasPost) cell.onclick = () => showSocialPreview(postIdx, i);
+    grid.appendChild(cell);
+    setTimeout(() => { cell.style.opacity = '1'; cell.style.transform = 'scale(1)'; }, 80 + i * 25);
+  }
+  // Auto-open first post after load
+  setTimeout(() => showSocialPreview(0, 0), 1200);
+}
+
+function showSocialPreview(idx, day) {
+  const p = SOCIAL_POSTS[idx];
+  const el = document.getElementById('socialPreview');
+  el.style.display = 'block';
+  el.style.animation = 'none'; el.offsetHeight; el.style.animation = 'slideUp 0.3s ease both';
+  document.getElementById('socialPreviewPlatform').textContent = p.platform;
+  const st = document.getElementById('socialPreviewStatus');
+  st.textContent = p.status;
+  st.style.background = p.status === 'Approved' ? 'rgba(34,197,94,0.08)' : p.status === 'In Review' ? 'rgba(245,158,11,0.08)' : 'rgba(77,166,255,0.08)';
+  st.style.color = p.statusColor;
+  document.getElementById('socialPreviewHandle').textContent = p.handle;
+  document.getElementById('socialPreviewImage').textContent = p.emoji;
+  document.getElementById('socialPreviewCaption').textContent = p.caption;
+  document.getElementById('socialPreviewTags').textContent = p.tags;
+  document.getElementById('socialPreviewDate').textContent = 'March ' + (day + 1) + ', 2026 — 10:00 AM';
+  document.getElementById('socialPreviewCopy').textContent = p.copy;
+  document.getElementById('socialPreviewAI').textContent = p.ai;
+}
+
+// ═══ EMAIL TAB ═══
+const EMAILS = [
+  { name:'March Newsletter', subject:'Your March Marketing Update 🚀', status:'Approved', statusColor:'var(--green)', date:'Mar 3, 9:00 AM', audience:'Full List (4,200)', pretext:'See what we\'ve been building this month...', hero:'linear-gradient(135deg,var(--accent-dim),rgba(77,166,255,0.03))', heroColor:'var(--accent)', cta:'var(--accent-dim)', ctaText:'var(--accent)', ai:'Subject lines with emojis see 15% higher open rates. Good call on the rocket.' },
+  { name:'Product Launch', subject:'Introducing: The Marketing Hub', status:'Scheduled', statusColor:'var(--accent)', date:'Mar 7, 11:00 AM', audience:'Prospects (1,800)', pretext:'One platform to replace them all...', hero:'linear-gradient(135deg,rgba(167,139,250,0.08),rgba(139,92,246,0.03))', heroColor:'var(--purple)', cta:'rgba(167,139,250,0.1)', ctaText:'var(--purple)', ai:'Consider adding a countdown timer element — creates urgency and lifts clicks by ~20%.' },
+  { name:'Weekly Digest', subject:'This Week in Marketing: 3 Wins You Should Know', status:'In Review', statusColor:'var(--amber)', date:'Mar 10, 8:00 AM', audience:'Engaged (2,600)', pretext:'Your top 3 highlights from this week...', hero:'linear-gradient(135deg,rgba(34,197,94,0.06),rgba(22,163,74,0.03))', heroColor:'var(--green)', cta:'rgba(34,197,94,0.08)', ctaText:'var(--green)', ai:'Numbered subject lines (3 Wins) are performing well. Open rates are trending +12% vs last month.' },
+  { name:'Re-Engagement', subject:'We miss you — here\'s what\'s new', status:'Draft', statusColor:'var(--text-3)', date:'Mar 14, 2:00 PM', audience:'Inactive 30d (890)', pretext:'A lot has changed since we last talked...', hero:'linear-gradient(135deg,rgba(245,158,11,0.06),rgba(217,119,6,0.03))', heroColor:'var(--amber)', cta:'rgba(245,158,11,0.08)', ctaText:'var(--amber)', ai:'For re-engagement, try a personal tone. First-person subject lines see 26% higher opens.' },
+];
+
+function initEmailTab() {
+  const el = document.getElementById('emailList');
+  if (!el) return;
+  el.innerHTML = EMAILS.map((e, i) => `
+    <div onclick="showEmailPreview(${i})" style="padding:14px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-12px)" id="email-row-${i}" onmouseenter="this.style.borderColor='var(--border2)';this.style.background='rgba(255,255,255,0.03)'" onmouseleave="this.style.borderColor='var(--border)';this.style.background='rgba(255,255,255,0.015)'">
+      <div style="width:40px;height:40px;border-radius:10px;background:${e.hero};display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">✉</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600">${e.name}</div><div style="font-size:11px;color:var(--text-3);margin-top:2px">${e.subject}</div></div>
+      <div style="font-size:10px;color:var(--text-3)">${e.date}</div>
+      <div class="pill" style="font-size:9px;background:${e.status==='Approved'?'rgba(34,197,94,0.08)':e.status==='In Review'?'rgba(245,158,11,0.08)':'rgba(255,255,255,0.04)'};color:${e.statusColor};border-color:transparent">${e.status}</div>
+    </div>
+  `).join('');
+  EMAILS.forEach((_, i) => {
+    setTimeout(() => { const r = document.getElementById('email-row-'+i); if(r){ r.style.transition='all 0.4s ease'; r.style.opacity='1'; r.style.transform='translateX(0)'; } }, 100 + i * 80);
+  });
+  setTimeout(() => showEmailPreview(0), 1000);
+}
+
+function showEmailPreview(idx) {
+  const e = EMAILS[idx];
+  const el = document.getElementById('emailPreview');
+  el.style.display = 'block';
+  el.style.animation = 'none'; el.offsetHeight; el.style.animation = 'slideUp 0.3s ease both';
+  document.getElementById('emailPreviewStatus').textContent = e.status;
+  document.getElementById('emailPreviewStatus').style.color = e.statusColor;
+  document.getElementById('emailHero').style.background = e.hero;
+  document.getElementById('emailHero').style.color = e.heroColor;
+  document.getElementById('emailHero').textContent = e.name.toUpperCase();
+  document.getElementById('emailSubject').textContent = e.subject;
+  document.getElementById('emailCTA').style.background = e.cta;
+  document.getElementById('emailCTA').style.color = e.ctaText;
+  document.getElementById('emailCTA').textContent = 'LEARN MORE';
+  document.getElementById('emailPreviewSubject').textContent = e.subject;
+  document.getElementById('emailPreviewPretext').textContent = e.pretext;
+  document.getElementById('emailPreviewDate').textContent = e.date;
+  document.getElementById('emailPreviewAudience').textContent = e.audience;
+  document.getElementById('emailPreviewAI').textContent = e.ai;
+}
+
+// ═══ PERFORMANCE TAB ═══
+function initPerfTab() {
+  animateCount(document.getElementById('perf-social'), rand(15000,45000));
+  animateCount(document.getElementById('perf-email'), parseFloat(randF(28,52)), '', '%');
+  animateCount(document.getElementById('perf-ads'), parseFloat(randF(2.5,6.8)), '$', 'x');
+  animateCount(document.getElementById('perf-web'), rand(8000,25000));
+  // Funnel
+  const funnel = document.getElementById('perfFunnel');
+  const funnelData = [{label:'Impressions',val:rand(30000,60000),pct:100},{label:'Clicks',val:rand(3000,8000),pct:rand(40,70)},{label:'Sessions',val:rand(1500,5000),pct:rand(25,45)},{label:'Conversions',val:rand(100,600),pct:rand(8,18)}];
+  funnel.innerHTML = funnelData.map((f,i) => `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="width:80px;font-size:10px;color:var(--text-3);font-family:var(--font-mono)">${f.label}</div>
+      <div style="flex:1;height:24px;background:rgba(255,255,255,0.03);border-radius:4px;overflow:hidden;position:relative">
+        <div style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:4px;transition:width 0.8s ease ${i*0.15}s" id="funnel-bar-${i}"></div>
+      </div>
+      <div style="font-family:var(--font-head);font-size:13px;font-weight:700;width:50px;text-align:right" id="funnel-val-${i}">0</div>
+    </div>
+  `).join('');
+  funnelData.forEach((f,i) => { setTimeout(() => { document.getElementById('funnel-bar-'+i).style.width = f.pct+'%'; animateCount(document.getElementById('funnel-val-'+i), f.val); }, 200); });
+  // Traffic sources
+  const traffic = document.getElementById('perfTraffic');
+  const sources = [{name:'Organic Search',pct:rand(25,40),color:'var(--green)'},{name:'Social Media',pct:rand(15,30),color:'var(--accent)'},{name:'Paid Ads',pct:rand(15,25),color:'var(--amber)'},{name:'Direct',pct:rand(10,20),color:'var(--cyan)'},{name:'Email',pct:rand(5,15),color:'var(--purple)'}];
+  traffic.innerHTML = sources.map((s,i) => `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="width:8px;height:8px;border-radius:2px;background:${s.color};flex-shrink:0"></div>
+      <div style="font-size:12px;color:var(--text-2);width:100px">${s.name}</div>
+      <div style="flex:1;height:6px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:0%;background:${s.color};border-radius:3px;transition:width 0.6s ease ${i*0.1}s" id="traffic-bar-${i}"></div>
+      </div>
+      <div style="font-size:11px;font-weight:700;width:32px;text-align:right">${s.pct}%</div>
+    </div>
+  `).join('');
+  sources.forEach((s,i) => { setTimeout(() => { document.getElementById('traffic-bar-'+i).style.width = s.pct+'%'; }, 200); });
+  // Chart
+  const chart = document.getElementById('perfChart');
+  chart.innerHTML = '';
+  const colors = ['var(--accent)','var(--purple)','var(--amber)','var(--cyan)'];
+  for (let d = 0; d < 7; d++) {
+    const group = document.createElement('div');
+    group.style.cssText = 'flex:1;display:flex;gap:2px;align-items:flex-end;height:100%';
+    colors.forEach((c,ci) => {
+      const bar = document.createElement('div');
+      const h = rand(15,95);
+      bar.style.cssText = `flex:1;height:0%;background:${c};border-radius:3px 3px 0 0;transition:height 0.6s cubic-bezier(0.16,1,0.3,1) ${d*0.05+ci*0.02}s;opacity:0.7`;
+      group.appendChild(bar);
+      requestAnimationFrame(() => { requestAnimationFrame(() => { bar.style.height = h+'%'; }); });
+    });
+    chart.appendChild(group);
+  }
+  // AI Suggestions
+  const ai = document.getElementById('perfAI');
+  const suggestions = [
+    {icon:'📊',title:'Shift Budget to Google Ads',desc:'Google CPA is $'+randF(1,3)+' vs Facebook\'s $'+randF(3,7)+'. Recommend shifting 20% of Facebook budget to Google for better ROAS.',type:'Budget'},
+    {icon:'📱',title:'Double Down on Reels',desc:'IG Reels are driving '+rand(30,55)+'% of your social engagement this week. Increase from 2x to 4x per week.',type:'Content'},
+    {icon:'✉',title:'Optimize Email Send Time',desc:'Your Tuesday 9AM sends see '+rand(15,30)+'% higher open rates than Thursday sends. Consider consolidating.',type:'Email'},
+    {icon:'🌐',title:'Fix Landing Page Bounce Rate',desc:'Homepage bounce rate is '+rand(45,65)+'% — '+rand(8,20)+'% above industry average. Run the Website audit for specific fixes.',type:'Web'},
+  ];
+  ai.innerHTML = suggestions.map((s,i) => `
+    <div style="padding:12px;border-radius:var(--r-sm);background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);display:flex;gap:12px;align-items:flex-start;opacity:0;transform:translateY(8px);transition:all 0.4s ease ${i*0.1}s" id="perf-ai-${i}">
+      <div style="font-size:18px;flex-shrink:0">${s.icon}</div>
+      <div style="flex:1"><div style="font-size:12px;font-weight:700;margin-bottom:3px;display:flex;align-items:center;gap:6px">✦ ${s.title}<span class="pill-accent pill" style="font-size:8px;margin-left:auto">${s.type}</span></div><div style="font-size:11px;color:var(--text-2);line-height:1.5">${s.desc}</div></div>
+    </div>
+  `).join('');
+  suggestions.forEach((_,i) => { setTimeout(() => { const el = document.getElementById('perf-ai-'+i); if(el){ el.style.opacity='1'; el.style.transform='translateY(0)'; } }, 400 + i*100); });
+}
+
+// ═══ APPROVAL HUB ═══
+const HUB_ITEMS = [
+  { title:'Spring Print Campaign — Brochure', type:'Print', icon:'🖨', time:'2h ago' },
+  { title:'Highway Billboard — Q2 Creative', type:'OOH', icon:'🏗', time:'Yesterday' },
+  { title:'IG Carousel — Spring Collection', type:'Social', icon:'📱', time:'3h ago' },
+  { title:'Event Banner — Trade Show', type:'Events', icon:'📋', time:'2 days ago' },
+  { title:'In-Store Display — Product Launch', type:'Retail', icon:'🏪', time:'3 days ago' },
+  { title:'March Newsletter Final', type:'Email', icon:'✉', time:'5h ago' },
+];
+
+let hubState = {};
+
+function initHubTab() {
+  hubState = {}; HUB_ITEMS.forEach((item,i) => { hubState[i] = i < 3 ? 'review' : i < 5 ? 'progress' : 'approved'; });
+  renderHub();
+}
+
+function renderHub() {
+  ['hubReview','hubProgress','hubApproved'].forEach(id => document.getElementById(id).innerHTML = '');
+  let rc=0,pc=0,ac=0;
+  Object.entries(hubState).forEach(([i, state]) => {
+    const item = HUB_ITEMS[i];
+    const target = state === 'review' ? 'hubReview' : state === 'progress' ? 'hubProgress' : 'hubApproved';
+    if(state==='review') rc++; else if(state==='progress') pc++; else ac++;
+    const colors = { review:'var(--amber)', progress:'var(--accent)', approved:'var(--green)' };
+    const nextState = state === 'review' ? 'progress' : state === 'progress' ? 'approved' : 'approved';
+    const nextLabel = state === 'review' ? 'Move to In Progress →' : state === 'progress' ? 'Approve ✓' : '';
+    const card = document.createElement('div');
+    card.style.cssText = 'padding:12px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);transition:all 0.3s ease;animation:slideUp 0.3s ease both';
+    card.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <div style="width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;font-size:14px">${item.icon}</div>
+        <div style="flex:1"><div style="font-size:12px;font-weight:600">${item.title}</div><div style="font-size:10px;color:var(--text-3)">${item.type} · ${item.time}</div></div>
+      </div>
+      ${nextLabel ? `<button onclick="moveHubItem(${i},'${nextState}')" style="width:100%;padding:5px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:${colors[state]};font-size:10px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.08)'" onmouseleave="this.style.background='rgba(255,255,255,0.04)'">${nextLabel}</button>` : '<div style="text-align:center;font-size:10px;color:var(--green);font-weight:600">✓ Complete</div>'}
+    `;
+    document.getElementById(target).appendChild(card);
+  });
+  document.getElementById('hubReviewCount').textContent = rc;
+  document.getElementById('hubProgressCount').textContent = pc;
+  document.getElementById('hubApprovedCount').textContent = ac;
+}
+
+function moveHubItem(i, newState) { hubState[i] = newState; renderHub(); }
+
+// ═══ STRATEGY AUDITS ═══
+function runAudit(type) {
+  const results = document.getElementById('auditResults');
+  results.style.display = 'block';
+  results.style.animation = 'none'; results.offsetHeight; results.style.animation = 'slideUp 0.3s ease both';
+  // Loading state
+  results.innerHTML = `<div class="card" style="padding:24px;text-align:center;border-color:rgba(77,166,255,0.15)"><div style="font-size:20px;animation:pulse 1s infinite">✦</div><div style="font-size:13px;color:var(--text-2);margin-top:8px">Running ${type === 'ads' ? 'Paid Ads' : type === 'web' ? 'Website' : 'Competitor'} audit...</div></div>`;
+  setTimeout(() => {
+    if (type === 'ads') renderAdsAudit();
+    else if (type === 'web') renderWebAudit();
+    else renderCompAudit();
+  }, 1200);
+}
+
+function renderAdsAudit() {
+  const r = document.getElementById('auditResults');
+  const campaigns = [
+    { name:'Brand Awareness — Meta', spend:'$'+rand(800,2500), roas:randF(2,5)+'x', cpa:'$'+randF(3,12), suggestion:'Narrow audience by 15% — overlap with Competitor A detected. Reduce waste spend.' },
+    { name:'Lead Gen — Google', spend:'$'+rand(600,1800), roas:randF(3,7)+'x', cpa:'$'+randF(1,6), suggestion:'Increase budget 20% — this campaign has headroom. CPA is well below target.' },
+    { name:'Retargeting — Meta', spend:'$'+rand(400,1200), roas:randF(4,9)+'x', cpa:'$'+randF(0.5,3), suggestion:'Frequency is at '+randF(3,6)+' — creative fatigue likely. Swap in new visuals this week.' },
+  ];
+  r.innerHTML = `<div class="card" style="border-color:rgba(77,166,255,0.15);overflow:hidden">
+    <div class="card-head" style="background:rgba(77,166,255,0.04)"><span style="font-family:var(--font-head);font-weight:700;font-size:14px">📣 Paid Ads Audit Results</span><span class="pill-accent pill" style="margin-left:auto;font-size:9px">✦ ${campaigns.length} CAMPAIGNS ANALYZED</span></div>
+    <div class="card-body" style="display:flex;flex-direction:column;gap:12px">${campaigns.map((c,i) => `
+      <div style="padding:14px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);opacity:0;transform:translateY(8px);transition:all 0.4s ease ${i*0.1}s" id="ads-result-${i}">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div style="font-size:13px;font-weight:600;flex:1">${c.name}</div>
+          <div class="pill" style="font-size:9px">Spend: ${c.spend}/mo</div>
+          <div class="pill" style="font-size:9px;background:rgba(34,197,94,0.08);color:var(--green);border-color:rgba(34,197,94,0.15)">ROAS: ${c.roas}</div>
+          <div class="pill" style="font-size:9px">CPA: ${c.cpa}</div>
+        </div>
+        <div style="padding:8px 10px;border-radius:var(--r-sm);background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:11px;color:var(--text-2);line-height:1.4"><span style="color:var(--accent);font-weight:700">✦ Suggestion:</span> ${c.suggestion}</div>
+      </div>
+    `).join('')}</div></div>`;
+  campaigns.forEach((_,i) => { setTimeout(() => { const el=document.getElementById('ads-result-'+i); if(el){el.style.opacity='1';el.style.transform='translateY(0)';} }, 200+i*120); });
+}
+
+function renderWebAudit() {
+  const r = document.getElementById('auditResults');
+  const pages = [
+    { page:'Homepage', seo:rand(60,95), ux:rand(55,90), perf:rand(50,95), fixes:['Add meta description (missing)','Compress hero image — '+rand(200,800)+'KB too large','Add H2 structure for better crawlability'] },
+    { page:'/pricing', seo:rand(50,85), ux:rand(60,92), perf:rand(55,88), fixes:['Add schema markup for pricing','CTA button contrast too low (WCAG fail)','Reduce JS bundle by '+rand(100,400)+'KB'] },
+    { page:'/blog', seo:rand(40,80), ux:rand(50,85), perf:rand(45,80), fixes:['Add internal links to top 3 posts','Image alt tags missing on '+rand(3,12)+' images','Load time '+randF(2,5)+'s — target under 2s'] },
+  ];
+  r.innerHTML = `<div class="card" style="border-color:rgba(0,212,255,0.15);overflow:hidden">
+    <div class="card-head" style="background:rgba(0,212,255,0.04)"><span style="font-family:var(--font-head);font-weight:700;font-size:14px">🌐 Website Audit Results</span><span class="pill" style="margin-left:auto;font-size:9px;background:rgba(0,212,255,0.08);color:var(--cyan);border-color:rgba(0,212,255,0.15)">✦ ${pages.length} PAGES SCORED</span></div>
+    <div class="card-body" style="display:flex;flex-direction:column;gap:12px">${pages.map((p,i) => `
+      <div style="padding:14px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);opacity:0;transform:translateY(8px);transition:all 0.4s ease ${i*0.1}s" id="web-result-${i}">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;font-family:var(--font-head)">${p.page}</div>
+        <div style="display:flex;gap:10px;margin-bottom:12px">
+          <div style="flex:1;padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:${p.seo>=75?'var(--green)':p.seo>=50?'var(--amber)':'var(--red)'}">${p.seo}</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">SEO</div></div>
+          <div style="flex:1;padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:${p.ux>=75?'var(--green)':p.ux>=50?'var(--amber)':'var(--red)'}">${p.ux}</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">UX</div></div>
+          <div style="flex:1;padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:${p.perf>=75?'var(--green)':p.perf>=50?'var(--amber)':'var(--red)'}">${p.perf}</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">PERF</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">${p.fixes.map(f => `<div style="padding:6px 10px;border-radius:4px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.08);font-size:11px;color:var(--text-2)">✦ ${f}</div>`).join('')}</div>
+      </div>
+    `).join('')}</div></div>`;
+  pages.forEach((_,i) => { setTimeout(() => { const el=document.getElementById('web-result-'+i); if(el){el.style.opacity='1';el.style.transform='translateY(0)';} }, 200+i*120); });
+}
+
+function renderCompAudit() {
+  const r = document.getElementById('auditResults');
+  const comps = [
+    { name:'Competitor A', strength:'Strong social presence — '+rand(20,50)+'K followers', weakness:'No email strategy detected', counter:'Launch targeted email campaigns to capture their disengaged audience.' },
+    { name:'Competitor B', strength:'Heavy Google Ads spend ~$'+rand(3,12)+'K/mo', weakness:'Poor organic SEO — ranking page 2+ for '+rand(5,15)+' target keywords', counter:'Double down on organic content for those keywords — cheaper long-term acquisition.' },
+    { name:'Competitor C', strength:'Active blog with '+rand(8,20)+' posts/month', weakness:'No paid social detected — organic only', counter:'Run paid social campaigns in their space — they can\'t compete on paid right now.' },
+  ];
+  r.innerHTML = `<div class="card" style="border-color:rgba(167,139,250,0.15);overflow:hidden">
+    <div class="card-head" style="background:rgba(167,139,250,0.04)"><span style="font-family:var(--font-head);font-weight:700;font-size:14px">🔍 Competitor Audit Results</span><span class="pill" style="margin-left:auto;font-size:9px;background:rgba(167,139,250,0.08);color:var(--purple);border-color:rgba(167,139,250,0.15)">✦ ${comps.length} COMPETITORS ANALYZED</span></div>
+    <div class="card-body" style="display:flex;flex-direction:column;gap:12px">${comps.map((c,i) => `
+      <div style="padding:14px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);opacity:0;transform:translateY(8px);transition:all 0.4s ease ${i*0.1}s" id="comp-result-${i}">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;font-family:var(--font-head)">${c.name}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div style="padding:8px 10px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:11px"><span style="color:var(--green);font-weight:700;display:block;margin-bottom:2px">Strength</span><span style="color:var(--text-2)">${c.strength}</span></div>
+          <div style="padding:8px 10px;border-radius:var(--r-sm);background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08);font-size:11px"><span style="color:var(--red);font-weight:700;display:block;margin-bottom:2px">Weakness</span><span style="color:var(--text-2)">${c.weakness}</span></div>
+        </div>
+        <div style="padding:8px 10px;border-radius:var(--r-sm);background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:11px;color:var(--text-2);line-height:1.4"><span style="color:var(--accent);font-weight:700">✦ Counter-Move:</span> ${c.counter}</div>
+      </div>
+    `).join('')}</div></div>`;
+  comps.forEach((_,i) => { setTimeout(() => { const el=document.getElementById('comp-result-'+i); if(el){el.style.opacity='1';el.style.transform='translateY(0)';} }, 200+i*120); });
+}
+
+// ═══ WEEKLY REPORT ═══
+function generateReport() {
+  const el = document.getElementById('reportContent');
+  el.style.display = 'block';
+  el.style.animation = 'none'; el.offsetHeight; el.style.animation = 'slideUp 0.4s ease both';
+  el.innerHTML = `
+    <div class="card" style="overflow:hidden;border-color:rgba(77,166,255,0.12)">
+      <div class="card-head" style="background:rgba(77,166,255,0.03)"><span style="font-family:var(--font-head);font-weight:700;font-size:14px">✦ Weekly Report — Feb 17–23, 2026</span></div>
+      <div class="card-body">
+        <div class="grid-3" style="gap:10px;margin-bottom:20px">
+          <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--accent)" id="rpt-impressions">0</div><div style="font-size:10px;color:var(--text-3);font-family:var(--font-mono)">IMPRESSIONS</div></div>
+          <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--green)" id="rpt-engage">0</div><div style="font-size:10px;color:var(--text-3);font-family:var(--font-mono)">ENGAGEMENTS</div></div>
+          <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--purple)" id="rpt-conv">0</div><div style="font-size:10px;color:var(--text-3);font-family:var(--font-mono)">CONVERSIONS</div></div>
+        </div>
+        <div class="grid-2" style="gap:16px">
+          <div>
+            <div class="label" style="margin-bottom:8px">TOP WINS</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding:8px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:12px"><span style="color:var(--green);font-weight:700">↑ +${rand(15,40)}%</span> <span style="color:var(--text-2)">Email open rate — subject line test</span></div>
+              <div style="padding:8px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:12px"><span style="color:var(--green);font-weight:700">↑ +${rand(25,60)}%</span> <span style="color:var(--text-2)">IG reel reach vs avg</span></div>
+              <div style="padding:8px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:12px"><span style="color:var(--green);font-weight:700">↓ -${rand(10,25)}%</span> <span style="color:var(--text-2)">Google Ads CPA improved</span></div>
+            </div>
+            <div class="label" style="margin:16px 0 8px">LOSSES TO ADDRESS</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding:8px 10px;border-radius:6px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08);font-size:12px"><span style="color:var(--red);font-weight:700">↓ -${rand(8,20)}%</span> <span style="color:var(--text-2)">Facebook organic reach declining</span></div>
+              <div style="padding:8px 10px;border-radius:6px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08);font-size:12px"><span style="color:var(--red);font-weight:700">↓ -${rand(5,15)}%</span> <span style="color:var(--text-2)">LinkedIn post engagement</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="label" style="margin-bottom:8px">✦ AI RECOMMENDATIONS FOR NEXT WEEK</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Increase IG reel frequency to 4x/week — strong engagement trend continuing</div>
+              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Shift $${rand(150,400)} from Facebook to Google Ads — CPA gap is widening</div>
+              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ A/B test email preview text — open rates plateauing, this is the next lever</div>
+              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Publish competitor response post — Competitor B just launched in your keyword space</div>
+              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Run Website audit on /pricing — bounce rate is ${rand(50,70)}%, well above target</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  setTimeout(() => {
+    animateCount(document.getElementById('rpt-impressions'), rand(20000,50000));
+    animateCount(document.getElementById('rpt-engage'), rand(1500,5000));
+    animateCount(document.getElementById('rpt-conv'), rand(80,400));
+  }, 300);
+}
+const NAV = [
+  { id:'home',       icon:'✦', label:'Home' },
+  { id:'_sep1' },
+  { id:'overview',   icon:'◈', label:'Overview' },
+  { id:'social',     icon:'▦', label:'Social' },
+  { id:'email',      icon:'✉', label:'Email' },
+  { id:'performance',icon:'△', label:'Performance' },
+  { id:'hub',        icon:'⬡', label:'Approval Hub' },
+  { id:'strategy',   icon:'◎', label:'Strategy' },
+  { id:'brandkit',   icon:'◐', label:'Brand Kit' },
+  { id:'report',     icon:'☰', label:'Weekly Report' },
+];
+
+const MODULES = [
+  { id:'overview',   icon:'◈', name:'Control Center',  desc:'Two-week snapshot, live campaigns, wins & losses, competitor pulse, AI next steps', ai:true },
+  { id:'social',     icon:'▦', name:'Social Calendar',  desc:'Visual scheduling, platform mockups, approval workflows, editable copy' },
+  { id:'email',      icon:'✉', name:'Email Studio',     desc:'Mockup rendering, editable copy, version tracking, approval states' },
+  { id:'performance',icon:'△', name:'Performance',     desc:'Unified analytics across social, email, paid ads, and website traffic', ai:true },
+  { id:'hub',        icon:'⬡', name:'Approval Hub',     desc:'Internal ticketing for print, OOH, retail, and all non-digital approvals' },
+  { id:'strategy',   icon:'◎', name:'Strategy Suite',   desc:'Paid ads, website analysis, competitors, audience segments, events', ai:true },
+  { id:'brandkit',   icon:'◐', name:'Brand Kit',        desc:'Logo, colors, tone, keywords, selling points — your brand DNA' },
+  { id:'report',     icon:'☰', name:'Weekly Report',   desc:'Comprehensive weekly breakdown with AI-recommended actions', ai:true },
+];
+
+let activeTab = 'home';
+
+function buildNav() {
+  const sidebar = document.getElementById('sidebarNav');
+  const mobile = document.getElementById('mobileBar');
+  sidebar.innerHTML = '';
+  mobile.innerHTML = '';
+
+  NAV.forEach(item => {
+    if (item.id.startsWith('_sep')) {
+      const sep = document.createElement('div');
+      sep.className = 'nav-sep';
+      sidebar.appendChild(sep);
+      return;
+    }
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn' + (activeTab === item.id ? ' active' : '');
+    btn.innerHTML = `<span class="nav-icon">${item.icon}</span>${item.label}`;
+    btn.onclick = () => goTab(item.id);
+    sidebar.appendChild(btn);
+
+    const mbtn = document.createElement('button');
+    mbtn.className = activeTab === item.id ? 'active' : '';
+    mbtn.textContent = item.label;
+    mbtn.onclick = () => goTab(item.id);
+    mobile.appendChild(mbtn);
+  });
+}
+
+function buildModuleGrid() {
+  const grid = document.getElementById('moduleGrid');
+  grid.innerHTML = '';
+  MODULES.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.cssText = 'padding:16px;cursor:pointer;transition:all 0.2s';
+    card.onmouseenter = function(){ this.style.borderColor='var(--border2)'; this.style.transform='translateY(-2px)'; };
+    card.onmouseleave = function(){ this.style.borderColor=''; this.style.transform=''; };
+    card.onclick = () => goTab(m.id);
+    card.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <div style="width:32px;height:32px;border-radius:8px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:14px">${m.icon}</div>
+        <div style="font-family:var(--font-head);font-weight:700;font-size:14px">${m.name}</div>
+        ${m.ai ? '<span class="pill-accent pill" style="margin-left:auto;font-size:8px">✦ AI</span>' : ''}
+      </div>
+      <p style="font-size:12px;color:var(--text-3);line-height:1.5">${m.desc}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function goTab(id) {
+  activeTab = id;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('tab-' + id);
+  if (target) {
+    target.classList.add('active');
+    target.querySelector('.stagger')?.querySelectorAll(':scope > *').forEach((el, i) => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = `slideUp 0.5s ease ${i * 0.05}s forwards`;
+    });
+  }
+  document.getElementById('mainScroll').scrollTop = 0;
+  buildNav();
+  // Fire overview data when switching to overview tab
+  if (id === 'overview') setTimeout(regenerateAll, 150);
+  if (id === 'social') setTimeout(initSocialTab, 150);
+  if (id === 'email') setTimeout(initEmailTab, 150);
+  if (id === 'performance') setTimeout(initPerfTab, 150);
+  if (id === 'hub') setTimeout(initHubTab, 150);
+  if (id === 'report') { document.getElementById('reportContent').style.display='none'; }
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  btn.textContent = '✦ Demo Requested!';
+  btn.style.background = 'var(--green)';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+}
+
+buildNav();
+buildModuleGrid();
+document.getElementById('tab-home').classList.add('active');
+</script>
+</body>
+</html>
