@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Marketing Hub — Your Entire Marketing Command Center</title>
+<title>Business Hub — Your Entire Business Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -73,9 +73,9 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);-webkit
 .sidebar{width:210px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0 10px}
 .sidebar-brand{padding:16px 6px 14px;border-bottom:1px solid var(--border);margin-bottom:10px}
 .sidebar-brand-inner{display:flex;align-items:center;gap:9px}
-.sidebar-logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#0066cc);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;color:#fff}
-.sidebar-brand-text h1{font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:-0.3px}
-.sidebar-brand-text span{font-size:9px;color:var(--text-3);font-family:var(--font-mono);letter-spacing:0.8px;display:block;margin-top:1px}
+.sidebar-logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--green),var(--amber));display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;color:#fff}
+.sidebar-brand-text h1{font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:-0.3px;background:linear-gradient(90deg,var(--accent),var(--green),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sidebar-brand-text span{font-size:9px;color:var(--text-2);font-family:var(--font-mono);letter-spacing:0.8px;display:block;margin-top:1px;opacity:0.7}
 
 .sidebar-nav{flex:1;display:flex;flex-direction:column;gap:1px;padding-top:4px}
 .nav-btn{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:var(--r-sm);font-size:13px;font-weight:400;cursor:pointer;border:none;text-align:left;width:100%;background:transparent;color:rgba(237,237,237,0.45);border-left:2px solid transparent;transition:all 0.12s;font-family:var(--font-body)}
@@ -84,6 +84,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);-webkit
 .nav-btn .nav-icon{font-size:13px;opacity:0.5;width:16px;text-align:center;transition:opacity 0.12s}
 .nav-btn.active .nav-icon{opacity:1}
 .nav-sep{height:1px;background:var(--border);margin:8px 0}
+.nav-label{font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:var(--text-2);padding:12px 12px 4px;opacity:0.85}
 
 .sidebar-bottom{padding:10px 0 12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
 .sidebar-cta{padding:8px 10px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-weight:600;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all 0.2s;text-align:center;letter-spacing:0.2px}
@@ -227,10 +228,8 @@ textarea.form-input{min-height:100px;resize:vertical}
   .card-head{padding:10px 12px;gap:6px;flex-wrap:wrap}
 
   /* ─── HOME ─── */
-  #tab-home .grid-3{grid-template-columns:1fr 1fr 1fr !important}
-  #tab-home .stat-card .stat-val{font-size:18px}
-  /* Hide mock sidebar on mobile */
-  .mock-body > div[style*="display:flex;gap:12px"] > div[style*="width:120px"]{display:none}
+  #tab-home [style*="1fr 1fr 1fr"]{grid-template-columns:1fr 1fr 1fr !important}
+  #tab-home [style*="font-size:32px"]{font-size:24px !important}
 
   /* ─── OVERVIEW TAB ─── */
   #tab-overview [id="mainChart"]{height:100px !important}
@@ -294,6 +293,12 @@ textarea.form-input{min-height:100px;resize:vertical}
   /* ─── PROPOSALS TAB ─── */
   #proposalResult .grid-2{grid-template-columns:1fr !important}
 
+  /* ─── INDUSTRIES ─── */
+  #industryGrid{grid-template-columns:1fr 1fr !important}
+  #tab-industries .grid-2{grid-template-columns:1fr !important}
+  #tab-industries [style*="repeat(4"]{grid-template-columns:repeat(2,1fr) !important}
+  .team-card{padding:14px !important}
+
   /* ─── WHY US ─── */
   #tab-whyus .grid-2{grid-template-columns:1fr !important}
 
@@ -308,9 +313,7 @@ textarea.form-input{min-height:100px;resize:vertical}
   .page-subtitle{font-size:12px !important}
   .cta-block{padding:16px}
   .cta-block h3{font-size:14px}
-  #tab-home .grid-3{grid-template-columns:1fr !important}
-  #tab-home .stat-card{padding:10px}
-  #tab-home .stat-val{font-size:18px}
+  #tab-home [style*="1fr 1fr 1fr"]{grid-template-columns:1fr !important}
   /* 2x2 grids → stack on tiny phones */
   [style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr !important}
   /* Proposal cards 2x2 stays */
@@ -327,6 +330,12 @@ textarea.form-input{min-height:100px;resize:vertical}
 .mobile-bar button.active{background:var(--accent-dim);color:var(--accent);border-color:rgba(77,166,255,0.15)}
 .mobile-bar button.green-tab{color:rgba(34,197,94,0.5);border-color:rgba(34,197,94,0.1)}
 .mobile-bar button.green-tab.active{background:rgba(34,197,94,0.12);color:var(--green);border-color:rgba(34,197,94,0.2)}
+.mobile-bar button.purple-tab{color:rgba(167,139,250,0.5);border-color:rgba(167,139,250,0.1)}
+.mobile-bar button.purple-tab.active{background:rgba(167,139,250,0.12);color:var(--purple);border-color:rgba(167,139,250,0.2)}
+.mobile-bar button.amber-tab{color:rgba(245,158,11,0.5);border-color:rgba(245,158,11,0.1)}
+.mobile-bar button.amber-tab.active{background:rgba(245,158,11,0.12);color:var(--amber);border-color:rgba(245,158,11,0.2)}
+.mobile-bar button.blue-tab{color:rgba(77,166,255,0.5);border-color:rgba(77,166,255,0.1)}
+.mobile-bar button.blue-tab.active{background:rgba(77,166,255,0.12);color:var(--accent);border-color:rgba(77,166,255,0.2)}
 .mobile-bar .mob-sep{width:1px;height:20px;background:var(--border);flex-shrink:0;align-self:center;margin:0 2px}
 
 /* Coming soon badge */
@@ -347,7 +356,7 @@ textarea.form-input{min-height:100px;resize:vertical}
         <div class="sidebar-brand-inner">
           <div class="sidebar-logo">✦</div>
           <div class="sidebar-brand-text">
-            <h1>Marketing Hub</h1>
+            <h1>Business Hub</h1>
             <span>COMMAND CENTER</span>
           </div>
         </div>
@@ -363,84 +372,143 @@ textarea.form-input{min-height:100px;resize:vertical}
     <div class="main">
       <div class="main-scroll" id="mainScroll">
 
-        <!-- ══ HOME / WELCOME ══ -->
+        <!-- ══ HOME / DASHBOARD ══ -->
         <div id="tab-home" class="page">
-          <div class="page-inner stagger">
-            <div>
-              <div class="label label-accent" style="margin-bottom:12px">✦ WELCOME TO THE HUB</div>
-              <div class="page-title" style="font-size:36px;max-width:500px">Your Entire Marketing,<br><span class="gradient-text">One Command Center</span></div>
-              <div class="page-subtitle" style="max-width:540px">One unified platform for social, email, paid ads, performance analytics, competitor intelligence, and AI-powered strategy. Already 80% built — customized for your business.</div>
+          <div class="page-inner">
+            <!-- Hero -->
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div class="label label-accent" style="margin-bottom:10px">✦ BUSINESS HUB</div>
+              <div class="page-title" style="font-size:28px">Here's how your business is doing.</div>
             </div>
 
-            <!-- Stats row -->
-            <div class="grid-3" style="margin-top:28px;gap:10px">
-              <div class="stat-card" style="animation:glow-pulse 4s ease infinite"><div class="stat-val">12</div><div class="stat-label">Integrated Modules</div></div>
-              <div class="stat-card"><div class="stat-val" style="color:var(--green)">80%</div><div class="stat-label">Pre-Built & Ready</div></div>
-              <div class="stat-card"><div class="stat-val" style="color:var(--purple)">∞</div><div class="stat-label">AI-Powered Suggestions</div></div>
+            <!-- 3 big numbers -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:24px;animation:slideUp 0.4s ease 0.05s both">
+              <div style="padding:20px 16px;border-radius:var(--r);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);text-align:center">
+                <div style="font-family:var(--font-head);font-size:32px;font-weight:800;color:var(--green)">$34K</div>
+                <div style="font-size:12px;color:var(--text-2);margin-top:6px">Revenue this month</div>
+                <div style="font-size:11px;color:var(--green);margin-top:4px;font-weight:600">↑ 12% from last month</div>
+              </div>
+              <div style="padding:20px 16px;border-radius:var(--r);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);text-align:center">
+                <div style="font-family:var(--font-head);font-size:32px;font-weight:800;color:var(--amber)">47</div>
+                <div style="font-size:12px;color:var(--text-2);margin-top:6px">New leads</div>
+                <div style="font-size:11px;color:var(--green);margin-top:4px;font-weight:600">↑ 8 new this week</div>
+              </div>
+              <div style="padding:20px 16px;border-radius:var(--r);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1);text-align:center">
+                <div style="font-family:var(--font-head);font-size:32px;font-weight:800;color:var(--accent)">4.7★</div>
+                <div style="font-size:12px;color:var(--text-2);margin-top:6px">Online rating</div>
+                <div style="font-size:11px;color:var(--green);margin-top:4px;font-weight:600">3 new 5-star reviews</div>
+              </div>
             </div>
 
-            <!-- Interactive Hub Preview -->
-            <div style="margin-top:24px">
-              <div class="label" style="margin-bottom:10px">EXPLORE THE PLATFORM</div>
-              <div class="mock">
-                <div class="mock-bar">
-                  <div class="mock-dot" style="background:rgba(255,95,87,0.5)"></div>
-                  <div class="mock-dot" style="background:rgba(255,189,46,0.5)"></div>
-                  <div class="mock-dot" style="background:rgba(39,201,63,0.5)"></div>
-                  <div class="mock-label">Marketing Hub — Control Center</div>
+            <!-- HERE'S WHAT TO DO -->
+            <div style="margin-top:32px;animation:slideUp 0.4s ease 0.1s both">
+              <div style="font-family:var(--font-head);font-weight:700;font-size:18px;margin-bottom:16px">Here's what to focus on</div>
+
+              <!-- Strategy suggestion (amber) -->
+              <div class="card" style="border-left:3px solid var(--amber);cursor:pointer;margin-bottom:10px;transition:all 0.2s" onclick="goTab('advisor')" onmouseenter="this.style.borderColor='var(--amber)';this.style.transform='translateX(4px)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.15)';this.style.transform=''">
+                <div style="padding:16px;display:flex;align-items:flex-start;gap:14px">
+                  <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">✧</div>
+                  <div style="flex:1">
+                    <div style="font-size:14px;font-weight:700;color:var(--text)">3 people are ready to buy — follow up today</div>
+                    <div style="font-size:12px;color:var(--text-2);margin-top:4px;line-height:1.5">They opened your emails and checked out your site this week. A quick message could close the deal.</div>
+                    <div style="font-size:11px;color:var(--amber);font-weight:600;margin-top:8px">Open AI Advisor →</div>
+                  </div>
                 </div>
-                <div class="mock-body">
-                  <div style="display:flex;gap:12px">
-                    <div style="width:120px;display:flex;flex-direction:column;gap:4px">
-                      <div onclick="goTab('overview')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;background:var(--accent-dim);color:var(--accent);font-weight:600;border-left:2px solid var(--accent)">◈ Overview</div>
-                      <div onclick="goTab('social')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">▦ Social</div>
-                      <div onclick="goTab('email')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">✉ Email</div>
-                      <div onclick="goTab('performance')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">△ Performance</div>
-                      <div onclick="goTab('hub')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">⬡ Approvals</div>
-                      <div onclick="goTab('strategy')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">◎ Strategy</div>
-                      <div onclick="goTab('brandkit')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">◐ Brand Kit</div>
-                      <div onclick="goTab('report')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:var(--text-3);transition:all 0.15s" onmouseenter="this.style.background='rgba(255,255,255,0.04)';this.style.color='var(--text-2)'" onmouseleave="this.style.background='';this.style.color='var(--text-3)'">☰ Reports</div>
-                      <div style="height:1px;background:var(--border);margin:4px 0"></div>
-                      <div onclick="goTab('crm')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">◉ CRM</div>
-                      <div onclick="goTab('leads')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">◇ Leads</div>
-                      <div onclick="goTab('invoices')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">□ Invoices</div>
-                      <div onclick="goTab('proposals')" style="padding:6px 8px;border-radius:5px;font-size:10px;cursor:pointer;color:rgba(34,197,94,0.4);transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='rgba(34,197,94,0.4)'">▷ Proposals</div>
-                    </div>
-                    <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-                      <div class="grid-3" style="gap:8px">
-                        <div style="background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.08);border-radius:8px;padding:10px"><div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--accent)">12.4K</div><div style="font-size:8px;color:var(--text-3);font-family:var(--font-mono)">IMPRESSIONS</div></div>
-                        <div style="background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);border-radius:8px;padding:10px"><div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--green)">847</div><div style="font-size:8px;color:var(--text-3);font-family:var(--font-mono)">ENGAGEMENTS</div></div>
-                        <div style="background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.08);border-radius:8px;padding:10px"><div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--purple)">6.8%</div><div style="font-size:8px;color:var(--text-3);font-family:var(--font-mono)">CONV. RATE</div></div>
-                      </div>
-                      <div style="flex:1;display:grid;grid-template-columns:2fr 1fr;gap:8px;min-height:80px">
-                        <div style="border-radius:8px;background:rgba(77,166,255,0.03);border:1px solid var(--border);position:relative;overflow:hidden">
-                          <svg style="position:absolute;bottom:0;left:0;right:0;width:100%;height:50px" viewBox="0 0 400 50" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(77,166,255,0.15)"/><stop offset="100%" stop-color="rgba(77,166,255,0)"/></linearGradient></defs><path d="M0,40 Q60,20 120,28 T240,15 T360,25 L400,20 V50 H0Z" fill="url(#cg)"/><path d="M0,40 Q60,20 120,28 T240,15 T360,25 L400,20" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="500" stroke-dashoffset="500" style="animation:draw 2s ease forwards 0.5s"/></svg>
-                        </div>
-                        <div style="display:flex;flex-direction:column;gap:6px">
-                          <div style="flex:1;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);padding:6px;font-size:8px;color:var(--green)">
-                            <div style="font-weight:700">TOP WIN</div><div style="color:var(--text-3);margin-top:2px">Email +23% CTR</div>
-                          </div>
-                          <div style="flex:1;border-radius:6px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.08);padding:6px;font-size:8px;color:var(--amber)">
-                            <div style="font-weight:700">REVIEW</div><div style="color:var(--text-3);margin-top:2px">3 items pending</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+              </div>
+
+              <!-- Sales suggestion (green) -->
+              <div class="card" style="border-left:3px solid var(--green);cursor:pointer;margin-bottom:10px;transition:all 0.2s" onclick="goTab('invoices')" onmouseenter="this.style.borderColor='var(--green)';this.style.transform='translateX(4px)'" onmouseleave="this.style.borderColor='rgba(34,197,94,0.15)';this.style.transform=''">
+                <div style="padding:16px;display:flex;align-items:flex-start;gap:14px">
+                  <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">$</div>
+                  <div style="flex:1">
+                    <div style="font-size:14px;font-weight:700;color:var(--text)">Someone owes you $4,800 and it's late</div>
+                    <div style="font-size:12px;color:var(--text-2);margin-top:4px;line-height:1.5">Acme Corp is 2 weeks past due. We can send them a reminder automatically.</div>
+                    <div style="font-size:11px;color:var(--green);font-weight:600;margin-top:8px">View Invoices →</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Marketing suggestion (blue) -->
+              <div class="card" style="border-left:3px solid var(--accent);cursor:pointer;margin-bottom:10px;transition:all 0.2s" onclick="goTab('social')" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateX(4px)'" onmouseleave="this.style.borderColor='rgba(77,166,255,0.15)';this.style.transform=''">
+                <div style="padding:16px;display:flex;align-items:flex-start;gap:14px">
+                  <div style="width:36px;height:36px;border-radius:10px;background:rgba(77,166,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">▦</div>
+                  <div style="flex:1">
+                    <div style="font-size:14px;font-weight:700;color:var(--text)">Short videos are getting 3x more attention</div>
+                    <div style="font-size:12px;color:var(--text-2);margin-top:4px;line-height:1.5">Your posts reached 12,400 people this week. Posting one behind-the-scenes video could triple that.</div>
+                    <div style="font-size:11px;color:var(--accent);font-weight:600;margin-top:8px">Open Social Calendar →</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Module cards -->
-            <div style="margin-top:28px">
-              <div class="label" style="margin-bottom:10px">ALL MODULES</div>
-              <div class="grid-2" style="gap:10px" id="moduleGrid"></div>
+            <!-- Quick links — grouped by color -->
+            <div style="margin-top:28px;animation:slideUp 0.4s ease 0.15s both">
+              <div style="font-family:var(--font-head);font-weight:700;font-size:18px;margin-bottom:14px">Explore your tools</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+                <!-- Strategy column -->
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="font-size:9px;font-weight:700;color:var(--amber);font-family:var(--font-mono);letter-spacing:0.8px;padding-bottom:6px;border-bottom:1px solid rgba(245,158,11,0.15)">STRATEGY</div>
+                  <div onclick="goTab('advisor')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(245,158,11,0.06)';this.style.color='var(--amber)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">✧ AI Advisor</div>
+                  <div onclick="goTab('cashflow')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(245,158,11,0.06)';this.style.color='var(--amber)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">$ Cash Flow</div>
+                  <div onclick="goTab('compete')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(245,158,11,0.06)';this.style.color='var(--amber)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">⚔ Competitors</div>
+                  <div onclick="goTab('reputation')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(245,158,11,0.06)';this.style.color='var(--amber)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">★ Reputation</div>
+                  <div onclick="goTab('automate')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(245,158,11,0.06)';this.style.color='var(--amber)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">⚡ Automations</div>
+                  <div onclick="goTab('prioritize')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(245,158,11,0.06)';this.style.color='var(--amber)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">▲ Priorities</div>
+                </div>
+                <!-- Sales column -->
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="font-size:9px;font-weight:700;color:var(--green);font-family:var(--font-mono);letter-spacing:0.8px;padding-bottom:6px;border-bottom:1px solid rgba(34,197,94,0.15)">SALES</div>
+                  <div onclick="goTab('leads')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">◇ Leads</div>
+                  <div onclick="goTab('invoices')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">□ Invoices</div>
+                  <div onclick="goTab('crm')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">◉ Contacts</div>
+                  <div onclick="goTab('proposals')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(34,197,94,0.06)';this.style.color='var(--green)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">▷ Proposals</div>
+                </div>
+                <!-- Marketing column -->
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="font-size:9px;font-weight:700;color:var(--accent);font-family:var(--font-mono);letter-spacing:0.8px;padding-bottom:6px;border-bottom:1px solid rgba(77,166,255,0.15)">MARKETING</div>
+                  <div onclick="goTab('social')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(77,166,255,0.06)';this.style.color='var(--accent)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">▦ Social</div>
+                  <div onclick="goTab('email')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(77,166,255,0.06)';this.style.color='var(--accent)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">✉ Email</div>
+                  <div onclick="goTab('performance')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(77,166,255,0.06)';this.style.color='var(--accent)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">△ Analytics</div>
+                  <div onclick="goTab('strategy')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(77,166,255,0.06)';this.style.color='var(--accent)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">◎ Strategy</div>
+                  <div onclick="goTab('brandkit')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(77,166,255,0.06)';this.style.color='var(--accent)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">◐ Brand Kit</div>
+                  <div onclick="goTab('report')" style="padding:8px 10px;border-radius:var(--r-sm);font-size:11px;color:var(--text-2);cursor:pointer;transition:all 0.15s" onmouseenter="this.style.background='rgba(77,166,255,0.06)';this.style.color='var(--accent)'" onmouseleave="this.style.background='';this.style.color='var(--text-2)'">☰ Weekly Report</div>
+                </div>
+              </div>
             </div>
 
-            <div class="cta-block">
-              <div><h3>Ready to see it live?</h3><p>80% built. 100% customizable to your business.</p></div>
+            <!-- Industry CTA -->
+            <div style="margin-top:32px;padding:20px;border-radius:var(--r-lg);background:linear-gradient(135deg,rgba(167,139,250,0.06),rgba(167,139,250,0.02));border:1px solid rgba(167,139,250,0.15);cursor:pointer;transition:all 0.2s;animation:slideUp 0.4s ease 0.2s both" onclick="goTab('industries')" onmouseenter="this.style.borderColor='rgba(167,139,250,0.3)'" onmouseleave="this.style.borderColor='rgba(167,139,250,0.15)'">
+              <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+                <div style="font-size:24px">◆</div>
+                <div style="flex:1">
+                  <div style="font-family:var(--font-head);font-weight:700;font-size:15px">See how this looks for your industry</div>
+                  <div style="font-size:12px;color:var(--text-2);margin-top:3px">Photographer, lawyer, restaurant, dentist — pick yours.</div>
+                </div>
+                <div style="padding:7px 14px;background:var(--purple);color:#fff;border-radius:var(--r-sm);font-size:11px;font-weight:700;flex-shrink:0">Explore →</div>
+              </div>
+            </div>
+
+            <div class="cta-block" style="margin-top:20px;animation:slideUp 0.4s ease 0.25s both">
+              <div><h3>Want to see this for your business?</h3><p>We set it up. You just do what you do.</p></div>
               <button class="cta-btn" onclick="goTab('contact')">Book a Demo →</button>
             </div>
+          </div>
+        </div>
+
+        <!-- ══ INDUSTRIES ══ -->
+        <div id="tab-industries" class="page">
+          <div class="page-inner">
+            <!-- Grid view (default) -->
+            <div id="industryGridView">
+              <div style="animation:slideUp 0.4s ease forwards">
+                <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(167,139,250,0.1);color:var(--purple);border:1px solid rgba(167,139,250,0.2);margin-bottom:12px;letter-spacing:0.5px">◆ CUSTOMIZED FOR YOU</div>
+                <div class="page-title">Pick your industry.</div>
+                <div class="page-subtitle">We'll show you exactly what the hub looks like, what it solves, and what AI does for you.</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px;animation:slideUp 0.4s ease 0.08s both" id="industryGrid"></div>
+            </div>
+            <!-- Detail view (rendered by JS) -->
+            <div id="industryDetailView" style="display:none"></div>
           </div>
         </div>
 
@@ -1096,13 +1164,147 @@ textarea.form-input{min-height:100px;resize:vertical}
           </div>
         </div>
 
+        <!-- ══ BUSINESS ADVISOR ══ -->
+        <div id="tab-advisor" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);margin-bottom:12px;letter-spacing:0.5px">✧ BUSINESS STRATEGY</div>
+              <div class="page-title">Business Advisor</div>
+              <div class="page-subtitle">Ask your AI advisor anything — or pick a preset question. Answers are informed by your real performance data.</div>
+            </div>
+            <div class="label" style="margin-top:24px;margin-bottom:10px;animation:slideUp 0.4s ease 0.06s both">ASK A QUESTION</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;animation:slideUp 0.4s ease 0.08s both" id="advisorQuestions">
+              <div class="adv-q card" onclick="askAdvisor(0)" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="font-size:13px;font-weight:600">What should I focus on this week?</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Prioritized by impact + urgency</div></div>
+              <div class="adv-q card" onclick="askAdvisor(1)" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="font-size:13px;font-weight:600">Where am I leaking money?</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Spend analysis across all channels</div></div>
+              <div class="adv-q card" onclick="askAdvisor(2)" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="font-size:13px;font-weight:600">Which channel is underperforming?</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Cross-channel ROI comparison</div></div>
+              <div class="adv-q card" onclick="askAdvisor(3)" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="font-size:13px;font-weight:600">Should I raise prices?</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Market data + margin analysis</div></div>
+              <div class="adv-q card" onclick="askAdvisor(4)" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="font-size:13px;font-weight:600">What offer would convert better?</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Conversion optimization insights</div></div>
+              <div class="adv-q card" onclick="askAdvisor(5)" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="font-size:13px;font-weight:600">What is my next highest ROI move?</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Data-ranked opportunity</div></div>
+            </div>
+            <div id="advisorResult" style="display:none;margin-top:20px"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border-color:rgba(245,158,11,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Your AI business advisor.</h3><p>Always on. Always data-backed. Always honest.</p></div><button class="cta-btn" style="background:var(--amber);color:#000" onclick="goTab('contact')">Get Started →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ COMPETITIVE INTEL ══ -->
+        <div id="tab-compete" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);margin-bottom:12px;letter-spacing:0.5px">⚔ BUSINESS STRATEGY</div>
+              <div class="page-title">Competitive Advisor</div>
+              <div class="page-subtitle">Analyze your competition, refine your positioning, and build offers that win.</div>
+            </div>
+            <div class="label" style="margin-top:24px;margin-bottom:10px;animation:slideUp 0.4s ease 0.06s both">ANALYSIS TOOLS</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;animation:slideUp 0.4s ease 0.08s both">
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="runCompete(0)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)';this.style.transform=''"><div style="font-size:22px;margin-bottom:6px">💰</div><div style="font-weight:700;font-size:12px">Pricing Analysis</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">vs. competitors</div></div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="runCompete(1)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)';this.style.transform=''"><div style="font-size:22px;margin-bottom:6px">🎯</div><div style="font-weight:700;font-size:12px">Positioning</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Evaluate & refine</div></div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="runCompete(2)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)';this.style.transform=''"><div style="font-size:22px;margin-bottom:6px">📦</div><div style="font-weight:700;font-size:12px">Bundle Builder</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Suggest packages</div></div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="runCompete(3)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)';this.style.transform=''"><div style="font-size:22px;margin-bottom:6px">👑</div><div style="font-weight:700;font-size:12px">Premium Tiers</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Create upsells</div></div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="runCompete(4)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)';this.style.transform=''"><div style="font-size:22px;margin-bottom:6px">🛡️</div><div style="font-weight:700;font-size:12px">Guarantee Test</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Language testing</div></div>
+              <div class="card" style="padding:16px;cursor:pointer;text-align:center;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="runCompete(5)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)';this.style.transform=''"><div style="font-size:22px;margin-bottom:6px">🪝</div><div style="font-weight:700;font-size:12px">Offer Hooks</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">Stronger copy</div></div>
+            </div>
+            <div id="competeResult" style="display:none;margin-top:20px"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border-color:rgba(245,158,11,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Out-position your competition.</h3><p>Data-driven pricing, bundling, and offer strategy.</p></div><button class="cta-btn" style="background:var(--amber);color:#000" onclick="goTab('contact')">Get Started →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ CASH FLOW ══ -->
+        <div id="tab-cashflow" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);margin-bottom:12px;letter-spacing:0.5px">$ BUSINESS STRATEGY</div>
+              <div class="page-title">Cash Flow Manager</div>
+              <div class="page-subtitle">Revenue, expenses, runway projections, and AI-powered scaling recommendations.</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:24px;margin-bottom:16px;animation:slideUp 0.4s ease 0.06s both">
+              <button onclick="generateCashFlow()" style="padding:8px 18px;background:var(--amber);color:#000;border:none;border-radius:var(--r-sm);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-body)">✧ Generate Forecast →</button>
+            </div>
+            <!-- Stats -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;animation:slideUp 0.4s ease 0.08s both">
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--green)" id="cf-revenue">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">MONTHLY REVENUE</div></div>
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--red)" id="cf-expenses">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">MONTHLY EXPENSES</div></div>
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--amber)" id="cf-net">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">NET CASH FLOW</div></div>
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--accent)" id="cf-runway">0 mo</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">RUNWAY</div></div>
+            </div>
+            <div id="cashflowResults" style="display:none;margin-top:20px"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border-color:rgba(245,158,11,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Know your numbers.</h3><p>Runway, risk, and recommendations — updated in real time.</p></div><button class="cta-btn" style="background:var(--amber);color:#000" onclick="goTab('contact')">Get Started →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ REPUTATION ══ -->
+        <div id="tab-reputation" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);margin-bottom:12px;letter-spacing:0.5px">★ BUSINESS STRATEGY</div>
+              <div class="page-title">Reputation Management</div>
+              <div class="page-subtitle">Monitor reviews, track sentiment, auto-draft responses, and protect your brand perception.</div>
+            </div>
+            <!-- Reputation stats -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px;animation:slideUp 0.4s ease 0.06s both">
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--amber)" id="rep-rating">0.0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">AVG RATING</div></div>
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--green)" id="rep-positive">0%</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">POSITIVE</div></div>
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--accent)" id="rep-total">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">TOTAL REVIEWS</div></div>
+              <div style="padding:14px;border-radius:var(--r-sm);background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--red)" id="rep-alerts">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">ALERTS</div></div>
+            </div>
+            <!-- Reviews -->
+            <div class="label" style="margin-top:20px;margin-bottom:10px;animation:slideUp 0.4s ease 0.1s both">RECENT REVIEWS</div>
+            <div id="reviewsList" style="display:flex;flex-direction:column;gap:8px;animation:slideUp 0.4s ease 0.12s both"></div>
+            <!-- SEO Tactics -->
+            <div class="label" style="margin-top:24px;margin-bottom:10px;animation:slideUp 0.4s ease 0.18s both">AI REPUTATION ACTIONS</div>
+            <div id="repActions" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;animation:slideUp 0.4s ease 0.2s both"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border-color:rgba(245,158,11,0.15);animation:slideUp 0.4s ease 0.25s both"><div><h3>Protect your reputation.</h3><p>Every review monitored, every response crafted, every risk flagged.</p></div><button class="cta-btn" style="background:var(--amber);color:#000" onclick="goTab('contact')">Get Started →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ AUTOMATION ══ -->
+        <div id="tab-automate" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);margin-bottom:12px;letter-spacing:0.5px">⚡ BUSINESS STRATEGY</div>
+              <div class="page-title">Workflow Automation</div>
+              <div class="page-subtitle">Describe what you want in plain English. The system builds the automation.</div>
+            </div>
+            <div class="label" style="margin-top:24px;margin-bottom:10px;animation:slideUp 0.4s ease 0.06s both">DESCRIBE YOUR AUTOMATION</div>
+            <div style="animation:slideUp 0.4s ease 0.08s both">
+              <textarea id="autoInput" class="form-input" style="width:100%;min-height:60px;font-size:13px;resize:vertical;border-color:rgba(245,158,11,0.15)" placeholder="e.g. &quot;When a new lead fills out my contact form, send them a welcome email, wait 2 days, then send a follow-up with pricing...&quot;"></textarea>
+              <button onclick="buildAutomation()" style="margin-top:8px;padding:8px 18px;background:var(--amber);color:#000;border:none;border-radius:var(--r-sm);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-body)">⚡ Build Automation →</button>
+            </div>
+            <div class="label" style="margin-top:24px;margin-bottom:10px;animation:slideUp 0.4s ease 0.1s both">OR PICK A TEMPLATE</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;animation:slideUp 0.4s ease 0.12s both" id="autoTemplates">
+              <div class="card" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="pickAutoTemplate(0)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">✉</span><span style="font-weight:700;font-size:12px">New Lead Email Flow</span></div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Welcome → Wait 2d → Follow-up → Wait 5d → Final offer</div></div>
+              <div class="card" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="pickAutoTemplate(1)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">🔀</span><span style="font-weight:700;font-size:12px">Lead Routing</span></div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Score lead → Assign to rep → Notify via Slack → Schedule call</div></div>
+              <div class="card" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="pickAutoTemplate(2)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">📅</span><span style="font-weight:700;font-size:12px">Appointment Reminders</span></div><div style="font-size:10px;color:var(--text-3);margin-top:4px">24hr email → 2hr SMS → Post-visit follow-up → Review request</div></div>
+              <div class="card" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="pickAutoTemplate(3)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">🛒</span><span style="font-weight:700;font-size:12px">Abandoned Cart Recovery</span></div><div style="font-size:10px;color:var(--text-3);margin-top:4px">1hr reminder → 24hr discount → 3d urgency → Final call</div></div>
+              <div class="card" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onclick="pickAutoTemplate(4)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">🔄</span><span style="font-weight:700;font-size:12px">Follow-Up Sequences</span></div><div style="font-size:10px;color:var(--text-3);margin-top:4px">After meeting → Send recap → Wait 3d → Check in → Close loop</div></div>
+            </div>
+            <div id="autoResult" style="display:none;margin-top:20px"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border-color:rgba(245,158,11,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Say it. Build it. Done.</h3><p>No code, no flowcharts, no complexity. Just describe what you want.</p></div><button class="cta-btn" style="background:var(--amber);color:#000" onclick="goTab('contact')">Get Started →</button></div>
+          </div>
+        </div>
+
+        <!-- ══ PRIORITIZATION ══ -->
+        <div id="tab-prioritize" class="page">
+          <div class="page-inner">
+            <div style="animation:slideUp 0.4s ease forwards">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2);margin-bottom:12px;letter-spacing:0.5px">▲ BUSINESS STRATEGY</div>
+              <div class="page-title">Decision Prioritization</div>
+              <div class="page-subtitle">AI ranks your top growth moves by ROI, effort, risk, and timing — so you always know what to do next.</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:24px;margin-bottom:16px;animation:slideUp 0.4s ease 0.06s both">
+              <button onclick="generatePriorities()" style="padding:8px 18px;background:var(--amber);color:#000;border:none;border-radius:var(--r-sm);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-body)">▲ Rank My Growth Moves →</button>
+            </div>
+            <div id="priorityResults" style="display:none"></div>
+            <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border-color:rgba(245,158,11,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Stop guessing. Start prioritizing.</h3><p>20 growth moves, ranked by the data. Your next move is always clear.</p></div><button class="cta-btn" style="background:var(--amber);color:#000" onclick="goTab('contact')">Get Started →</button></div>
+          </div>
+        </div>
+
         <!-- ══ WHY US ══ -->
         <div id="tab-whyus" class="page">
           <div class="page-inner stagger">
             <div>
-              <div class="label label-accent" style="margin-bottom:12px">✦ WHY MARKETING HUB</div>
+              <div class="label label-accent" style="margin-bottom:12px">✦ WHY BUSINESS HUB</div>
               <div class="page-title">Not Another Tool.<br><span class="gradient-text">The Only Tool.</span></div>
-              <div class="page-subtitle">Marketing teams juggle 10+ platforms. We replaced them all with one intelligent hub — plus AI analysis like it's never been done before.</div>
+              <div class="page-subtitle">Businesses juggle 10+ platforms for marketing, sales, and operations. We replaced them all with one intelligent hub — 80% built, 20% customized to your industry.</div>
             </div>
             <div class="grid-2" style="margin-top:24px;gap:10px">
               <div class="card" style="padding:24px;position:relative;overflow:hidden"><div style="position:absolute;top:8px;right:16px;font-family:var(--font-head);font-size:48px;font-weight:800;color:rgba(255,255,255,0.03)">01</div><h3 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:8px">One Platform, Zero Fragmentation</h3><p style="font-size:13px;color:var(--text-2);line-height:1.6">Social, email, ads, analytics, competitors, approvals, and strategy — all in one dashboard. No more Hootsuite + Mailchimp + GA + SEMrush + Asana.</p></div>
@@ -1129,7 +1331,7 @@ textarea.form-input{min-height:100px;resize:vertical}
             <div>
               <div class="label label-accent" style="margin-bottom:12px">✦ GET IN TOUCH</div>
               <div class="page-title">Let's Build <span class="gradient-text">Your Hub</span></div>
-              <div class="page-subtitle">Tell us about your business and we'll show you how the Marketing Hub gets customized for your specific needs.</div>
+              <div class="page-subtitle">Tell us about your business and we'll show you how the Business Hub gets customized for your specific needs.</div>
             </div>
             <div class="grid-2" style="margin-top:24px;gap:32px;align-items:start">
               <form style="display:flex;flex-direction:column;gap:16px" onsubmit="handleSubmit(event)">
@@ -1139,7 +1341,7 @@ textarea.form-input{min-height:100px;resize:vertical}
                 </div>
                 <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-input" placeholder="Your company name" required></div>
                 <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="jane@company.com" required></div>
-                <div class="form-group"><label class="form-label">Biggest Marketing Challenge</label><textarea class="form-input" placeholder="Tell us about your current marketing setup, pain points, and what you'd love to see unified..."></textarea></div>
+                <div class="form-group"><label class="form-label">Biggest Business Challenge</label><textarea class="form-input" placeholder="Tell us about your business, current tools, pain points, and what you'd love to see unified..."></textarea></div>
                 <div class="form-group"><label class="form-label">How'd You Hear About Us?</label><select class="form-input" style="cursor:pointer"><option value="">Select one...</option><option>Referral</option><option>Social Media</option><option>Search</option><option>Other</option></select></div>
                 <button type="submit" class="cta-btn" style="align-self:flex-start;padding:12px 36px">Book a Demo →</button>
               </form>
@@ -1149,7 +1351,7 @@ textarea.form-input{min-height:100px;resize:vertical}
                 <div class="card" style="padding:20px"><h4 style="font-family:var(--font-head);font-weight:700;font-size:14px;margin-bottom:6px">What's Coming</h4><p style="font-size:12px;color:var(--text-3);line-height:1.6">Landing page generators, AI social content, and advanced automation — actively in development.</p></div>
                 <div style="padding:24px;background:linear-gradient(135deg,rgba(77,166,255,0.06),rgba(77,166,255,0.02));border:1px solid rgba(77,166,255,0.12);border-radius:var(--r);text-align:center">
                   <div style="font-size:24px;margin-bottom:8px">✦</div>
-                  <div style="font-family:var(--font-head);font-weight:700;font-size:15px">Marketing Hub</div>
+                  <div style="font-family:var(--font-head);font-weight:700;font-size:15px">Business Hub</div>
                   <div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);letter-spacing:1px;margin-top:2px">YOUR COMMAND CENTER</div>
                 </div>
               </div>
@@ -1519,7 +1721,7 @@ function showSocialPreview(idx, day) {
 // ═══ EMAIL TAB ═══
 const EMAILS = [
   { name:'March Newsletter', subject:'Your March Marketing Update 🚀', status:'Approved', statusColor:'var(--green)', date:'Mar 3, 9:00 AM', audience:'Full List (4,200)', pretext:'See what we\'ve been building this month...', hero:'linear-gradient(135deg,var(--accent-dim),rgba(77,166,255,0.03))', heroColor:'var(--accent)', cta:'var(--accent-dim)', ctaText:'var(--accent)', ai:'Subject lines with emojis see 15% higher open rates. Good call on the rocket.' },
-  { name:'Product Launch', subject:'Introducing: The Marketing Hub', status:'Scheduled', statusColor:'var(--accent)', date:'Mar 7, 11:00 AM', audience:'Prospects (1,800)', pretext:'One platform to replace them all...', hero:'linear-gradient(135deg,rgba(167,139,250,0.08),rgba(139,92,246,0.03))', heroColor:'var(--purple)', cta:'rgba(167,139,250,0.1)', ctaText:'var(--purple)', ai:'Consider adding a countdown timer element — creates urgency and lifts clicks by ~20%.' },
+  { name:'Product Launch', subject:'Introducing: The Business Hub', status:'Scheduled', statusColor:'var(--accent)', date:'Mar 7, 11:00 AM', audience:'Prospects (1,800)', pretext:'One platform to replace them all...', hero:'linear-gradient(135deg,rgba(167,139,250,0.08),rgba(139,92,246,0.03))', heroColor:'var(--purple)', cta:'rgba(167,139,250,0.1)', ctaText:'var(--purple)', ai:'Consider adding a countdown timer element — creates urgency and lifts clicks by ~20%.' },
   { name:'Weekly Digest', subject:'This Week in Marketing: 3 Wins You Should Know', status:'In Review', statusColor:'var(--amber)', date:'Mar 10, 8:00 AM', audience:'Engaged (2,600)', pretext:'Your top 3 highlights from this week...', hero:'linear-gradient(135deg,rgba(34,197,94,0.06),rgba(22,163,74,0.03))', heroColor:'var(--green)', cta:'rgba(34,197,94,0.08)', ctaText:'var(--green)', ai:'Numbered subject lines (3 Wins) are performing well. Open rates are trending +12% vs last month.' },
   { name:'Re-Engagement', subject:'We miss you — here\'s what\'s new', status:'Draft', statusColor:'var(--text-3)', date:'Mar 14, 2:00 PM', audience:'Inactive 30d (890)', pretext:'A lot has changed since we last talked...', hero:'linear-gradient(135deg,rgba(245,158,11,0.06),rgba(217,119,6,0.03))', heroColor:'var(--amber)', cta:'rgba(245,158,11,0.08)', ctaText:'var(--amber)', ai:'For re-engagement, try a personal tone. First-person subject lines see 26% higher opens.' },
 ];
@@ -2064,25 +2266,605 @@ function renderPastProposals() {
   `).join('');
   past.forEach((_,i) => { setTimeout(() => { const el=document.getElementById('past-prop-'+i); if(el){el.style.opacity='1';el.style.transform='translateY(0)';el.style.transition='all 0.3s ease';} }, 100+i*60); });
 }
+// ═══ INDUSTRIES PAGE ═══
+// Industry selection handled by openIndustry/closeIndustry functions
+
+const INDUSTRIES = [
+  {id:'creative',icon:'🎨',name:'Creatives',sub:'Photographers, Artists, Designers',
+    struggles:['Inconsistent income','Pricing confidence','Visibility & discovery','Portfolio positioning','Personal branding'],
+    tools:[
+      {n:'Pricing Optimizer',d:'AI analyzes your market and builds competitive package pricing — sessions, prints, licensing, commissions.'},
+      {n:'Visual Content Calendar',d:'Instagram-first scheduling built around visual storytelling — portfolio reveals, process videos, behind-the-scenes.'},
+      {n:'Collector Persona Analyzer',d:'Identifies who your ideal buyers are, what they collect, and how to reach them.'},
+      {n:'Print vs Original Strategy',d:'AI recommends the right mix of print sales, originals, and licensing based on your audience and margins.'},
+      {n:'Collector Email Nurture',d:'Automated email sequences that build relationships with collectors — new work previews, studio visits, exhibition invites.'},
+      {n:'Exhibition Tracker',d:'Track applications, deadlines, acceptances, and follow-ups for gallery shows and art fairs.'},
+      {n:'Commission Intake Workflow',d:'Clients describe what they want, AI qualifies the project, sends a quote, and manages the process.'},
+      {n:'Licensing Deal Analyzer',d:'Evaluates licensing offers against market rates so you never undersell your work.'},
+    ],
+    addon:'AI moodboard + brand voice generator',
+    addonDesc:'Upload your work and the AI generates moodboards, color palettes, and a brand voice guide that sounds like you — not like marketing.',
+    highlight:'Your pricing is set by data, not by guesswork. Your calendar fills itself. Your brand speaks with one voice across every platform.'},
+  {id:'realtor',icon:'🏠',name:'Realtors',sub:'Agents & Brokerages',
+    struggles:['Lead speed','Conversion rate','Local dominance','Listing presentation'],
+    tools:[
+      {n:'Zillow + CRM Integration',d:'Leads from Zillow, Realtor.com, and your site flow directly into your pipeline — no copy-pasting.'},
+      {n:'Automated Follow-Up Sequences',d:'New lead? They get a personalized text in 2 minutes, an email in 10, and a check-in 3 days later. Automatically.'},
+      {n:'Listing Performance Analyzer',d:'See which listings get the most views, saves, and inquiries — and which ones need better photos or pricing.'},
+      {n:'Neighborhood SEO Suggestions',d:'AI tells you which "[neighborhood] homes for sale" keywords to target to dominate local search.'},
+      {n:'Open House Conversion Scoring',d:'Track who showed up, who followed up, and who converted. Score every open house by ROI.'},
+      {n:'Pipeline Heat Map',d:'Visual map of every lead by stage — see who\'s hot, who\'s cooling off, and who needs attention right now.'},
+      {n:'Seller Objection Analyzer',d:'AI studies common objections in your market and generates counter-responses tailored to your style.'},
+      {n:'Personalized CMA Assistant',d:'Generate comparative market analyses with one click — branded, accurate, and ready to present.'},
+    ],
+    addon:'AI lead predictor',
+    addonDesc:'AI predicts which leads are most likely to transact in the next 90 days — so you spend your time on the ones that matter.',
+    highlight:'You respond to leads faster than anyone in your market. Your pipeline never goes cold. You know which deals are closing before your competitors do.'},
+  {id:'restaurant',icon:'🍽️',name:'Restaurants',sub:'Single & Multi-Location',
+    struggles:['Thin margins','Staffing challenges','Local marketing','Repeat traffic'],
+    tools:[
+      {n:'Menu Profitability Analyzer',d:'See which dishes make money and which don\'t. AI suggests price adjustments and menu placement changes.'},
+      {n:'Inventory Waste Tracker',d:'Track food costs, waste, and ordering patterns. AI flags over-ordering before it hits your bottom line.'},
+      {n:'Promo Calendar',d:'Plan promotions around holidays, seasons, local events, and slow days — all in one visual calendar.'},
+      {n:'Geo-Targeted Ad Builder',d:'Build ads that target people within 5 miles of your location. AI writes the copy and picks the audience.'},
+      {n:'Loyalty Program Automation',d:'Customers earn points, get birthday rewards, and receive "we miss you" emails — all on autopilot.'},
+      {n:'Review Sentiment Monitor',d:'Track what people love and hate across Google, Yelp, and social. Get alerts when sentiment shifts.'},
+      {n:'Event-Based Promo Triggers',d:'AI watches weather, sports schedules, and local events — then suggests timely promos automatically.'},
+    ],
+    addon:'Weather-triggered promotions',
+    addonDesc:'"Rain forecast tomorrow. Push delivery promo." AI connects real-time weather to your marketing — automatically.',
+    highlight:'You know which dishes make money. Your regulars keep coming back. Your slow nights get filled with smart, timely promotions.'},
+  {id:'gym',icon:'💪',name:'Gyms & Fitness Studios',sub:'Boutique & Personal Training',
+    struggles:['Member churn','Inconsistent attendance','Low lifetime value','Weak upsells','Owner burnout','Poor referral tracking'],
+    tools:[
+      {n:'Churn Prediction AI',d:'Flags members likely to cancel before they do — based on attendance, engagement, and payment patterns.'},
+      {n:'Attendance Drop Alerts',d:'If a regular misses 2+ sessions, the system sends a personalized check-in message automatically.'},
+      {n:'Automated Win-Back Campaigns',d:'Former members get a re-engagement sequence — personal note, limited offer, success story — timed to hit when they\'re most likely to return.'},
+      {n:'Upsell Timing Predictor',d:'AI knows when a member is ready for PT, a nutrition plan, or a challenge package — and prompts you to offer it.'},
+      {n:'Referral Tracking Automation',d:'Track who referred who, automate rewards, and see which members drive the most new signups.'},
+      {n:'Revenue Per Member Dashboard',d:'See lifetime value, average spend, and upsell potential for every member at a glance.'},
+      {n:'Capacity Optimizer',d:'AI analyzes class utilization and suggests schedule changes to maximize revenue per timeslot.'},
+      {n:'Intro Offer Conversion Tracker',d:'Track which trial offers convert best and optimize your front-door funnel.'},
+    ],
+    addon:'Transformation story engine',
+    addonDesc:'AI turns member progress photos and milestones into social-ready content — the most powerful marketing a gym can have.',
+    highlight:'You know who\'s about to leave before they do. Your upsells land at the right time. Your members become your marketing.'},
+  {id:'ecommerce',icon:'🛒',name:'E-Commerce Brands',sub:'DTC & Online Retail',
+    struggles:['Rising acquisition costs','Low repeat purchases','Discount dependency','Inventory misalignment','Attribution confusion','Email fatigue'],
+    tools:[
+      {n:'High-LTV Customer Predictor',d:'AI identifies which first-time buyers are most likely to become repeat customers — so you invest in the right ones.'},
+      {n:'Repeat Purchase Timing AI',d:'Predicts when each customer is ready to buy again and triggers a perfectly timed email or ad.'},
+      {n:'Dynamic Bundle Recommender',d:'AI suggests product bundles based on purchase history, margins, and what sells together.'},
+      {n:'SKU Performance Analyzer',d:'See which products drive profit vs. which ones just drive revenue. Kill underperformers, double down on winners.'},
+      {n:'Inventory Forecasting Tool',d:'Predicts demand based on trends, seasonality, and marketing plans — so you never over-order or stock out.'},
+      {n:'Email Flow Gap Detector',d:'Finds holes in your email sequences — abandoned carts without follow-ups, post-purchase gaps, missing win-backs.'},
+      {n:'Ad Creative Angle Analyzer',d:'AI evaluates which ad angles, hooks, and formats perform best — and suggests new ones to test.'},
+      {n:'AOV Optimization Dashboard',d:'Tracks average order value by channel, campaign, and segment — with AI suggestions to increase it.'},
+    ],
+    addon:'AI product launch builder',
+    addonDesc:'Give it a product and a launch date. It builds the entire campaign — emails, ads, social posts, and landing page copy.',
+    highlight:'You stop chasing new customers and start keeping the ones you have. Your margins grow because your marketing gets smarter, not louder.'},
+  {id:'therapist',icon:'🧠',name:'Therapists & Mental Health',sub:'Private Practices & Group Practices',
+    struggles:['Client cancellations','Inconsistent caseload','Referral dependency','Admin overwhelm','Low marketing confidence','Limited business analytics'],
+    tools:[
+      {n:'Cancellation Risk Predictor',d:'AI flags clients likely to cancel based on patterns — so you can reach out or fill the slot in advance.'},
+      {n:'Waitlist Auto-Fill',d:'When someone cancels, the system automatically offers the slot to your waitlist — no phone tag needed.'},
+      {n:'Intake Form AI Screening',d:'AI reviews intake forms and flags important clinical or scheduling considerations before the first session.'},
+      {n:'Referral Source Tracker',d:'See exactly where your clients come from — doctors, directories, word-of-mouth — and which sources send the best fits.'},
+      {n:'Revenue Per Modality Dashboard',d:'Compare revenue across individual, couples, group, and specialty sessions to optimize your schedule.'},
+      {n:'Session Utilization Optimizer',d:'AI analyzes your availability vs. booked hours and suggests schedule changes to reduce gaps.'},
+      {n:'Ethical Content Calendar',d:'Pre-built content themes that are clinically appropriate — mental health awareness, stress tips, practice updates.'},
+      {n:'Consultation Follow-Up Automation',d:'After a free consult, the system sends a warm follow-up sequence to convert them into a client.'},
+    ],
+    addon:'Compliant thought-leadership generator',
+    addonDesc:'AI writes blog posts, social content, and newsletter articles that position you as an expert — while keeping everything clinically appropriate.',
+    highlight:'Your schedule stays full. Your admin shrinks. You spend less time on business and more time on the work that matters.'},
+  {id:'homeservice',icon:'🔧',name:'Home Services',sub:'HVAC, Plumbing, Roofing, Electrical',
+    struggles:['Missed calls','Unqualified leads','Scheduling chaos','Underpriced jobs','Seasonal revenue swings','Poor follow-up','Low maintenance contract retention'],
+    tools:[
+      {n:'Lead Quality Scoring AI',d:'Scores every incoming lead by job size, urgency, and fit — so your team calls the best ones first.'},
+      {n:'Auto-Booking Assistant',d:'Customers book online, get confirmation, and receive reminders — no back-and-forth phone calls.'},
+      {n:'Dynamic Pricing Optimizer',d:'AI adjusts quotes based on job complexity, season, demand, and your capacity — so you never underbid.'},
+      {n:'Technician Performance Dashboard',d:'Track revenue per tech, completion rates, upsell rates, and customer ratings across your team.'},
+      {n:'Maintenance Reminder Automation',d:'Annual tune-ups, filter changes, seasonal check-ups — customers get reminded before they even think about it.'},
+      {n:'Geo-Targeted Ad Suggestions',d:'AI identifies which neighborhoods need your services most and targets ads there — by zip code.'},
+      {n:'Revenue Forecasting Tool',d:'Predicts revenue by month based on historical data, seasonal patterns, and current pipeline.'},
+      {n:'Upsell Opportunity Predictor',d:'AI flags jobs where an upsell makes sense — "while we\'re here" add-ons that increase ticket size.'},
+    ],
+    addon:'Emergency-season campaign generator',
+    addonDesc:'Storm coming? Heatwave? Freeze warning? AI automatically launches targeted campaigns before your phone starts ringing.',
+    highlight:'Your best leads get called first. Your pricing is dialed in. Your slow season gets filled with maintenance contracts that run on autopilot.'},
+  {id:'medical',icon:'⚕️',name:'Medical Practices',sub:'Dentists, Chiropractors, Specialists',
+    struggles:['No-shows','Low treatment plan acceptance','Underutilized provider time','Weak referral tracking','Review inconsistency','Insurance delays'],
+    tools:[
+      {n:'No-Show Prediction AI',d:'Flags patients likely to miss their appointment based on history and patterns — so you can confirm or fill the slot.'},
+      {n:'Treatment Plan Acceptance Predictor',d:'AI identifies which patients are most likely to accept a treatment plan — and what messaging works best.'},
+      {n:'Scheduling Block Optimizer',d:'Analyzes your schedule for gaps and inefficiencies, then suggests changes to maximize provider time.'},
+      {n:'Referral Source Analyzer',d:'Track which doctors, directories, and channels send you the most (and best) patients.'},
+      {n:'Review Automation Engine',d:'Sends a review request after every positive visit — timed perfectly for maximum response rate.'},
+      {n:'Insurance Reimbursement Tracker',d:'Monitor outstanding claims, flag delayed reimbursements, and see revenue by insurance type.'},
+      {n:'Revenue Per Provider Dashboard',d:'Compare production, utilization, and patient satisfaction across providers in your practice.'},
+      {n:'Recall Campaign Automation',d:'6-month cleanings, annual exams, follow-up treatments — patients get reminded automatically.'},
+    ],
+    addon:'Before/after marketing generator',
+    addonDesc:'Upload before/after photos and AI creates compliant, compelling social content and case studies that attract new patients.',
+    highlight:'Your chairs stay full. Your patients say yes to treatment plans. Your reviews grow on autopilot. Your admin overhead shrinks.'},
+];
+
+function buildIndustryGrid() {
+  const grid = document.getElementById('industryGrid');
+  if (!grid) return;
+  grid.innerHTML = INDUSTRIES.map(ind => `
+    <div class="card" onclick="openIndustry('${ind.id}')" style="padding:18px;cursor:pointer;text-align:center;transition:all 0.2s" onmouseenter="this.style.borderColor='rgba(167,139,250,0.3)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='';this.style.transform=''">
+      <div style="font-size:28px;margin-bottom:8px">${ind.icon}</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:13px">${ind.name}</div>
+      <div style="font-size:10px;color:var(--text-3);margin-top:3px">${ind.sub}</div>
+    </div>`).join('');
+}
+
+function openIndustry(id) {
+  const ind = INDUSTRIES.find(i => i.id === id);
+  if (!ind) return;
+  document.getElementById('industryGridView').style.display = 'none';
+  const el = document.getElementById('industryDetailView');
+  el.style.display = 'block';
+  el.style.animation = 'none'; el.offsetHeight; el.style.animation = 'slideUp 0.4s ease both';
+  el.innerHTML = `
+    <div style="margin-bottom:24px">
+      <div onclick="closeIndustry()" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(167,139,250,0.08);color:var(--purple);border:1px solid rgba(167,139,250,0.15);cursor:pointer;margin-bottom:16px;transition:all 0.15s" onmouseenter="this.style.background='rgba(167,139,250,0.15)'" onmouseleave="this.style.background='rgba(167,139,250,0.08)'">← All Industries</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="font-size:36px">${ind.icon}</div>
+        <div>
+          <div style="font-family:var(--font-head);font-size:24px;font-weight:800">${ind.name}</div>
+          <div style="font-size:13px;color:var(--text-2);margin-top:2px">${ind.sub}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What you struggle with -->
+    <div style="margin-bottom:28px">
+      <div style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:12px">What keeps you up at night</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${ind.struggles.map(s => `<div style="padding:8px 14px;border-radius:var(--r-sm);background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1);font-size:12px;color:var(--text-2)">${s}</div>`).join('')}
+      </div>
+    </div>
+
+    <!-- The highlight — plain English -->
+    <div style="padding:20px;border-radius:var(--r);background:linear-gradient(135deg,rgba(167,139,250,0.06),rgba(167,139,250,0.02));border:1px solid rgba(167,139,250,0.15);margin-bottom:28px">
+      <div style="font-size:14px;color:var(--text);line-height:1.7;font-weight:500">${ind.highlight}</div>
+    </div>
+
+    <!-- What the hub does for you -->
+    <div style="margin-bottom:28px">
+      <div style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:14px">What the hub does for you</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${ind.tools.map((t,i) => `
+          <div class="card" style="padding:14px;border-left:3px solid var(--purple);opacity:0;transform:translateX(-8px);transition:all 0.3s ease" id="ind-tool-${i}">
+            <div style="font-size:13px;font-weight:700;color:var(--text)">${t.n}</div>
+            <div style="font-size:12px;color:var(--text-2);margin-top:4px;line-height:1.5">${t.d}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Add-on -->
+    <div style="margin-bottom:28px">
+      <div class="card" style="border-color:rgba(245,158,11,0.15);overflow:hidden">
+        <div style="padding:14px 16px;background:rgba(245,158,11,0.04);border-bottom:1px solid rgba(245,158,11,0.08);display:flex;align-items:center;gap:8px">
+          <span style="font-size:14px">✧</span><span style="font-family:var(--font-head);font-weight:700;font-size:13px">AI Add-On: ${ind.addon}</span>
+        </div>
+        <div style="padding:14px 16px;font-size:12px;color:var(--text-2);line-height:1.6">${ind.addonDesc}</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="padding:24px;border-radius:var(--r-lg);background:linear-gradient(135deg,rgba(167,139,250,0.06),rgba(167,139,250,0.02));border:1px solid rgba(167,139,250,0.15);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div style="font-family:var(--font-head);font-weight:700;font-size:16px">Ready to see this live?</div>
+        <div style="font-size:12px;color:var(--text-2);margin-top:3px">We'll set it up for your ${ind.name.toLowerCase()} business. You just do what you do.</div>
+      </div>
+      <button class="cta-btn" style="background:var(--purple);color:#fff" onclick="goTab('contact')">Book a Demo →</button>
+    </div>
+  `;
+
+  ind.tools.forEach((_,i) => {
+    setTimeout(() => { const c=document.getElementById('ind-tool-'+i); if(c){c.style.opacity='1';c.style.transform='translateX(0)';} }, 150+i*50);
+  });
+}
+
+function closeIndustry() {
+  document.getElementById('industryDetailView').style.display = 'none';
+  const gv = document.getElementById('industryGridView');
+  gv.style.display = 'block';
+  gv.style.animation = 'none'; gv.offsetHeight; gv.style.animation = 'slideUp 0.3s ease both';
+}
+
+// ═══ BUSINESS ADVISOR ═══
+const ADVISOR_ANSWERS = [
+  {q:'What should I focus on this week?',items:[
+    {priority:'HIGH',color:'var(--red)',title:'Fix email deliverability',desc:'Open rates dropped 18% — check SPF/DKIM records and clean your list. Estimated recovery: +$2,400/mo in email revenue.'},
+    {priority:'HIGH',color:'var(--red)',title:'Follow up with 3 warm leads',desc:'Marcus Chen, Sarah Johnson, and Lisa Patel all engaged in the last 48 hours. Strike while hot — conversion probability: 65%.'},
+    {priority:'MED',color:'var(--amber)',title:'Launch the March social campaign',desc:'Content is approved and scheduled. Push live by Wednesday to catch the weekend traffic spike.'},
+    {priority:'LOW',color:'var(--accent)',title:'Update pricing page copy',desc:'A/B test showed the current version underperforms by 12%. New copy is drafted — just needs to go live.'}
+  ]},
+  {q:'Where am I leaking money?',items:[
+    {priority:'LEAK',color:'var(--red)',title:'Facebook Ads: $1,200/mo wasted',desc:'3 ad sets have a CPA 4x above target. Pausing them immediately saves $1,200/mo with zero impact on conversions.'},
+    {priority:'LEAK',color:'var(--red)',title:'Unused software subscriptions',desc:'Detected 3 tools with no logins in 60+ days: Scheduling tool ($49/mo), Analytics addon ($79/mo), Stock photo sub ($29/mo). Total: $157/mo.'},
+    {priority:'LEAK',color:'var(--amber)',title:'Unconverted leads decaying',desc:'47 leads haven\'t been contacted in 14+ days. Estimated lost revenue: $8,500. Recommend automated re-engagement sequence.'},
+    {priority:'SAVE',color:'var(--green)',title:'Negotiate vendor contracts',desc:'Two vendor invoices are 20%+ above market rate. Renegotiation potential: $340/mo savings.'}
+  ]},
+  {q:'Which channel is underperforming?',items:[
+    {priority:'WEAK',color:'var(--red)',title:'Paid Search: ROAS 1.2x (target: 3x)',desc:'Google Ads spend is $3,400/mo but return is barely breaking even. Keywords "general marketing" are too broad — need long-tail refinement.'},
+    {priority:'OK',color:'var(--amber)',title:'Email: Open rate 19% (industry avg: 24%)',desc:'Subject lines are too generic. A/B test with personalization and numbers could push you to 26%+.'},
+    {priority:'STRONG',color:'var(--green)',title:'Instagram: Engagement 4.8% (avg: 1.5%)',desc:'Top performer. Double down — increase posting frequency from 4x to 6x/week. Estimated additional reach: +12,000/month.'},
+    {priority:'STRONG',color:'var(--green)',title:'Referrals: 32% of new business',desc:'Highest LTV customers come from referrals. Consider a formal referral program to scale this channel.'}
+  ]},
+  {q:'Should I raise prices?',items:[
+    {priority:'YES',color:'var(--green)',title:'Data supports a 15-20% increase',desc:'Your close rate is 68% — well above the 40% threshold that suggests underpricing. A 15% increase would add ~$4,200/mo in revenue.'},
+    {priority:'RISK',color:'var(--amber)',title:'Competitor A is 22% cheaper',desc:'But their offering is narrower. Position your premium on included strategy + AI features to justify the gap.'},
+    {priority:'TIP',color:'var(--accent)',title:'Grandfather existing clients',desc:'Raise prices for new clients only. Existing clients keep current rate for 6 months — reduces churn risk to near-zero.'},
+    {priority:'TIP',color:'var(--accent)',title:'Add a premium tier instead',desc:'Rather than raising base price, introduce a premium tier at +40% with priority support and monthly strategy calls.'}
+  ]},
+  {q:'What offer would convert better?',items:[
+    {priority:'TEST',color:'var(--amber)',title:'"Free audit" outperforms "free trial" 3:1',desc:'Based on your audience (service businesses), a free audit feels more personal and valuable than a self-serve trial.'},
+    {priority:'TEST',color:'var(--amber)',title:'Add a 30-day money-back guarantee',desc:'Competitors without guarantees convert at 2.1%. Those with guarantees: 3.8%. The refund rate is typically under 5%.'},
+    {priority:'NOW',color:'var(--green)',title:'Bundle: "Setup + 1st Month Free"',desc:'Removes both objections at once (effort + cost). Projected conversion lift: +35% based on similar offers in your space.'},
+    {priority:'TIP',color:'var(--accent)',title:'Lead with ROI, not features',desc:'Change your CTA from "Start Free Trial" to "See Your ROI in 7 Days". Outcome-based CTAs convert 22% better.'}
+  ]},
+  {q:'What is my next highest ROI move?',items:[
+    {priority:'#1',color:'var(--green)',title:'Launch referral program — est. ROI: 12x',desc:'Referral customers have 3x LTV and zero acquisition cost. A simple "give $50, get $50" program could add 8-12 new clients/quarter.'},
+    {priority:'#2',color:'var(--green)',title:'Fix paid search targeting — est. ROI: 5x',desc:'Narrowing from broad to long-tail keywords will cut CPA by 60%. Same budget, 2.5x more conversions.'},
+    {priority:'#3',color:'var(--amber)',title:'Email re-engagement — est. ROI: 4x',desc:'47 dormant leads × 15% reactivation × $1,200 avg deal = $8,460 in recovered revenue. Cost: a 5-email sequence.'},
+    {priority:'#4',color:'var(--accent)',title:'Add testimonials to pricing page — est. ROI: 3x',desc:'Pages with testimonials convert 34% better. You have 12 5-star reviews that could be featured. 30 min of work.'}
+  ]},
+];
+
+function askAdvisor(idx) {
+  const a = ADVISOR_ANSWERS[idx];
+  const el = document.getElementById('advisorResult');
+  el.style.display='block'; el.innerHTML='<div class="card" style="padding:20px;text-align:center;border-color:rgba(245,158,11,0.15)"><div style="animation:pulse 1s infinite;font-size:20px">✧</div><div style="font-size:12px;color:var(--text-2);margin-top:6px">Analyzing your data...</div></div>';
+  el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+  setTimeout(() => {
+    el.innerHTML = `
+      <div class="card" style="border-color:rgba(245,158,11,0.15);overflow:hidden">
+        <div class="card-head" style="background:rgba(245,158,11,0.04)"><span style="font-size:14px">✧</span><span style="font-family:var(--font-head);font-weight:700;font-size:14px">${a.q}</span></div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+          ${a.items.map((it,i) => `<div style="padding:12px;border-radius:var(--r-sm);border:1px solid var(--border);border-left:3px solid ${it.color};opacity:0;transform:translateX(-10px);transition:all 0.3s ease" id="adv-item-${i}"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,0.06);color:${it.color};font-weight:700;font-family:var(--font-mono)">${it.priority}</span><span style="font-weight:700;font-size:13px">${it.title}</span></div><div style="font-size:12px;color:var(--text-2);line-height:1.5">${it.desc}</div></div>`).join('')}
+        </div>
+      </div>`;
+    a.items.forEach((_,i) => { setTimeout(() => { const c=document.getElementById('adv-item-'+i); if(c){c.style.opacity='1';c.style.transform='translateX(0)';} }, 100+i*100); });
+  }, 1200);
+}
+
+// ═══ COMPETITIVE INTEL ═══
+const COMPETE_RESULTS = [
+  {title:'Pricing Analysis',icon:'💰',items:[
+    {label:'Your price',val:'$997/mo',note:'Mid-market positioning'},
+    {label:'Competitor A',val:'$779/mo',note:'Lower price, fewer features'},
+    {label:'Competitor B',val:'$1,249/mo',note:'Premium price, similar features'},
+    {label:'Market avg',val:'$892/mo',note:'You\'re 12% above average'},
+  ],rec:'Your price is justified by feature breadth. Emphasize ROI — show $997 replaces $2,800+ in separate tools. Add a comparison page.'},
+  {title:'Positioning Audit',icon:'🎯',items:[
+    {label:'Your position',val:'All-in-one hub',note:'Broad but unfocused messaging'},
+    {label:'Gap found',val:'AI angle underused',note:'Competitors don\'t lead with AI'},
+    {label:'Opportunity',val:'"AI-powered" prefix',note:'Differentiates in every channel'},
+    {label:'Risk',val:'Feature parity claims',note:'2 competitors now claim "all-in-one"'},
+  ],rec:'Pivot messaging from "all-in-one" to "AI-powered business hub." Competitors can match features but not your AI layer. Lead every headline with AI.'},
+  {title:'Bundle Suggestions',icon:'📦',items:[
+    {label:'Starter Bundle',val:'$497/mo',note:'Marketing + Brand Kit + Report'},
+    {label:'Growth Bundle',val:'$997/mo',note:'Full marketing + Sales CRM'},
+    {label:'Pro Bundle',val:'$1,497/mo',note:'Everything + Strategy + Advisor'},
+    {label:'Enterprise',val:'Custom',note:'Multi-location + API + Onboarding'},
+  ],rec:'Three-tier pricing increases conversion 23% over single-price. Anchor on the Pro Bundle — most buyers will land on Growth.'},
+  {title:'Premium Tier Design',icon:'👑',items:[
+    {label:'White-glove setup',val:'+$2,500',note:'One-time onboarding fee'},
+    {label:'Monthly strategy call',val:'+$300/mo',note:'30-min with strategist'},
+    {label:'Priority support',val:'+$150/mo',note:'4hr response SLA'},
+    {label:'Custom reporting',val:'+$200/mo',note:'Branded PDF reports'},
+  ],rec:'Stack these into a "Concierge" tier at +$500/mo. Margin is 80%+ and appeals to businesses that value time over money.'},
+  {title:'Guarantee Language',icon:'🛡️',items:[
+    {label:'Option A',val:'"30-day money back"',note:'Standard, expected, safe'},
+    {label:'Option B',val:'"ROI in 60 days or free"',note:'Bold, high-converting, risky'},
+    {label:'Option C',val:'"Cancel anytime, keep data"',note:'Low-friction, builds trust'},
+    {label:'Recommended',val:'Option C + B hybrid',note:'"See ROI in 60 days. Cancel anytime."'},
+  ],rec:'Combine: "See measurable ROI in 60 days or cancel anytime — keep all your data." This tests at 2.4x vs no guarantee.'},
+  {title:'Offer Hook Rewrites',icon:'🪝',items:[
+    {label:'Current',val:'"Try our platform"',note:'Generic, no urgency'},
+    {label:'Hook 1',val:'"Replace 8 tools today"',note:'Concrete, pain-focused'},
+    {label:'Hook 2',val:'"Your AI advisor is waiting"',note:'Personal, curiosity-driven'},
+    {label:'Hook 3',val:'"See what you\'re missing — free"',note:'FOMO + free = high click rate'},
+  ],rec:'Lead with Hook 1 on landing pages (logical buyers), Hook 2 on social (curiosity browsers), Hook 3 in email subject lines (re-engagement).'},
+];
+
+function runCompete(idx) {
+  const r = COMPETE_RESULTS[idx];
+  const el = document.getElementById('competeResult');
+  el.style.display='block'; el.innerHTML='<div class="card" style="padding:20px;text-align:center;border-color:rgba(245,158,11,0.15)"><div style="animation:pulse 1s infinite;font-size:20px">'+r.icon+'</div><div style="font-size:12px;color:var(--text-2);margin-top:6px">Running '+r.title+'...</div></div>';
+  el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+  setTimeout(() => {
+    el.innerHTML = `
+      <div class="card" style="border-color:rgba(245,158,11,0.15);overflow:hidden">
+        <div class="card-head" style="background:rgba(245,158,11,0.04)"><span style="font-size:16px">${r.icon}</span><span style="font-family:var(--font-head);font-weight:700;font-size:14px">${r.title}</span></div>
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+            ${r.items.map((it,i) => `<div style="padding:10px;border-radius:var(--r-sm);border:1px solid var(--border);opacity:0;transform:translateY(6px);transition:all 0.3s ease" id="comp-item-${i}"><div class="label" style="margin-bottom:3px">${it.label}</div><div style="font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--amber)">${it.val}</div><div style="font-size:10px;color:var(--text-3);margin-top:2px">${it.note}</div></div>`).join('')}
+          </div>
+          <div style="padding:12px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1)"><div class="label" style="color:var(--amber);margin-bottom:4px">✧ AI RECOMMENDATION</div><div style="font-size:12px;color:var(--text-2);line-height:1.6">${r.rec}</div></div>
+        </div>
+      </div>`;
+    r.items.forEach((_,i) => { setTimeout(() => { const c=document.getElementById('comp-item-'+i); if(c){c.style.opacity='1';c.style.transform='translateY(0)';} }, 100+i*80); });
+  }, 1200);
+}
+
+// ═══ CASH FLOW ═══
+function generateCashFlow() {
+  const revenue = rand(18000,45000), expenses = rand(10000,28000), net = revenue - expenses;
+  const runway = net > 0 ? Math.round((rand(20000,80000))/expenses) : 0;
+  animateCount(document.getElementById('cf-revenue'),revenue,'$');
+  animateCount(document.getElementById('cf-expenses'),expenses,'$');
+  setTimeout(() => { document.getElementById('cf-net').textContent = (net>=0?'+':'-')+'$'+Math.abs(net).toLocaleString(); document.getElementById('cf-net').style.color = net>=0?'var(--green)':'var(--red)'; },600);
+  document.getElementById('cf-runway').textContent = runway+' mo';
+  const el = document.getElementById('cashflowResults');
+  el.style.display='block'; el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+  const adSpend = rand(2000,6000), recurring = rand(3000,8000), seasonal = ['Peak season (Q4)','Slow season (Q1)','Growth season (Q2)','Stable (Q3)'][rand(0,3)];
+  el.innerHTML = `
+    <div class="grid-2" style="gap:12px;margin-bottom:16px">
+      <div class="card" style="padding:14px;border-color:rgba(245,158,11,0.1)"><div class="label" style="margin-bottom:6px">EXPENSE BREAKDOWN</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">Ad Spend</span><span style="font-weight:700">$${adSpend.toLocaleString()}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">Recurring Software</span><span style="font-weight:700">$${recurring.toLocaleString()}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">Payroll</span><span style="font-weight:700">$${(expenses-adSpend-recurring).toLocaleString()}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;padding-top:6px;border-top:1px solid var(--border)"><span style="color:var(--text-3)">Seasonality</span><span style="color:var(--amber);font-weight:600">${seasonal}</span></div>
+        </div>
+      </div>
+      <div class="card" style="padding:14px;border-color:rgba(245,158,11,0.1)"><div class="label" style="margin-bottom:6px">3-MONTH PROJECTION</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          ${[1,2,3].map(m => { const proj = net+rand(-2000,3000)*m; return `<div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-2)">Month ${m}</span><span style="font-weight:700;color:${proj>=0?'var(--green)':'var(--red)'}">$${Math.abs(proj).toLocaleString()}</span></div>`; }).join('')}
+          <div style="display:flex;justify-content:space-between;font-size:12px;padding-top:6px;border-top:1px solid var(--border)"><span style="color:var(--text-3)">Break-even</span><span style="font-weight:700;color:var(--accent)">$${Math.round(expenses*0.85).toLocaleString()}/mo</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label" style="margin-bottom:8px">✧ AI RECOMMENDATIONS</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      ${[
+        {icon:'⚠️',title:'Risk Warning',desc:net<5000?'Cash reserves are thin. Build a 3-month buffer before scaling ad spend.':'Cash position is healthy. You have room to invest in growth.',color:net<5000?'var(--red)':'var(--green)'},
+        {icon:'👤',title:'Hiring Timing',desc:net>8000?'Revenue supports a new hire. Best ROI: a dedicated sales closer or content creator.':'Hold on hiring — wait until monthly net exceeds $8,000 consistently.',color:net>8000?'var(--green)':'var(--amber)'},
+        {icon:'📈',title:'Ad Scaling',desc:adSpend<4000?'Ad spend is conservative. Test a 25% increase on your top-performing channel for 2 weeks.':'Ad spend is healthy. Focus on optimization (creative refresh, audience refinement) before scaling further.',color:'var(--accent)'},
+        {icon:'💡',title:'Break-Even Insight',desc:'You need $'+Math.round(expenses*0.85).toLocaleString()+'/mo in revenue to break even at 85% margin. Currently '+(revenue>expenses*0.85?'above':'below')+' that threshold.',color:'var(--amber)'},
+      ].map((r,i) => `<div class="card" style="padding:12px;border-left:3px solid ${r.color};opacity:0;transform:translateX(-8px);transition:all 0.3s ease" id="cf-rec-${i}"><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="font-size:12px">${r.icon}</span><span style="font-weight:700;font-size:12px">${r.title}</span></div><div style="font-size:11px;color:var(--text-2);line-height:1.5">${r.desc}</div></div>`).join('')}
+    </div>`;
+  [0,1,2,3].forEach(i => { setTimeout(() => { const c=document.getElementById('cf-rec-'+i); if(c){c.style.opacity='1';c.style.transform='translateX(0)';} }, 300+i*80); });
+}
+
+// ═══ REPUTATION ═══
+function initReputationTab() {
+  const rating = (4+Math.random()*0.8).toFixed(1), total = rand(48,320), positive = rand(78,95), alerts = rand(0,3);
+  document.getElementById('rep-rating').textContent = rating;
+  document.getElementById('rep-positive').textContent = positive+'%';
+  animateCount(document.getElementById('rep-total'),total);
+  document.getElementById('rep-alerts').textContent = alerts;
+  const reviewNames = ['Jessica M.','David R.','Sarah K.','Tom L.','Anna C.','Mike P.','Nina W.','Chris B.'];
+  const reviews = [
+    {stars:5,text:'Absolutely incredible service. The team went above and beyond on our project.',sentiment:'Positive',color:'var(--green)'},
+    {stars:5,text:'Best investment we made this year. ROI was visible within the first month.',sentiment:'Positive',color:'var(--green)'},
+    {stars:4,text:'Great platform, just wish the onboarding was a bit smoother.',sentiment:'Mostly Positive',color:'var(--green)'},
+    {stars:3,text:'Decent features but the support response time could be better.',sentiment:'Neutral',color:'var(--amber)'},
+    {stars:2,text:'Had some billing issues that took too long to resolve.',sentiment:'Negative',color:'var(--red)'},
+    {stars:5,text:'Replaced 6 different tools with this one hub. Game changer for our team.',sentiment:'Positive',color:'var(--green)'},
+  ];
+  const el = document.getElementById('reviewsList');
+  el.innerHTML = reviews.map((r,i) => `
+    <div class="card" style="padding:12px;border-left:3px solid ${r.color};opacity:0;transform:translateX(-8px);transition:all 0.3s ease" id="rev-${i}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="color:var(--amber);font-size:12px">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span>
+        <span style="font-weight:700;font-size:12px">${reviewNames[i]}</span>
+        <span style="margin-left:auto;font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,0.04);color:${r.color};font-weight:600">${r.sentiment}</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-2);line-height:1.5">"${r.text}"</div>
+      ${r.stars<=3?`<div style="margin-top:8px;padding:8px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1)"><div class="label" style="color:var(--amber);margin-bottom:3px">✧ AI DRAFT RESPONSE</div><div style="font-size:11px;color:var(--text-2);line-height:1.5">${r.stars===2?'Thank you for your feedback. We apologize for the billing inconvenience and have escalated this to our team. We\'d love to make this right — please reach out directly.':'We appreciate your honest feedback. We\'re actively improving our support response times. We\'d love to hear more about how we can serve you better.'}</div></div>`:''}
+    </div>`).join('');
+  reviews.forEach((_,i) => { setTimeout(() => { const c=document.getElementById('rev-'+i); if(c){c.style.opacity='1';c.style.transform='translateX(0)';} }, 100+i*60); });
+  const actions = [
+    {icon:'🔍',title:'Monitor Google Reviews',desc:'Real-time alerts for new reviews across Google, Yelp, and Facebook'},
+    {icon:'✍️',title:'Auto-Draft Responses',desc:'AI crafts personalized replies — approve with one click'},
+    {icon:'📊',title:'Sentiment Tracking',desc:'Detect shifts in brand perception before they become problems'},
+    {icon:'🚨',title:'Decline Alerts',desc:'Immediate notification when ratings drop below your threshold'},
+    {icon:'📍',title:'Local SEO Tactics',desc:'AI suggests citation fixes, keyword adjustments, and review strategies'},
+    {icon:'⭐',title:'Review Generation',desc:'Automated post-service review requests via email and SMS'},
+  ];
+  document.getElementById('repActions').innerHTML = actions.map((a,i) => `
+    <div class="card" style="padding:12px;border-color:rgba(245,158,11,0.08);opacity:0;transform:translateY(6px);transition:all 0.3s ease" id="rep-act-${i}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:14px">${a.icon}</span><span style="font-weight:700;font-size:12px">${a.title}</span></div>
+      <div style="font-size:11px;color:var(--text-3);line-height:1.4">${a.desc}</div>
+    </div>`).join('');
+  actions.forEach((_,i) => { setTimeout(() => { const c=document.getElementById('rep-act-'+i); if(c){c.style.opacity='1';c.style.transform='translateY(0)';} }, 400+i*50); });
+}
+
+// ═══ AUTOMATION ═══
+const AUTO_TEMPLATES = [
+  {name:'New Lead Email Flow',steps:[
+    {type:'trigger',label:'New lead submits form',icon:'🔔',color:'var(--green)'},
+    {type:'action',label:'Send welcome email',icon:'✉',color:'var(--accent)'},
+    {type:'wait',label:'Wait 2 days',icon:'⏳',color:'var(--text-3)'},
+    {type:'action',label:'Send follow-up with case studies',icon:'✉',color:'var(--accent)'},
+    {type:'condition',label:'Did they open?',icon:'❓',color:'var(--amber)'},
+    {type:'action',label:'YES → Send pricing + book call CTA',icon:'✉',color:'var(--green)'},
+    {type:'action',label:'NO → Wait 5d → Final value email',icon:'✉',color:'var(--red)'},
+  ]},
+  {name:'Lead Routing',steps:[
+    {type:'trigger',label:'New lead enters CRM',icon:'🔔',color:'var(--green)'},
+    {type:'action',label:'AI scores lead (budget, timeline, fit)',icon:'🧠',color:'var(--purple)'},
+    {type:'condition',label:'Score > 80?',icon:'❓',color:'var(--amber)'},
+    {type:'action',label:'HIGH → Assign to senior rep + Slack alert',icon:'👤',color:'var(--green)'},
+    {type:'action',label:'MED → Add to nurture sequence',icon:'✉',color:'var(--accent)'},
+    {type:'action',label:'LOW → Tag for monthly newsletter',icon:'📋',color:'var(--text-3)'},
+  ]},
+  {name:'Appointment Reminders',steps:[
+    {type:'trigger',label:'Appointment booked',icon:'🔔',color:'var(--green)'},
+    {type:'action',label:'Send confirmation email + calendar invite',icon:'✉',color:'var(--accent)'},
+    {type:'wait',label:'Wait until 24hr before',icon:'⏳',color:'var(--text-3)'},
+    {type:'action',label:'Send reminder email',icon:'✉',color:'var(--accent)'},
+    {type:'wait',label:'Wait until 2hr before',icon:'⏳',color:'var(--text-3)'},
+    {type:'action',label:'Send SMS reminder',icon:'📱',color:'var(--amber)'},
+    {type:'action',label:'Post-visit → Send follow-up + review request',icon:'⭐',color:'var(--green)'},
+  ]},
+  {name:'Abandoned Cart Recovery',steps:[
+    {type:'trigger',label:'Cart abandoned (no purchase in 1hr)',icon:'🔔',color:'var(--red)'},
+    {type:'action',label:'Send "forgot something?" email',icon:'✉',color:'var(--accent)'},
+    {type:'wait',label:'Wait 24 hours',icon:'⏳',color:'var(--text-3)'},
+    {type:'action',label:'Send 10% discount email',icon:'💰',color:'var(--amber)'},
+    {type:'wait',label:'Wait 3 days',icon:'⏳',color:'var(--text-3)'},
+    {type:'action',label:'Send urgency email (limited stock/time)',icon:'⚡',color:'var(--red)'},
+    {type:'condition',label:'Still no purchase?',icon:'❓',color:'var(--amber)'},
+    {type:'action',label:'Tag as "price-sensitive" for future offers',icon:'🏷️',color:'var(--text-3)'},
+  ]},
+  {name:'Post-Meeting Follow-Up',steps:[
+    {type:'trigger',label:'Meeting completed',icon:'🔔',color:'var(--green)'},
+    {type:'action',label:'AI drafts meeting recap email',icon:'🧠',color:'var(--purple)'},
+    {type:'action',label:'Send recap + next steps',icon:'✉',color:'var(--accent)'},
+    {type:'wait',label:'Wait 3 days',icon:'⏳',color:'var(--text-3)'},
+    {type:'action',label:'Send check-in: "Any questions?"',icon:'✉',color:'var(--accent)'},
+    {type:'action',label:'Update CRM with engagement status',icon:'📋',color:'var(--green)'},
+  ]},
+];
+
+function pickAutoTemplate(idx) { renderAutomation(AUTO_TEMPLATES[idx]); }
+function buildAutomation() {
+  const input = document.getElementById('autoInput').value;
+  if (!input.trim()) return;
+  renderAutomation({name:'Custom Automation',steps:[
+    {type:'trigger',label:'When: '+input.substring(0,50)+(input.length>50?'...':''),icon:'🔔',color:'var(--green)'},
+    {type:'action',label:'AI parses intent and identifies actions',icon:'🧠',color:'var(--purple)'},
+    {type:'action',label:'Build email/SMS sequence',icon:'✉',color:'var(--accent)'},
+    {type:'condition',label:'Check engagement signals',icon:'❓',color:'var(--amber)'},
+    {type:'action',label:'Route to next best action',icon:'⚡',color:'var(--amber)'},
+    {type:'action',label:'Update CRM + notify team',icon:'📋',color:'var(--green)'},
+  ]});
+}
+function renderAutomation(tmpl) {
+  const el = document.getElementById('autoResult');
+  el.style.display='block'; el.innerHTML='<div class="card" style="padding:20px;text-align:center;border-color:rgba(245,158,11,0.15)"><div style="animation:pulse 1s infinite;font-size:20px">⚡</div><div style="font-size:12px;color:var(--text-2);margin-top:6px">Building automation...</div></div>';
+  el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+  setTimeout(() => {
+    el.innerHTML = `
+      <div class="card" style="border-color:rgba(245,158,11,0.15);overflow:hidden">
+        <div class="card-head" style="background:rgba(245,158,11,0.04)"><span style="font-size:14px">⚡</span><span style="font-family:var(--font-head);font-weight:700;font-size:14px">${tmpl.name}</span><span class="pill" style="margin-left:auto;font-size:9px;background:rgba(245,158,11,0.1);color:var(--amber);border-color:rgba(245,158,11,0.15)">${tmpl.steps.length} STEPS</span></div>
+        <div class="card-body" style="padding:20px">
+          <div style="display:flex;flex-direction:column;gap:0;position:relative">
+            ${tmpl.steps.map((s,i) => `
+              <div style="display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(8px);transition:all 0.3s ease" id="auto-step-${i}">
+                <div style="display:flex;flex-direction:column;align-items:center;width:32px;flex-shrink:0">
+                  <div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,0.06);border:2px solid ${s.color};display:flex;align-items:center;justify-content:center;font-size:11px">${s.icon}</div>
+                  ${i<tmpl.steps.length-1?'<div style="width:2px;height:20px;background:var(--border)"></div>':''}
+                </div>
+                <div style="flex:1;padding:8px 12px;border-radius:var(--r-sm);border:1px solid var(--border);margin-bottom:${i<tmpl.steps.length-1?'0':'0'}px;background:rgba(255,255,255,0.015)">
+                  <div style="display:flex;align-items:center;gap:6px"><span style="font-size:8px;padding:1px 6px;border-radius:6px;background:rgba(255,255,255,0.06);color:${s.color};font-weight:700;font-family:var(--font-mono);text-transform:uppercase">${s.type}</span><span style="font-size:12px;font-weight:600">${s.label}</span></div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div style="margin-top:16px;display:flex;gap:8px">
+            <button style="padding:8px 16px;background:var(--amber);color:#000;border:none;border-radius:var(--r-sm);font-weight:700;font-size:11px;cursor:pointer;font-family:var(--font-body)">Activate Automation</button>
+            <button style="padding:8px 16px;background:rgba(255,255,255,0.04);color:var(--text-2);border:1px solid var(--border);border-radius:var(--r-sm);font-weight:600;font-size:11px;cursor:pointer;font-family:var(--font-body)">Edit Steps</button>
+          </div>
+        </div>
+      </div>`;
+    tmpl.steps.forEach((_,i) => { setTimeout(() => { const c=document.getElementById('auto-step-'+i); if(c){c.style.opacity='1';c.style.transform='translateY(0)';} }, 100+i*100); });
+  }, 1200);
+}
+
+// ═══ PRIORITIZATION ═══
+function generatePriorities() {
+  const moves = [
+    {title:'Launch referral program',roi:95,effort:20,risk:5,timing:'Now'},
+    {title:'Fix paid search targeting',roi:88,effort:30,risk:10,timing:'Now'},
+    {title:'Email re-engagement campaign',roi:82,effort:15,risk:5,timing:'Now'},
+    {title:'Add testimonials to pricing page',roi:78,effort:10,risk:2,timing:'Now'},
+    {title:'Raise prices 15% for new clients',roi:75,effort:10,risk:20,timing:'Next month'},
+    {title:'Launch Instagram Reels series',roi:72,effort:40,risk:10,timing:'This week'},
+    {title:'Build partner referral channel',roi:70,effort:50,risk:15,timing:'This quarter'},
+    {title:'Automate lead follow-up sequence',roi:68,effort:25,risk:5,timing:'Now'},
+    {title:'Publish 8 SEO blog articles',roi:65,effort:60,risk:5,timing:'This month'},
+    {title:'Renegotiate vendor contracts',roi:60,effort:15,risk:5,timing:'This week'},
+    {title:'Create video case studies',roi:58,effort:55,risk:10,timing:'This month'},
+    {title:'Run Facebook retargeting campaign',roi:55,effort:30,risk:15,timing:'Next week'},
+    {title:'Hire a sales closer',roi:52,effort:70,risk:25,timing:'Next quarter'},
+    {title:'Launch a podcast',roi:45,effort:75,risk:10,timing:'Next quarter'},
+    {title:'Attend 2 industry conferences',roi:42,effort:50,risk:10,timing:'This quarter'},
+    {title:'Build a mobile app',roi:40,effort:90,risk:30,timing:'6+ months'},
+    {title:'Run a webinar series',roi:38,effort:45,risk:10,timing:'Next month'},
+    {title:'Expand to new market',roi:35,effort:80,risk:35,timing:'6+ months'},
+    {title:'Open a second location',roi:30,effort:95,risk:40,timing:'Next year'},
+    {title:'Rebrand completely',roi:25,effort:85,risk:30,timing:'Next year'},
+  ];
+  const el = document.getElementById('priorityResults');
+  el.style.display='block'; el.innerHTML='<div class="card" style="padding:20px;text-align:center;border-color:rgba(245,158,11,0.15)"><div style="animation:pulse 1s infinite;font-size:20px">▲</div><div style="font-size:12px;color:var(--text-2);margin-top:6px">Ranking growth moves...</div></div>';
+  el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+  setTimeout(() => {
+    el.innerHTML = `
+      <div class="card" style="border-color:rgba(245,158,11,0.15);overflow:hidden">
+        <div class="card-head" style="background:rgba(245,158,11,0.04)"><span style="font-size:14px">▲</span><span style="font-family:var(--font-head);font-weight:700;font-size:14px">Top 20 Growth Moves — Ranked</span></div>
+        <div class="card-body" style="padding:8px">
+          <div style="display:grid;grid-template-columns:30px 2fr repeat(4,1fr);gap:6px;padding:6px 10px;border-bottom:1px solid var(--border)">
+            <div class="label">#</div><div class="label">MOVE</div><div class="label">ROI</div><div class="label">EFFORT</div><div class="label">RISK</div><div class="label">TIMING</div>
+          </div>
+          ${moves.map((m,i) => {
+            const score = m.roi - m.effort*0.3 - m.risk*0.5;
+            const roiColor = m.roi>=70?'var(--green)':m.roi>=50?'var(--amber)':'var(--text-3)';
+            const effColor = m.effort<=30?'var(--green)':m.effort<=60?'var(--amber)':'var(--red)';
+            const riskColor = m.risk<=10?'var(--green)':m.risk<=25?'var(--amber)':'var(--red)';
+            return `<div style="display:grid;grid-template-columns:30px 2fr repeat(4,1fr);gap:6px;padding:8px 10px;border-bottom:1px solid var(--border);opacity:0;transform:translateX(-6px);transition:all 0.25s ease" id="pri-row-${i}" onmouseenter="this.style.background='rgba(255,255,255,0.03)'" onmouseleave="this.style.background=''">
+              <div style="font-family:var(--font-head);font-weight:800;font-size:12px;color:${i<3?'var(--amber)':i<7?'var(--text-2)':'var(--text-3)'}">${i+1}</div>
+              <div style="font-size:12px;font-weight:${i<3?'700':'500'}">${m.title}</div>
+              <div style="font-size:11px;font-weight:700;color:${roiColor}">${m.roi}%</div>
+              <div style="font-size:11px;color:${effColor}">${m.effort<=30?'Low':m.effort<=60?'Med':'High'}</div>
+              <div style="font-size:11px;color:${riskColor}">${m.risk<=10?'Low':m.risk<=25?'Med':'High'}</div>
+              <div style="font-size:10px;color:var(--text-3)">${m.timing}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+    moves.forEach((_,i) => { setTimeout(() => { const c=document.getElementById('pri-row-'+i); if(c){c.style.opacity='1';c.style.transform='translateX(0)';} }, 100+i*40); });
+  }, 1500);
+}
+
 const NAV = [
   { id:'home',       icon:'✦', label:'Home' },
-  { id:'_sep1' },
-  { id:'overview',   icon:'◈', label:'Overview' },
-  { id:'social',     icon:'▦', label:'Social' },
-  { id:'email',      icon:'✉', label:'Email' },
-  { id:'performance',icon:'△', label:'Performance' },
-  { id:'hub',        icon:'⬡', label:'Approval Hub' },
-  { id:'strategy',   icon:'◎', label:'Strategy' },
-  { id:'brandkit',   icon:'◐', label:'Brand Kit' },
-  { id:'report',     icon:'☰', label:'Weekly Report' },
-  { id:'_sep2' },
+  { id:'industries', icon:'◆', label:'Industries', purple:true },
+  { id:'_label', text:'STRATEGY' },
+  { id:'advisor',    icon:'✧', label:'Business Advisor', amber:true },
+  { id:'compete',    icon:'⚔', label:'Competitive Intel', amber:true },
+  { id:'cashflow',   icon:'$', label:'Cash Flow',        amber:true },
+  { id:'reputation', icon:'★', label:'Reputation',       amber:true },
+  { id:'automate',   icon:'⚡', label:'Automation',       amber:true },
+  { id:'prioritize', icon:'▲', label:'Prioritization',   amber:true },
+  { id:'_label', text:'SALES' },
   { id:'crm',        icon:'◉', label:'CRM List',        green:true },
   { id:'leads',      icon:'◇', label:'Lead Management', green:true },
   { id:'invoices',   icon:'□', label:'Invoices',        green:true },
   { id:'proposals',  icon:'▷', label:'Proposals',       green:true },
+  { id:'_label', text:'MARKETING' },
+  { id:'overview',   icon:'◈', label:'Overview',       blue:true },
+  { id:'social',     icon:'▦', label:'Social',         blue:true },
+  { id:'email',      icon:'✉', label:'Email',          blue:true },
+  { id:'performance',icon:'△', label:'Performance',    blue:true },
+  { id:'hub',        icon:'⬡', label:'Approval Hub',   blue:true },
+  { id:'strategy',   icon:'◎', label:'Strategy',       blue:true },
+  { id:'brandkit',   icon:'◐', label:'Brand Kit',      blue:true },
+  { id:'report',     icon:'☰', label:'Weekly Report',  blue:true },
 ];
 
 const MODULES = [
+  { id:'industries', icon:'◆', name:'Industries',       desc:'See how the hub customizes for your specific industry and team size', accent:'purple' },
+  { id:'advisor',    icon:'✧', name:'Business Advisor',  desc:'AI advisor answers your biggest business questions with data-backed insights', accent:'amber' },
+  { id:'compete',    icon:'⚔', name:'Competitive Intel', desc:'Pricing analysis, positioning, bundles, premium tiers, and offer hooks', accent:'amber' },
+  { id:'cashflow',   icon:'$', name:'Cash Flow Manager', desc:'Revenue, expenses, runway projections, risk warnings, and scaling recs', accent:'amber' },
+  { id:'reputation', icon:'★', name:'Reputation Mgmt',   desc:'Review monitoring, sentiment tracking, response drafting, and local SEO', accent:'amber' },
+  { id:'automate',   icon:'⚡', name:'Workflow Automation',desc:'Describe what you want in plain English — AI builds the automation', accent:'amber' },
+  { id:'prioritize', icon:'▲', name:'Decision Engine',   desc:'AI ranks your top 20 growth moves by ROI, effort, risk, and timing', accent:'amber' },
+  { id:'crm',        icon:'◉', name:'CRM List',         desc:'Upload, browse, and segment your full contact list', accent:'green' },
+  { id:'leads',      icon:'◇', name:'Lead Management',  desc:'Track leads, send automated emails, monitor engagement', accent:'green' },
+  { id:'invoices',   icon:'□', name:'Invoices',         desc:'Send, receive, and track all invoices from clients and vendors', accent:'green' },
+  { id:'proposals',  icon:'▷', name:'Proposals',        desc:'Generate proposals for freelancers based on AI suggestions', accent:'green' },
   { id:'overview',   icon:'◈', name:'Control Center',  desc:'Two-week snapshot, live campaigns, wins & losses, competitor pulse, AI next steps', ai:true },
   { id:'social',     icon:'▦', name:'Social Calendar',  desc:'Visual scheduling, platform mockups, approval workflows, editable copy' },
   { id:'email',      icon:'✉', name:'Email Studio',     desc:'Mockup rendering, editable copy, version tracking, approval states' },
@@ -2091,10 +2873,6 @@ const MODULES = [
   { id:'strategy',   icon:'◎', name:'Strategy Suite',   desc:'Paid ads, website analysis, competitors, audience segments, events', ai:true },
   { id:'brandkit',   icon:'◐', name:'Brand Kit',        desc:'Logo, colors, tone, keywords, selling points — your brand DNA' },
   { id:'report',     icon:'☰', name:'Weekly Report',   desc:'Comprehensive weekly breakdown with AI-recommended actions', ai:true },
-  { id:'crm',        icon:'◉', name:'CRM List',         desc:'Upload, browse, and segment your full contact list', accent:'green' },
-  { id:'leads',      icon:'◇', name:'Lead Management',  desc:'Track leads, send automated emails, monitor engagement', accent:'green' },
-  { id:'invoices',   icon:'□', name:'Invoices',         desc:'Send, receive, and track all invoices from clients and vendors', accent:'green' },
-  { id:'proposals',  icon:'▷', name:'Proposals',        desc:'Generate proposals for freelancers based on AI suggestions', accent:'green' },
 ];
 
 let activeTab = 'home';
@@ -2106,6 +2884,19 @@ function buildNav() {
   mobile.innerHTML = '';
 
   NAV.forEach(item => {
+    if (item.id === '_label') {
+      const lbl = document.createElement('div');
+      lbl.className = 'nav-label';
+      lbl.textContent = item.text;
+      if (item.text === 'STRATEGY') lbl.style.color = 'var(--amber)';
+      else if (item.text === 'SALES') lbl.style.color = 'var(--green)';
+      else if (item.text === 'MARKETING') lbl.style.color = 'var(--accent)';
+      sidebar.appendChild(lbl);
+      const mlbl = document.createElement('div');
+      mlbl.className = 'mob-sep';
+      mobile.appendChild(mlbl);
+      return;
+    }
     if (item.id.startsWith('_sep')) {
       const sep = document.createElement('div');
       sep.className = 'nav-sep';
@@ -2123,13 +2914,29 @@ function buildNav() {
       btn.style.borderLeftColor = 'var(--green)';
     } else if (item.green) {
       btn.style.color = 'rgba(34,197,94,0.45)';
+    } else if (item.purple && activeTab === item.id) {
+      btn.style.background = 'rgba(167,139,250,0.12)';
+      btn.style.color = 'var(--purple)';
+      btn.style.borderLeftColor = 'var(--purple)';
+    } else if (item.amber && activeTab === item.id) {
+      btn.style.background = 'rgba(245,158,11,0.12)';
+      btn.style.color = 'var(--amber)';
+      btn.style.borderLeftColor = 'var(--amber)';
+    } else if (item.amber) {
+      btn.style.color = 'rgba(245,158,11,0.4)';
+    } else if (item.blue && activeTab === item.id) {
+      btn.style.background = 'rgba(77,166,255,0.12)';
+      btn.style.color = 'var(--accent)';
+      btn.style.borderLeftColor = 'var(--accent)';
+    } else if (item.blue) {
+      btn.style.color = 'rgba(77,166,255,0.45)';
     }
     btn.innerHTML = `<span class="nav-icon">${item.icon}</span>${item.label}`;
     btn.onclick = () => goTab(item.id);
     sidebar.appendChild(btn);
 
     const mbtn = document.createElement('button');
-    mbtn.className = (activeTab === item.id ? 'active' : '') + (item.green ? ' green-tab' : '');
+    mbtn.className = (activeTab === item.id ? 'active' : '') + (item.green ? ' green-tab' : '') + (item.purple ? ' purple-tab' : '') + (item.amber ? ' amber-tab' : '') + (item.blue ? ' blue-tab' : '');
     mbtn.textContent = item.label;
     mbtn.onclick = () => goTab(item.id);
     mobile.appendChild(mbtn);
@@ -2146,6 +2953,7 @@ function buildNav() {
 
 function buildModuleGrid() {
   const grid = document.getElementById('moduleGrid');
+  if (!grid) return;
   grid.innerHTML = '';
   MODULES.forEach(m => {
     const card = document.createElement('div');
@@ -2156,9 +2964,9 @@ function buildModuleGrid() {
     card.onclick = () => goTab(m.id);
     card.innerHTML = `
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <div style="width:32px;height:32px;border-radius:8px;background:${m.accent==='green'?'rgba(34,197,94,0.1)':'var(--accent-dim)'};display:flex;align-items:center;justify-content:center;font-size:14px">${m.icon}</div>
+        <div style="width:32px;height:32px;border-radius:8px;background:${m.accent==='green'?'rgba(34,197,94,0.1)':m.accent==='purple'?'rgba(167,139,250,0.1)':m.accent==='amber'?'rgba(245,158,11,0.1)':'var(--accent-dim)'};display:flex;align-items:center;justify-content:center;font-size:14px">${m.icon}</div>
         <div style="font-family:var(--font-head);font-weight:700;font-size:14px">${m.name}</div>
-        ${m.ai ? '<span class="pill-accent pill" style="margin-left:auto;font-size:8px">✦ AI</span>' : m.accent==='green' ? '<span class="pill-green pill" style="margin-left:auto;font-size:8px">⬢ NEW</span>' : ''}
+        ${m.ai ? '<span class="pill-accent pill" style="margin-left:auto;font-size:8px">✦ AI</span>' : m.accent==='green' ? '<span class="pill-green pill" style="margin-left:auto;font-size:8px">⬢ SALES</span>' : m.accent==='purple' ? '<span class="pill" style="margin-left:auto;font-size:8px;background:rgba(167,139,250,0.1);color:var(--purple);border-color:rgba(167,139,250,0.15)">◆ 80/20</span>' : m.accent==='amber' ? '<span class="pill" style="margin-left:auto;font-size:8px;background:rgba(245,158,11,0.1);color:var(--amber);border-color:rgba(245,158,11,0.15)">✧ AI</span>' : ''}
       </div>
       <p style="font-size:12px;color:var(--text-3);line-height:1.5">${m.desc}</p>
     `;
@@ -2193,11 +3001,11 @@ function goTab(id) {
   if (id === 'performance') setTimeout(initPerfTab, 150);
   if (id === 'hub') setTimeout(initHubTab, 150);
   if (id === 'report') { document.getElementById('reportContent').style.display='none'; }
-  if (id === 'business') setTimeout(initBusinessTab, 150);
   if (id === 'crm') setTimeout(initCRMTab, 150);
   if (id === 'leads') setTimeout(initLeadsTab, 150);
   if (id === 'invoices') setTimeout(initInvoicesTab, 150);
   if (id === 'proposals') setTimeout(initProposalsTab, 150);
+  if (id === 'reputation') setTimeout(initReputationTab, 150);
 }
 
 function handleSubmit(e) {
@@ -2211,6 +3019,7 @@ function handleSubmit(e) {
 
 buildNav();
 buildModuleGrid();
+buildIndustryGrid();
 document.getElementById('tab-home').classList.add('active');
 </script>
 </body>
