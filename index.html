@@ -338,6 +338,19 @@ textarea.form-input{min-height:100px;resize:vertical}
 .mobile-bar button.blue-tab.active{background:rgba(77,166,255,0.12);color:var(--accent);border-color:rgba(77,166,255,0.2)}
 .mobile-bar .mob-sep{width:1px;height:20px;background:var(--border);flex-shrink:0;align-self:center;margin:0 2px}
 
+/* Industry picker dropdown */
+/* ─── Industry top nav bar ───────────────────────────── */
+.ind-top-bar{display:flex;align-items:center;gap:4px;padding:7px 20px;border-bottom:1px solid var(--border);background:var(--bg);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
+.ind-top-bar::-webkit-scrollbar{display:none}
+.ind-top-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-3);cursor:pointer;font-size:11px;font-weight:500;white-space:nowrap;transition:all 0.15s;font-family:var(--font-body);flex-shrink:0}
+.ind-top-btn:hover{border-color:var(--border2);color:var(--text-2);background:rgba(255,255,255,0.04)}
+.ind-top-btn.active{font-weight:600}
+.ind-top-sep{width:1px;height:16px;background:var(--border);flex-shrink:0;margin:0 4px}
+/* ─── Sidebar industry mode bar ─────────────────────── */
+.brand-area{cursor:pointer;border-radius:var(--r-sm);transition:background 0.15s;padding:2px;margin:-2px}
+.brand-area:hover{background:rgba(255,255,255,0.04)}
+.ind-mode-bar{padding:4px 10px;border-radius:4px;margin:0 0 8px;display:none;align-items:center;gap:6px;font-size:9px;font-family:var(--font-mono);letter-spacing:0.5px;border-left:2px solid transparent}
+
 /* Coming soon badge */
 .coming-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600;background:rgba(77,166,255,0.08);color:var(--accent);border:1px solid rgba(77,166,255,0.12)}
 .coming-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);animation:dot-pulse 2s infinite}
@@ -353,12 +366,17 @@ textarea.form-input{min-height:100px;resize:vertical}
     <!-- ═══ SIDEBAR ═══ -->
     <div class="sidebar">
       <div class="sidebar-brand">
-        <div class="sidebar-brand-inner">
-          <div class="sidebar-logo">✦</div>
+        <div class="sidebar-brand-inner brand-area" id="brandArea" onclick="goTab('home')">
+          <div class="sidebar-logo" id="brandLogo">✦</div>
           <div class="sidebar-brand-text">
-            <h1>Business Hub</h1>
-            <span>COMMAND CENTER</span>
+            <h1 id="brandTitle">Business Hub</h1>
+            <span id="brandSub">COMMAND CENTER</span>
           </div>
+        </div>
+        <div class="ind-mode-bar" id="indModeBar">
+          <span id="indModeIcon">◆</span>
+          <span id="indModeName">Industry Mode</span>
+          <button onclick="resetIndustry()" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:10px;font-family:var(--font-mono);opacity:0.7">× reset</button>
         </div>
       </div>
       <nav class="sidebar-nav" id="sidebarNav"></nav>
@@ -370,11 +388,13 @@ textarea.form-input{min-height:100px;resize:vertical}
 
     <!-- ═══ MAIN ═══ -->
     <div class="main">
+      <div class="ind-top-bar" id="industryTopBar"></div>
       <div class="main-scroll" id="mainScroll">
 
         <!-- ══ HOME / DASHBOARD ══ -->
         <div id="tab-home" class="page">
-          <div class="page-inner">
+        <div id="industryHomeOverlay" style="display:none"></div>
+          <div class="page-inner" id="homePageInner">
             <!-- Hero -->
             <div style="animation:slideUp 0.4s ease forwards">
               <div class="label label-accent" style="margin-bottom:10px">✦ BUSINESS HUB</div>
@@ -476,16 +496,45 @@ textarea.form-input{min-height:100px;resize:vertical}
               </div>
             </div>
 
-            <!-- Industry CTA -->
-            <div style="margin-top:32px;padding:20px;border-radius:var(--r-lg);background:linear-gradient(135deg,rgba(167,139,250,0.06),rgba(167,139,250,0.02));border:1px solid rgba(167,139,250,0.15);cursor:pointer;transition:all 0.2s;animation:slideUp 0.4s ease 0.2s both" onclick="goTab('industries')" onmouseenter="this.style.borderColor='rgba(167,139,250,0.3)'" onmouseleave="this.style.borderColor='rgba(167,139,250,0.15)'">
-              <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-                <div style="font-size:24px">◆</div>
-                <div style="flex:1">
-                  <div style="font-family:var(--font-head);font-weight:700;font-size:15px">See how this looks for your industry</div>
-                  <div style="font-size:12px;color:var(--text-2);margin-top:3px">Photographer, lawyer, restaurant, dentist — pick yours.</div>
-                </div>
-                <div style="padding:7px 14px;background:var(--purple);color:#fff;border-radius:var(--r-sm);font-size:11px;font-weight:700;flex-shrink:0">Explore →</div>
+            <!-- Live Activity Feed -->
+            <div style="margin-top:28px;animation:slideUp 0.4s ease 0.17s both">
+              <div style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+                <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);animation:dot-pulse 1.8s infinite"></span> Live Activity
               </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08)">
+                  <span style="font-size:14px">◇</span>
+                  <div style="flex:1;font-size:12px;color:var(--text-2)">New lead <strong style="color:var(--text)">Sarah K.</strong> submitted a contact form</div>
+                  <span style="font-size:10px;color:var(--text-3);white-space:nowrap">2 min ago</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.08)">
+                  <span style="font-size:14px">✉</span>
+                  <div style="flex:1;font-size:12px;color:var(--text-2)">Email campaign <strong style="color:var(--text)">"Spring Offer"</strong> — 34% open rate</div>
+                  <span style="font-size:10px;color:var(--text-3);white-space:nowrap">18 min ago</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.08)">
+                  <span style="font-size:14px">★</span>
+                  <div style="flex:1;font-size:12px;color:var(--text-2)">New 5-star Google review — <strong style="color:var(--amber)">"Absolutely incredible service"</strong></div>
+                  <span style="font-size:10px;color:var(--text-3);white-space:nowrap">1 hr ago</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+                  <span style="font-size:14px">□</span>
+                  <div style="flex:1;font-size:12px;color:var(--text-2)">Invoice <strong style="color:var(--text)">#1042</strong> paid — $3,200 from Vertex Digital</div>
+                  <span style="font-size:10px;color:var(--text-3);white-space:nowrap">3 hr ago</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.08)">
+                  <span style="font-size:14px">▦</span>
+                  <div style="flex:1;font-size:12px;color:var(--text-2)">Social post approved — <strong style="color:var(--text)">Tuesday's IG Reel</strong> is queued</div>
+                  <span style="font-size:10px;color:var(--text-3);white-space:nowrap">5 hr ago</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Industry CTA -->
+            <div style="margin-top:32px;padding:20px;border-radius:var(--r-lg);background:linear-gradient(135deg,rgba(167,139,250,0.06),rgba(167,139,250,0.02));border:1px solid rgba(167,139,250,0.15);animation:slideUp 0.4s ease 0.2s both">
+              <div style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:6px">See how this looks for your industry</div>
+              <div style="font-size:12px;color:var(--text-2);margin-bottom:14px">Pick your industry — the hub transforms to show exactly how it's built for you.</div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px" id="homeIndustryGrid"></div>
             </div>
 
             <div class="cta-block" style="margin-top:20px;animation:slideUp 0.4s ease 0.25s both">
@@ -1182,6 +1231,25 @@ textarea.form-input{min-height:100px;resize:vertical}
               <div class="adv-q card" onclick="askAdvisor(5)" style="padding:14px;cursor:pointer;transition:all 0.2s;border-color:rgba(245,158,11,0.08)" onmouseenter="this.style.borderColor='rgba(245,158,11,0.25)'" onmouseleave="this.style.borderColor='rgba(245,158,11,0.08)'"><div style="font-size:13px;font-weight:600">What is my next highest ROI move?</div><div style="font-size:10px;color:var(--text-3);margin-top:4px">Data-ranked opportunity</div></div>
             </div>
             <div id="advisorResult" style="display:none;margin-top:20px"></div>
+
+            <!-- Always-visible AI Pulse section -->
+            <div style="margin-top:24px;animation:slideUp 0.4s ease 0.15s both">
+              <div class="label" style="margin-bottom:10px;color:var(--amber)">✧ THIS WEEK'S AI PULSE</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="padding:14px 16px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);border-left:3px solid var(--amber)">
+                  <div style="font-size:12px;font-weight:700;margin-bottom:4px;color:var(--text)">Your top channel is 3× more efficient than your second.</div>
+                  <div style="font-size:11px;color:var(--text-2);line-height:1.5">Email is generating $4.20 per dollar spent. Google Ads is at $1.30. Reallocate 20% of ad budget toward email nurture sequences this month.</div>
+                </div>
+                <div style="padding:14px 16px;border-radius:var(--r-sm);background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1);border-left:3px solid var(--red)">
+                  <div style="font-size:12px;font-weight:700;margin-bottom:4px;color:var(--text)">Risk: 4 leads have gone cold in the past 10 days.</div>
+                  <div style="font-size:11px;color:var(--text-2);line-height:1.5">They engaged with your content but never booked. A one-line personal email — not a template — closes this kind of lead at 34% on average.</div>
+                </div>
+                <div style="padding:14px 16px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);border-left:3px solid var(--green)">
+                  <div style="font-size:12px;font-weight:700;margin-bottom:4px;color:var(--text)">Opportunity: You're underpriced by ~18% vs. your market.</div>
+                  <div style="font-size:11px;color:var(--text-2);line-height:1.5">Competitor pricing data shows room to raise your core service by $150–$300 without losing leads. Test on new inquiries only — don't risk existing clients.</div>
+                </div>
+              </div>
+            </div>
             <div class="cta-block" style="margin-top:32px;background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border-color:rgba(245,158,11,0.15);animation:slideUp 0.4s ease 0.2s both"><div><h3>Your AI business advisor.</h3><p>Always on. Always data-backed. Always honest.</p></div><button class="cta-btn" style="background:var(--amber);color:#000" onclick="goTab('contact')">Get Started →</button></div>
           </div>
         </div>
@@ -1217,7 +1285,13 @@ textarea.form-input{min-height:100px;resize:vertical}
               <div class="page-subtitle">Revenue, expenses, runway projections, and AI-powered scaling recommendations.</div>
             </div>
             <div style="display:flex;align-items:center;gap:12px;margin-top:24px;margin-bottom:16px;animation:slideUp 0.4s ease 0.06s both">
-              <button onclick="generateCashFlow()" style="padding:8px 18px;background:var(--amber);color:#000;border:none;border-radius:var(--r-sm);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-body)">✧ Generate Forecast →</button>
+              <button onclick="generateCashFlow()" style="padding:8px 18px;background:var(--amber);color:#000;border:none;border-radius:var(--r-sm);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-body)">✧ Refresh Forecast →</button>
+            </div>
+            <!-- 6-month trend chart -->
+            <div class="card" style="padding:14px;margin-bottom:16px;border-color:rgba(245,158,11,0.1);animation:slideUp 0.4s ease 0.07s both">
+              <div class="label" style="margin-bottom:10px">6-MONTH REVENUE TREND</div>
+              <div id="cfTrendChart" style="display:flex;align-items:flex-end;gap:6px;height:70px;margin-bottom:6px"></div>
+              <div id="cfTrendLabels" style="display:flex;gap:6px"></div>
             </div>
             <!-- Stats -->
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;animation:slideUp 0.4s ease 0.08s both">
@@ -1962,48 +2036,142 @@ function generateReport() {
   const el = document.getElementById('reportContent');
   el.style.display = 'block';
   el.style.animation = 'none'; el.offsetHeight; el.style.animation = 'slideUp 0.4s ease both';
+  const rev = rand(28000,52000), leads = rand(32,68), emailOpen = rand(22,44), emailClick = rand(4,14);
+  const chans = [
+    { name:'Instagram', icon:'📸', reach: rand(8000,22000), eng: rand(600,3200), trend: rand(5,40), color:'var(--purple)' },
+    { name:'Email',     icon:'✉',  reach: rand(3000,8000),  eng: rand(200,1200), trend: rand(2,28), color:'var(--accent)' },
+    { name:'Google Ads',icon:'🎯', reach: rand(5000,15000), eng: rand(80,600),   trend: rand(-15,30), color:'var(--green)' },
+    { name:'LinkedIn',  icon:'💼', reach: rand(1200,4000),  eng: rand(60,400),   trend: rand(-20,15), color:'var(--cyan)' },
+    { name:'Facebook',  icon:'📘', reach: rand(2000,7000),  eng: rand(80,800),   trend: rand(-25,5),  color:'var(--amber)' },
+    { name:'SEO/Organic',icon:'🔍',reach: rand(4000,12000), eng: rand(200,1000), trend: rand(-5,25),  color:'var(--text-2)' },
+  ];
+  const topPosts = [
+    { platform:'Instagram', type:'Reel', caption:'"Behind the scenes at our studio 🎬"', reach: rand(6000,18000), likes: rand(300,1400), comments: rand(20,120) },
+    { platform:'LinkedIn',  type:'Post', caption:'"The biggest mistake we see businesses make with email..."', reach: rand(1500,5000), likes: rand(80,400), comments: rand(10,60) },
+    { platform:'Email',     type:'Campaign', caption:'"Are you leaving money on the table? 💰"', reach: rand(2000,6000), likes: Math.round(rand(2000,6000)*emailOpen/100)+' opens', comments: rand(30,180)+' clicks' },
+  ];
   el.innerHTML = `
-    <div class="card" style="overflow:hidden;border-color:rgba(77,166,255,0.12)">
-      <div class="card-head" style="background:rgba(77,166,255,0.03)"><span style="font-family:var(--font-head);font-weight:700;font-size:14px">✦ Weekly Report — Feb 17–23, 2026</span></div>
-      <div class="card-body">
-        <div class="grid-3" style="gap:10px;margin-bottom:20px">
-          <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--accent)" id="rpt-impressions">0</div><div style="font-size:10px;color:var(--text-3);font-family:var(--font-mono)">IMPRESSIONS</div></div>
-          <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--green)" id="rpt-engage">0</div><div style="font-size:10px;color:var(--text-3);font-family:var(--font-mono)">ENGAGEMENTS</div></div>
-          <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--purple)" id="rpt-conv">0</div><div style="font-size:10px;color:var(--text-3);font-family:var(--font-mono)">CONVERSIONS</div></div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <!-- Header metrics -->
+      <div class="card" style="overflow:hidden;border-color:rgba(77,166,255,0.12)">
+        <div class="card-head" style="background:rgba(77,166,255,0.03)">
+          <span style="font-family:var(--font-head);font-weight:700;font-size:14px">✦ Weekly Report — Mar 1–7, 2026</span>
+          <span class="pill-accent pill" style="margin-left:auto;font-size:9px">✦ AI GENERATED</span>
         </div>
-        <div class="grid-2" style="gap:16px">
-          <div>
-            <div class="label" style="margin-bottom:8px">TOP WINS</div>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="padding:8px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:12px"><span style="color:var(--green);font-weight:700">↑ +${rand(15,40)}%</span> <span style="color:var(--text-2)">Email open rate — subject line test</span></div>
-              <div style="padding:8px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:12px"><span style="color:var(--green);font-weight:700">↑ +${rand(25,60)}%</span> <span style="color:var(--text-2)">IG reel reach vs avg</span></div>
-              <div style="padding:8px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:12px"><span style="color:var(--green);font-weight:700">↓ -${rand(10,25)}%</span> <span style="color:var(--text-2)">Google Ads CPA improved</span></div>
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+            <div style="padding:12px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--green)" id="rpt-revenue">$0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">REVENUE</div></div>
+            <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--accent)" id="rpt-impressions">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">IMPRESSIONS</div></div>
+            <div style="padding:12px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--green)" id="rpt-engage">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">ENGAGEMENTS</div></div>
+            <div style="padding:12px;border-radius:var(--r-sm);background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--amber)" id="rpt-leads">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">NEW LEADS</div></div>
+            <div style="padding:12px;border-radius:var(--r-sm);background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.1);text-align:center"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--purple)" id="rpt-conv">0</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono);margin-top:2px">CONVERSIONS</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Channel Performance -->
+      <div class="card" style="overflow:hidden">
+        <div class="card-head"><span style="font-weight:700;font-size:13px">Channel Performance</span><span class="label" style="margin-left:auto">THIS WEEK</span></div>
+        <div class="card-body" style="padding:12px">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="rpt-channels">
+            ${chans.map(c => `
+              <div style="padding:10px 12px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015)">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+                  <span style="font-size:13px">${c.icon}</span>
+                  <span style="font-size:11px;font-weight:700">${c.name}</span>
+                  <span style="margin-left:auto;font-size:10px;font-weight:700;color:${c.trend>=0?'var(--green)':'var(--red)'}">${c.trend>=0?'↑ +':'↓ '}${Math.abs(c.trend)}%</span>
+                </div>
+                <div style="display:flex;gap:12px">
+                  <div><div style="font-size:13px;font-weight:700;color:${c.color}">${c.reach.toLocaleString()}</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">REACH</div></div>
+                  <div><div style="font-size:13px;font-weight:700;color:var(--text-2)">${c.eng.toLocaleString()}</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">ENG</div></div>
+                </div>
+                <div style="margin-top:8px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden"><div style="height:100%;border-radius:2px;background:${c.color};width:${Math.min(100,Math.round(c.eng/c.reach*100*8))}%;transition:width 0.8s ease"></div></div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Posts + Wins/Losses -->
+      <div class="grid-2" style="gap:12px">
+        <!-- Top posts -->
+        <div class="card" style="overflow:hidden">
+          <div class="card-head"><span style="font-weight:700;font-size:13px">Top Performing Content</span></div>
+          <div class="card-body" style="padding:10px;display:flex;flex-direction:column;gap:8px">
+            ${topPosts.map((p,i) => `
+              <div style="padding:10px 12px;border-radius:var(--r-sm);border:1px solid var(--border);background:rgba(255,255,255,0.015);opacity:0;transform:translateX(-8px);transition:all 0.3s ease ${i*0.08}s" id="rpt-post-${i}">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+                  <span style="font-size:9px;padding:1px 6px;border-radius:6px;background:rgba(255,255,255,0.06);color:var(--text-3);font-weight:600">${p.platform}</span>
+                  <span style="font-size:9px;color:var(--text-3)">${p.type}</span>
+                </div>
+                <div style="font-size:11px;color:var(--text-2);margin-bottom:6px;line-height:1.4">${p.caption}</div>
+                <div style="display:flex;gap:10px">
+                  <span style="font-size:10px;color:var(--text-3)">👁 ${typeof p.reach==='number'?p.reach.toLocaleString():p.reach}</span>
+                  <span style="font-size:10px;color:var(--text-3)">♥ ${typeof p.likes==='number'?p.likes.toLocaleString():p.likes}</span>
+                  <span style="font-size:10px;color:var(--text-3)">💬 ${typeof p.comments==='number'?p.comments.toLocaleString():p.comments}</span>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Wins and losses -->
+        <div class="card" style="overflow:hidden">
+          <div class="card-head"><span style="font-weight:700;font-size:13px">Wins & Losses</span></div>
+          <div class="card-body" style="padding:10px">
+            <div class="label" style="margin-bottom:8px">THIS WEEK'S WINS</div>
+            <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px">
+              <div style="padding:7px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:11px"><span style="color:var(--green);font-weight:700">↑ +${rand(15,40)}%</span> <span style="color:var(--text-2)">Email open rate — subject line test</span></div>
+              <div style="padding:7px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:11px"><span style="color:var(--green);font-weight:700">↑ +${rand(25,60)}%</span> <span style="color:var(--text-2)">IG reel reach vs avg</span></div>
+              <div style="padding:7px 10px;border-radius:6px;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.08);font-size:11px"><span style="color:var(--green);font-weight:700">↓ -${rand(10,25)}%</span> <span style="color:var(--text-2)">Google Ads CPA improved</span></div>
             </div>
-            <div class="label" style="margin:16px 0 8px">LOSSES TO ADDRESS</div>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="padding:8px 10px;border-radius:6px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08);font-size:12px"><span style="color:var(--red);font-weight:700">↓ -${rand(8,20)}%</span> <span style="color:var(--text-2)">Facebook organic reach declining</span></div>
-              <div style="padding:8px 10px;border-radius:6px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08);font-size:12px"><span style="color:var(--red);font-weight:700">↓ -${rand(5,15)}%</span> <span style="color:var(--text-2)">LinkedIn post engagement</span></div>
+            <div class="label" style="margin-bottom:8px">AREAS TO ADDRESS</div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="padding:7px 10px;border-radius:6px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08);font-size:11px"><span style="color:var(--red);font-weight:700">↓ -${rand(8,20)}%</span> <span style="color:var(--text-2)">Facebook organic reach declining</span></div>
+              <div style="padding:7px 10px;border-radius:6px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.08);font-size:11px"><span style="color:var(--red);font-weight:700">↓ -${rand(5,15)}%</span> <span style="color:var(--text-2)">LinkedIn post engagement</span></div>
+              <div style="padding:7px 10px;border-radius:6px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.08);font-size:11px"><span style="color:var(--amber);font-weight:700">⚠ ${rand(2,5)} invoices</span> <span style="color:var(--text-2)">approaching overdue status</span></div>
             </div>
           </div>
-          <div>
-            <div class="label" style="margin-bottom:8px">✦ AI RECOMMENDATIONS FOR NEXT WEEK</div>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Increase IG reel frequency to 4x/week — strong engagement trend continuing</div>
-              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Shift $${rand(150,400)} from Facebook to Google Ads — CPA gap is widening</div>
-              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ A/B test email preview text — open rates plateauing, this is the next lever</div>
-              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Publish competitor response post — Competitor B just launched in your keyword space</div>
-              <div style="padding:10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:12px;color:var(--text-2);line-height:1.5">✦ Run Website audit on /pricing — bounce rate is ${rand(50,70)}%, well above target</div>
+        </div>
+      </div>
+
+      <!-- Email stats + AI Recs -->
+      <div class="grid-2" style="gap:12px">
+        <!-- Email breakdown -->
+        <div class="card" style="overflow:hidden">
+          <div class="card-head"><span style="font-weight:700;font-size:13px">✉ Email This Week</span></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+              <div style="padding:10px;border-radius:var(--r-sm);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1);text-align:center"><div style="font-weight:800;font-size:18px;color:var(--accent)">${emailOpen}%</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">OPEN RATE</div></div>
+              <div style="padding:10px;border-radius:var(--r-sm);background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.1);text-align:center"><div style="font-weight:800;font-size:18px;color:var(--green)">${emailClick}%</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">CLICK RATE</div></div>
+              <div style="padding:10px;border-radius:var(--r-sm);background:rgba(255,255,255,0.02);border:1px solid var(--border);text-align:center"><div style="font-weight:800;font-size:18px;color:var(--text)">${rand(1,4)}</div><div style="font-size:9px;color:var(--text-3);font-family:var(--font-mono)">CAMPAIGNS</div></div>
             </div>
+            <div style="font-size:11px;padding:8px 10px;border-radius:var(--r-sm);background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.08);color:var(--text-2);line-height:1.5">
+              <span style="color:var(--accent);font-weight:700">✦ Insight:</span> Your ${emailOpen >= 30 ? 'open rate is above industry average' : 'open rate has room to improve'}. ${emailClick >= 8 ? 'Click-through rate is strong' : 'Focus on call-to-action clarity to lift clicks'}.
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Recs -->
+        <div class="card" style="overflow:hidden">
+          <div class="card-head" style="background:rgba(77,166,255,0.03)"><span style="font-weight:700;font-size:13px">✦ AI Next Steps</span></div>
+          <div class="card-body" style="padding:10px;display:flex;flex-direction:column;gap:6px">
+            <div style="padding:9px 10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:11px;color:var(--text-2);line-height:1.5">✦ Increase IG reel frequency to 4x/week — momentum is building</div>
+            <div style="padding:9px 10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:11px;color:var(--text-2);line-height:1.5">✦ Shift $${rand(150,400)} from Facebook to Google Ads — CPA gap widening</div>
+            <div style="padding:9px 10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:11px;color:var(--text-2);line-height:1.5">✦ A/B test email preview text — open rates plateauing, this is the next lever</div>
+            <div style="padding:9px 10px;border-radius:6px;background:var(--accent-dim);border:1px solid rgba(77,166,255,0.1);font-size:11px;color:var(--text-2);line-height:1.5">✦ Competitor B launched in your keyword space — publish a counter-positioning post</div>
+            <div style="padding:9px 10px;border-radius:6px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.1);font-size:11px;color:var(--text-2);line-height:1.5">⚠ Follow up with ${rand(2,5)} engaged leads — last contact was ${rand(4,10)}+ days ago</div>
           </div>
         </div>
       </div>
     </div>
   `;
   setTimeout(() => {
+    animateCount(document.getElementById('rpt-revenue'), rev, '$');
     animateCount(document.getElementById('rpt-impressions'), rand(20000,50000));
     animateCount(document.getElementById('rpt-engage'), rand(1500,5000));
+    animateCount(document.getElementById('rpt-leads'), leads);
     animateCount(document.getElementById('rpt-conv'), rand(80,400));
-  }, 300);
+    [0,1,2].forEach(i => { setTimeout(() => { const p=document.getElementById('rpt-post-'+i); if(p){p.style.opacity='1';p.style.transform='translateX(0)';} }, i*80); });
+  }, 200);
 }
 
 // ═══ BUSINESS TOOLS ═══
@@ -2597,6 +2765,20 @@ function runCompete(idx) {
 
 // ═══ CASH FLOW ═══
 function generateCashFlow() {
+  // Render 6-month trend chart
+  const months = ['Oct','Nov','Dec','Jan','Feb','Mar'];
+  const revVals = months.map((_,i) => rand(18000+i*1200, 32000+i*1800));
+  const maxRev = Math.max(...revVals);
+  const trendChart = document.getElementById('cfTrendChart');
+  const trendLabels = document.getElementById('cfTrendLabels');
+  if (trendChart) {
+    trendChart.innerHTML = revVals.map((v,i) => {
+      const pct = Math.round((v/maxRev)*100);
+      const isLast = i === revVals.length-1;
+      return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:9px;font-family:var(--font-mono);color:${isLast?'var(--amber)':'var(--text-3)'}">$${(v/1000).toFixed(0)}k</div><div style="flex:1;width:100%;border-radius:3px 3px 0 0;background:${isLast?'var(--amber)':'rgba(245,158,11,0.3)'};height:${pct}%;min-height:4px;transition:height 0.6s ease"></div></div>`;
+    }).join('');
+    trendLabels.innerHTML = months.map((m,i) => `<div style="flex:1;font-size:9px;font-family:var(--font-mono);color:${i===months.length-1?'var(--amber)':'var(--text-3)'};text-align:center">${m}</div>`).join('');
+  }
   const revenue = rand(18000,45000), expenses = rand(10000,28000), net = revenue - expenses;
   const runway = net > 0 ? Math.round((rand(20000,80000))/expenses) : 0;
   animateCount(document.getElementById('cf-revenue'),revenue,'$');
@@ -2877,12 +3059,113 @@ const MODULES = [
 
 let activeTab = 'home';
 
+// Per-industry color themes
+const INDUSTRY_COLORS = {
+  creative:    { c:'#c084fc', dim:'rgba(192,132,252,0.13)', tint:'rgba(192,132,252,0.04)', grad:'linear-gradient(135deg,rgba(192,132,252,0.09),rgba(192,132,252,0.02))' },
+  realtor:     { c:'#38bdf8', dim:'rgba(56,189,248,0.13)',  tint:'rgba(56,189,248,0.04)',  grad:'linear-gradient(135deg,rgba(56,189,248,0.09),rgba(56,189,248,0.02))'  },
+  restaurant:  { c:'#fb923c', dim:'rgba(251,146,60,0.13)',  tint:'rgba(251,146,60,0.04)',  grad:'linear-gradient(135deg,rgba(251,146,60,0.09),rgba(251,146,60,0.02))'  },
+  gym:         { c:'#f43f5e', dim:'rgba(244,63,94,0.13)',   tint:'rgba(244,63,94,0.04)',   grad:'linear-gradient(135deg,rgba(244,63,94,0.09),rgba(244,63,94,0.02))'   },
+  ecommerce:   { c:'#22d3ee', dim:'rgba(34,211,238,0.13)',  tint:'rgba(34,211,238,0.04)',  grad:'linear-gradient(135deg,rgba(34,211,238,0.09),rgba(34,211,238,0.02))'  },
+  therapist:   { c:'#4ade80', dim:'rgba(74,222,128,0.13)',  tint:'rgba(74,222,128,0.04)',  grad:'linear-gradient(135deg,rgba(74,222,128,0.09),rgba(74,222,128,0.02))'  },
+  homeservice: { c:'#fbbf24', dim:'rgba(251,191,36,0.13)',  tint:'rgba(251,191,36,0.04)',  grad:'linear-gradient(135deg,rgba(251,191,36,0.09),rgba(251,191,36,0.02))'  },
+  medical:     { c:'#60a5fa', dim:'rgba(96,165,250,0.13)',  tint:'rgba(96,165,250,0.04)',  grad:'linear-gradient(135deg,rgba(96,165,250,0.09),rgba(96,165,250,0.02))'  },
+};
+
+// Industry-specific nav: priorities (match home dashboard AI cards) + supporting tools
+const INDUSTRY_NAV = {
+  creative:    { priorities:['social','email','advisor'],     tools:['reputation','proposals','brandkit','cashflow'] },
+  realtor:     { priorities:['leads','social','email'],       tools:['crm','advisor','reputation','cashflow'] },
+  restaurant:  { priorities:['reputation','social','email'],  tools:['automate','advisor','performance','cashflow'] },
+  gym:         { priorities:['leads','automate','advisor'],   tools:['email','crm','social','performance'] },
+  ecommerce:   { priorities:['automate','email','advisor'],   tools:['performance','social','cashflow','compete'] },
+  therapist:   { priorities:['leads','reputation','email'],   tools:['advisor','social','proposals','brandkit'] },
+  homeservice: { priorities:['leads','automate','reputation'],tools:['advisor','invoices','social','cashflow'] },
+  medical:     { priorities:['leads','email','advisor'],      tools:['reputation','automate','performance','cashflow'] },
+};
+
+// Lookup map: id → NAV item metadata
+const NAV_LOOKUP = {};
+NAV.forEach(n => { if (n.id && n.id !== '_label') NAV_LOOKUP[n.id] = n; });
+
 function buildNav() {
   const sidebar = document.getElementById('sidebarNav');
   const mobile = document.getElementById('mobileBar');
   sidebar.innerHTML = '';
   mobile.innerHTML = '';
 
+  // ── INDUSTRY MODE: focused, prioritized nav ──────────────────────────────
+  if (currentIndustry) {
+    const ind = INDUSTRIES.find(i => i.id === currentIndustry);
+    const cfg = INDUSTRY_NAV[currentIndustry] || { priorities:[], tools:[] };
+
+    function makeNavBtn(id, badge) {
+      const meta = NAV_LOOKUP[id];
+      if (!meta) return;
+      const btn = document.createElement('button');
+      const isActive = activeTab === id;
+      btn.className = 'nav-btn' + (isActive ? ' active' : '');
+      if (isActive) {
+        btn.style.background = 'var(--ind-dim, rgba(167,139,250,0.12))';
+        btn.style.color = 'var(--ind-color, var(--purple))';
+        btn.style.borderLeftColor = 'var(--ind-color, var(--purple))';
+      } else {
+        btn.style.color = badge === 'priority' ? 'var(--ind-color, var(--purple))' : 'rgba(200,200,200,0.35)';
+      }
+      const badgeHtml = badge === 'priority'
+        ? `<span style="margin-left:auto;font-size:8px;font-family:var(--font-mono);color:var(--ind-color,var(--purple));background:var(--ind-dim,rgba(167,139,250,0.12));padding:1px 5px;border-radius:3px;letter-spacing:0.3px">▲ TOP</span>`
+        : '';
+      btn.innerHTML = `<span class="nav-icon">${meta.icon}</span>${meta.label}${badgeHtml}`;
+      btn.onclick = () => goTab(id);
+      sidebar.appendChild(btn);
+
+      const mbtn = document.createElement('button');
+      mbtn.className = (isActive ? 'active ' : '') + 'purple-tab';
+      mbtn.textContent = meta.label;
+      mbtn.onclick = () => goTab(id);
+      mobile.appendChild(mbtn);
+    }
+
+    // Home button
+    const homeBtn = document.createElement('button');
+    homeBtn.className = 'nav-btn' + (activeTab === 'home' ? ' active' : '');
+    homeBtn.innerHTML = `<span class="nav-icon">✦</span>Dashboard`;
+    homeBtn.onclick = () => goTab('home');
+    sidebar.appendChild(homeBtn);
+    const mhome = document.createElement('button');
+    mhome.className = activeTab === 'home' ? 'active' : '';
+    mhome.textContent = 'Dashboard'; mhome.onclick = () => goTab('home');
+    mobile.appendChild(mhome);
+
+    // Priorities section
+    const priLbl = document.createElement('div');
+    priLbl.className = 'nav-label';
+    priLbl.style.color = 'var(--ind-color, var(--purple))';
+    priLbl.textContent = '▲ PRIORITIES';
+    sidebar.appendChild(priLbl);
+    const mpriLbl = document.createElement('div');
+    mpriLbl.className = 'mob-sep'; mobile.appendChild(mpriLbl);
+    cfg.priorities.forEach(id => makeNavBtn(id, 'priority'));
+
+    // Tools section
+    const toolLbl = document.createElement('div');
+    toolLbl.className = 'nav-label';
+    toolLbl.style.color = 'var(--ind-color, var(--purple))';
+    toolLbl.style.opacity = '0.5';
+    toolLbl.textContent = `${ind ? ind.name.toUpperCase() : 'YOUR'} TOOLS`;
+    sidebar.appendChild(toolLbl);
+    const mtoolLbl = document.createElement('div');
+    mtoolLbl.className = 'mob-sep'; mobile.appendChild(mtoolLbl);
+    cfg.tools.forEach(id => makeNavBtn(id, 'tool'));
+
+    // Mobile CTAs
+    const msep2 = document.createElement('div'); msep2.className = 'mob-sep'; mobile.appendChild(msep2);
+    const demoBtn2 = document.createElement('button');
+    demoBtn2.textContent = 'Book Demo'; demoBtn2.style.cssText='background:var(--accent);color:#fff;border-color:var(--accent)';
+    demoBtn2.onclick = () => goTab('contact'); mobile.appendChild(demoBtn2);
+    return;
+  }
+
+  // ── GENERIC MODE: full nav ───────────────────────────────────────────────
   NAV.forEach(item => {
     if (item.id === '_label') {
       const lbl = document.createElement('div');
@@ -3000,12 +3283,25 @@ function goTab(id) {
   if (id === 'email') setTimeout(initEmailTab, 150);
   if (id === 'performance') setTimeout(initPerfTab, 150);
   if (id === 'hub') setTimeout(initHubTab, 150);
-  if (id === 'report') { document.getElementById('reportContent').style.display='none'; }
+  if (id === 'report') setTimeout(generateReport, 150);
+  if (id === 'cashflow') setTimeout(generateCashFlow, 150);
+  if (id === 'prioritize') setTimeout(generatePriorities, 150);
   if (id === 'crm') setTimeout(initCRMTab, 150);
   if (id === 'leads') setTimeout(initLeadsTab, 150);
   if (id === 'invoices') setTimeout(initInvoicesTab, 150);
   if (id === 'proposals') setTimeout(initProposalsTab, 150);
   if (id === 'reputation') setTimeout(initReputationTab, 150);
+  if (id === 'home') {
+    const overlay = document.getElementById('industryHomeOverlay');
+    const inner = document.getElementById('homePageInner');
+    if (currentIndustry && overlay && inner) {
+      inner.style.display = 'none';
+      overlay.style.display = 'block';
+    } else if (overlay && inner) {
+      overlay.style.display = 'none';
+      inner.style.display = '';
+    }
+  }
 }
 
 function handleSubmit(e) {
@@ -3017,9 +3313,353 @@ function handleSubmit(e) {
   setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
 }
 
+// ═══ INDUSTRY MODE ═══
+let currentIndustry = null;
+
+function buildIndustryTopBar() {
+  const bar = document.getElementById('industryTopBar');
+  if (!bar) return;
+  bar.innerHTML = '';
+  const IND_SHORT = {creative:'Creative',realtor:'Realtor',restaurant:'Restaurant',gym:'Gym',ecommerce:'E-Commerce',therapist:'Therapist',homeservice:'Home Service',medical:'Medical'};
+  // Generic pill
+  const genBtn = document.createElement('button');
+  genBtn.className = 'ind-top-btn' + (!currentIndustry ? ' active' : '');
+  genBtn.innerHTML = `<span>✦</span> All Industries`;
+  if (!currentIndustry) { genBtn.style.background='rgba(77,166,255,0.1)'; genBtn.style.borderColor='rgba(77,166,255,0.25)'; genBtn.style.color='var(--accent)'; }
+  genBtn.onclick = resetIndustry;
+  bar.appendChild(genBtn);
+  // Divider
+  const sep = document.createElement('div'); sep.className = 'ind-top-sep'; bar.appendChild(sep);
+  // Industry pills
+  INDUSTRIES.forEach(ind => {
+    const clr = INDUSTRY_COLORS[ind.id] || { c:'var(--accent)', dim:'rgba(77,166,255,0.12)' };
+    const isActive = currentIndustry === ind.id;
+    const btn = document.createElement('button');
+    btn.className = 'ind-top-btn' + (isActive ? ' active' : '');
+    btn.innerHTML = `<span>${ind.icon}</span>${IND_SHORT[ind.id]||ind.name}`;
+    if (isActive) { btn.style.background=clr.dim; btn.style.borderColor=clr.c+'66'; btn.style.color=clr.c; }
+    btn.onclick = () => applyIndustry(ind.id);
+    bar.appendChild(btn);
+  });
+}
+
+function applyIndustry(id) {
+  currentIndustry = id;
+  const ind = INDUSTRIES.find(i => i.id === id);
+  if (!ind) return;
+  // Apply industry color theme via CSS vars
+  const clr = INDUSTRY_COLORS[id] || { c:'#a78bfa', dim:'rgba(167,139,250,0.13)', tint:'rgba(167,139,250,0.04)', grad:'linear-gradient(135deg,rgba(167,139,250,0.09),rgba(167,139,250,0.02))' };
+  const root = document.documentElement;
+  root.style.setProperty('--ind-color', clr.c);
+  root.style.setProperty('--ind-dim',   clr.dim);
+  root.style.setProperty('--ind-tint',  clr.tint);
+  root.style.setProperty('--ind-grad',  clr.grad);
+  // Update sidebar brand
+  const logo = document.getElementById('brandLogo');
+  logo.textContent = ind.icon;
+  logo.style.background = clr.dim;
+  logo.style.color = clr.c;
+  logo.style.fontSize = '14px';
+  document.getElementById('brandTitle').textContent = ind.name + ' Hub';
+  document.getElementById('brandSub').textContent = 'INDUSTRY MODE';
+  document.getElementById('brandSub').style.color = clr.c;
+  const modeBar = document.getElementById('indModeBar');
+  modeBar.style.display = 'flex';
+  modeBar.style.background = clr.tint;
+  modeBar.style.color = clr.c;
+  modeBar.style.borderLeftColor = clr.c + '55';
+  document.getElementById('indModeIcon').textContent = ind.icon;
+  document.getElementById('indModeName').textContent = ind.name + ' Mode';
+  document.querySelector('#indModeBar button').style.color = clr.c;
+  // Rebuild top bar + sidebar nav
+  buildIndustryTopBar();
+  // Go to home and render industry dashboard
+  goTab('home');
+  setTimeout(() => renderIndustryHome(ind), 200);
+}
+
+function resetIndustry() {
+  currentIndustry = null;
+  // Remove industry CSS vars
+  const root = document.documentElement;
+  root.style.removeProperty('--ind-color');
+  root.style.removeProperty('--ind-dim');
+  root.style.removeProperty('--ind-tint');
+  root.style.removeProperty('--ind-grad');
+  // Reset sidebar brand
+  const logo = document.getElementById('brandLogo');
+  logo.textContent = '✦';
+  logo.style.background = '';
+  logo.style.color = '';
+  logo.style.fontSize = '';
+  document.getElementById('brandTitle').textContent = 'Business Hub';
+  document.getElementById('brandSub').textContent = 'COMMAND CENTER';
+  document.getElementById('brandSub').style.color = '';
+  document.getElementById('indModeBar').style.display = 'none';
+  const overlay = document.getElementById('industryHomeOverlay');
+  if (overlay) overlay.style.display = 'none';
+  const inner = document.getElementById('homePageInner');
+  if (inner) inner.style.display = '';
+  activeTab = 'home';
+  buildNav();
+  buildIndustryTopBar();
+}
+
+function renderIndustryHome(ind) {
+  const overlay = document.getElementById('industryHomeOverlay');
+  if (!overlay) return;
+  document.getElementById('homePageInner').style.display = 'none';
+  overlay.style.display = 'block';
+  const data = getIndustryData(ind.id);
+  overlay.style.animation = 'none'; overlay.offsetHeight; overlay.style.animation = 'fadeIn 0.35s ease both';
+  overlay.innerHTML = `
+    <div class="page-inner">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;animation:slideUp 0.4s ease both">
+        <div style="font-size:36px;width:56px;height:56px;border-radius:16px;background:var(--ind-dim,rgba(167,139,250,0.12));display:flex;align-items:center;justify-content:center;flex-shrink:0">${ind.icon}</div>
+        <div style="flex:1">
+          <div class="label" style="color:var(--ind-color,var(--purple));margin-bottom:4px;display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ind-color,var(--purple));animation:dot-pulse 1.8s infinite"></span> INDUSTRY MODE</div>
+          <div class="page-title" style="font-size:24px">${ind.name} Dashboard</div>
+          <div style="font-size:12px;color:var(--text-2);margin-top:2px">${ind.sub}</div>
+        </div>
+        <button onclick="resetIndustry()" style="padding:6px 14px;background:var(--ind-tint,rgba(167,139,250,0.04));border:1px solid var(--ind-dim,rgba(167,139,250,0.2));border-radius:var(--r-sm);color:var(--ind-color,var(--purple));font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);flex-shrink:0">↩ Generic View</button>
+      </div>
+
+      <!-- Key metrics -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;animation:slideUp 0.4s ease 0.05s both">
+        ${data.metrics.map(m => `
+          <div style="padding:20px 16px;border-radius:var(--r);background:${m.bg};border:${m.border};text-align:center">
+            <div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:${m.color}">${m.value}</div>
+            <div style="font-size:12px;color:var(--text-2);margin-top:6px">${m.label}</div>
+            <div style="font-size:11px;color:${m.trendColor};margin-top:4px;font-weight:600">${m.trend}</div>
+          </div>`).join('')}
+      </div>
+
+      <!-- What to focus on -->
+      <div style="animation:slideUp 0.4s ease 0.1s both">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:14px;display:flex;align-items:center;gap:8px"><span style="color:var(--ind-color,var(--purple))">▲</span> AI-recommended focus areas</div>
+        ${data.priorities.map(p => `
+          <div class="card" style="border-left:3px solid ${p.color};cursor:pointer;margin-bottom:10px;transition:all 0.2s" onclick="goTab('${p.tab}')" onmouseenter="this.style.transform='translateX(4px)'" onmouseleave="this.style.transform=''">
+            <div style="padding:16px;display:flex;align-items:flex-start;gap:14px">
+              <div style="width:36px;height:36px;border-radius:10px;background:${p.bg};display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${p.icon}</div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700">${p.title}</div>
+                <div style="font-size:12px;color:var(--text-2);margin-top:4px;line-height:1.5">${p.desc}</div>
+                <div style="font-size:11px;font-weight:600;margin-top:8px;color:${p.color}">${p.cta}</div>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>
+
+      <!-- Priority tools -->
+      <div style="margin-top:8px;animation:slideUp 0.4s ease 0.15s both">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px"><span style="color:var(--ind-color,var(--purple))">◆</span> Tools built for ${ind.name}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          ${ind.tools.slice(0,6).map(t => `
+            <div class="card" style="padding:14px;border-color:var(--ind-dim,rgba(167,139,250,0.1));border-top:2px solid var(--ind-dim,rgba(167,139,250,0.15))">
+              <div style="font-size:12px;font-weight:700;margin-bottom:3px">${t.n}</div>
+              <div style="font-size:11px;color:var(--text-3);line-height:1.4">${t.d.length>90?t.d.substring(0,90)+'…':t.d}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Live activity feed -->
+      <div style="margin-top:24px;animation:slideUp 0.4s ease 0.2s both">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+          <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);animation:dot-pulse 1.8s infinite"></span> Live Activity
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          ${data.activity.map(a => `
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);background:${a.bg};border:${a.border}">
+              <span style="font-size:14px">${a.icon}</span>
+              <div style="flex:1;font-size:12px;color:var(--text-2)">${a.text}</div>
+              <span style="font-size:10px;color:var(--text-3);white-space:nowrap">${a.time}</span>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Highlight block -->
+      <div style="margin-top:24px;padding:20px;border-radius:var(--r-lg);background:var(--ind-grad,linear-gradient(135deg,rgba(167,139,250,0.06),rgba(167,139,250,0.02)));border:1px solid var(--ind-dim,rgba(167,139,250,0.15));animation:slideUp 0.4s ease 0.22s both">
+        <div style="font-size:13px;color:var(--text);line-height:1.7">${ind.highlight}</div>
+        <div style="margin-top:14px;padding:10px 14px;border-radius:var(--r-sm);background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.12)">
+          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:3px">✧ AI Add-On: ${ind.addon}</div>
+          <div style="font-size:11px;color:var(--text-2);line-height:1.5">${ind.addonDesc}</div>
+        </div>
+      </div>
+
+      <div class="cta-block" style="margin-top:20px;animation:slideUp 0.4s ease 0.25s both">
+        <div><h3>Want to see ${ind.name} Hub live?</h3><p>We'll customize everything for your specific setup.</p></div>
+        <button class="cta-btn" onclick="goTab('contact')">Book a Demo →</button>
+      </div>
+    </div>
+  `;
+}
+
+function getIndustryData(id) {
+  const D = {
+    creative:{
+      metrics:[
+        {value:'$8,400',label:'Revenue this month',trend:'↑ 14% from last month',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'12',label:'Active commissions',trend:'↑ 3 new this week',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--green)'},
+        {value:'4.9★',label:'Collector rating',trend:'18 reviews this month',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'💰',color:'var(--green)',bg:'rgba(34,197,94,0.1)',title:'2 pricing quotes need to go out today',desc:'AI analyzed your market — current rates are 22% below comparable creatives. Next quote should reflect updated pricing.',cta:'Open AI Advisor →',tab:'advisor'},
+        {icon:'📅',color:'var(--accent)',bg:'rgba(77,166,255,0.1)',title:"Your Tuesday portfolio reveal isn't posted yet",desc:'Best time for reach is 10am–12pm. Schedule it now to hit peak audience hours.',cta:'Open Social Calendar →',tab:'social'},
+        {icon:'✉',color:'var(--purple)',bg:'rgba(167,139,250,0.1)',title:'4 collectors haven\'t heard from you in 30 days',desc:'Warm nurture email showing your latest work. Average response rate: 38%. Takes 10 minutes.',cta:'Open Email Studio →',tab:'email'},
+      ],
+      activity:[
+        {icon:'💬',text:'New commission inquiry from <strong>Julia R.</strong> — custom portrait, ~$1,200',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'8 min ago'},
+        {icon:'⭐',text:'5-star Etsy review — <strong>"Absolutely breathtaking work"</strong>',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.08)',time:'1 hr ago'},
+        {icon:'✉',text:'Collector email "New Portfolio Drop" — 41% open rate',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'3 hr ago'},
+        {icon:'📸',text:'Tuesday IG portfolio reveal scheduled and queued',bg:'rgba(255,255,255,0.02)',border:'1px solid var(--border)',time:'5 hr ago'},
+      ]
+    },
+    realtor:{
+      metrics:[
+        {value:'$42K',label:'GCI this month',trend:'↑ 18% from last month',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'23',label:'Active leads',trend:'↑ 5 new this week',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--green)'},
+        {value:'4.8★',label:'Agent rating',trend:'2 new reviews',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'⚡',color:'var(--amber)',bg:'rgba(245,158,11,0.1)',title:'3 new Zillow leads need response within 5 minutes',desc:'Speed-to-response is the #1 conversion factor. AI drafted personalized intro messages — just hit send.',cta:'Open Lead Management →',tab:'leads'},
+        {icon:'🏠',color:'var(--accent)',bg:'rgba(77,166,255,0.1)',title:"Sunday open house hasn't been promoted yet",desc:'48-hour window is your best shot for attendance. AI-built social + email campaign is ready to launch.',cta:'Open Social Calendar →',tab:'social'},
+        {icon:'📊',color:'var(--green)',bg:'rgba(34,197,94,0.1)',title:'2 listings underperforming — price or photography issue',desc:'Both have views but low inquiries. AI flagged that listings with professional photos get 4× more leads.',cta:'Open Overview →',tab:'overview'},
+      ],
+      activity:[
+        {icon:'◇',text:'New Zillow lead — <strong>Mark T.</strong>, 3-bed in Riverside, pre-approved $620K',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'2 min ago'},
+        {icon:'🏠',text:'Showing confirmed — <strong>234 Oak St</strong>, Saturday 2pm with the Johnsons',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'34 min ago'},
+        {icon:'★',text:'New 5-star Google review from past client',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.08)',time:'2 hr ago'},
+        {icon:'✉',text:'Listing alert emails sent to 847 buyer matches for 45 Elm Ave',bg:'rgba(255,255,255,0.02)',border:'1px solid var(--border)',time:'4 hr ago'},
+      ]
+    },
+    restaurant:{
+      metrics:[
+        {value:'$28K',label:'Revenue this week',trend:'↑ 9% vs last week',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'847',label:'Covers served',trend:'Saturday night sold out',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--green)'},
+        {value:'4.6★',label:'Google rating',trend:'12 new reviews',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'📉',color:'var(--red)',bg:'rgba(239,68,68,0.1)',title:'3 menu items are losing money — fix pricing today',desc:'Truffle fries, lobster bisque, and the salmon special each have food cost above 40%. AI has pricing recommendations ready.',cta:'Open AI Advisor →',tab:'advisor'},
+        {icon:'📅',color:'var(--amber)',bg:'rgba(245,158,11,0.1)',title:"St. Patrick's Day promo needs to launch now",desc:"3-day window. AI built a geo-targeted ad campaign targeting a 5-mile radius. Estimated reach: 12,000 people.",cta:'Open Social Calendar →',tab:'social'},
+        {icon:'🔄',color:'var(--green)',bg:'rgba(34,197,94,0.1)',title:"14 regulars haven't visited in 4+ weeks",desc:"Loyalty program re-engagement campaign ready. 'We miss you' with 10% off converts at 28%.",cta:'Open Email Studio →',tab:'email'},
+      ],
+      activity:[
+        {icon:'⭐',text:'New Google review — <strong>"Best pasta in the city"</strong> — 5 stars',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.08)',time:'12 min ago'},
+        {icon:'🎉',text:'Saturday evening fully booked — 8 covers remaining for Sunday',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'1 hr ago'},
+        {icon:'⚠️',text:'Inventory alert — salmon stock low, order trigger recommended',bg:'rgba(239,68,68,0.04)',border:'1px solid rgba(239,68,68,0.08)',time:'2 hr ago'},
+        {icon:'✉',text:'Loyalty email "Taco Tuesday" — 29% open rate, 84 RSVPs',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'6 hr ago'},
+      ]
+    },
+    gym:{
+      metrics:[
+        {value:'$18K',label:'Monthly recurring revenue',trend:'↑ 6% MoM',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'284',label:'Active members',trend:'↓ 3 at churn risk',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--red)'},
+        {value:'$63',label:'Revenue per member',trend:'↑ $4 from upsells',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'⚠️',color:'var(--red)',bg:'rgba(239,68,68,0.1)',title:'3 members flagged as churn risk — contact today',desc:"AI detected attendance drops + payment changes. A personal message from you right now has a 72% save rate.",cta:'Open Lead Management →',tab:'leads'},
+        {icon:'💪',color:'var(--purple)',bg:'rgba(167,139,250,0.1)',title:'8 members are ready for a PT upsell',desc:"Usage patterns show they've maxed what they can do alone. AI says now is the right moment to introduce personal training.",cta:'Open AI Advisor →',tab:'advisor'},
+        {icon:'📸',color:'var(--accent)',bg:'rgba(77,166,255,0.1)',title:"Member transformation story needs to go out",desc:"Jake's 60-day progress is ready for posting. Content like this drives 3× the referrals of any paid ad.",cta:'Open Social Calendar →',tab:'social'},
+      ],
+      activity:[
+        {icon:'🎉',text:'New member signup — <strong>David M.</strong>, 6-month membership, $420 collected',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'20 min ago'},
+        {icon:'⚠️',text:'Churn alert — <strong>Lisa K.</strong> missed 3rd consecutive session',bg:'rgba(239,68,68,0.04)',border:'1px solid rgba(239,68,68,0.08)',time:'1 hr ago'},
+        {icon:'💬',text:'Referral converted — <strong>Tom R.</strong> joined via Maria\'s referral link',bg:'rgba(167,139,250,0.04)',border:'1px solid rgba(167,139,250,0.08)',time:'3 hr ago'},
+        {icon:'✉',text:'Win-back campaign sent to 12 lapsed members — 18% already opened',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'5 hr ago'},
+      ]
+    },
+    ecommerce:{
+      metrics:[
+        {value:'$52K',label:'Revenue this month',trend:'↑ 22% MoM',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'3.8×',label:'Email ROAS',trend:'↑ from 2.1× last month',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--green)'},
+        {value:'$84',label:'Avg order value',trend:'↑ $11 from bundles',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'🛒',color:'var(--red)',bg:'rgba(239,68,68,0.1)',title:'$3,200 sitting in abandoned carts right now',desc:'143 carts abandoned in the last 24 hours. Recovery sequence ready. Average recovery rate: 18%.',cta:'Open Automation →',tab:'automate'},
+        {icon:'📦',color:'var(--amber)',bg:'rgba(245,158,11,0.1)',title:'Top SKU running low — reorder before it tanks your ads',desc:'Your best-selling bundle is 11 units from stockout. 2 active ad sets point to that product.',cta:'Open AI Advisor →',tab:'advisor'},
+        {icon:'🔄',color:'var(--green)',bg:'rgba(34,197,94,0.1)',title:'62 one-time buyers due for their repeat purchase',desc:'Based on replenishment cycles, a timed email series gets 34% conversion.',cta:'Open Email Studio →',tab:'email'},
+      ],
+      activity:[
+        {icon:'🛒',text:'24 abandoned carts in the last hour — recovery sequence triggered',bg:'rgba(239,68,68,0.04)',border:'1px solid rgba(239,68,68,0.08)',time:'Just now'},
+        {icon:'✉',text:'Email "Restock Alert" — 38% open rate, $1,840 attributed revenue',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'2 hr ago'},
+        {icon:'📦',text:'Bundle recommendation accepted — avg order value jumped to $104',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'4 hr ago'},
+        {icon:'⭐',text:'New 5-star product review — <strong>"Exactly what I needed"</strong>',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.08)',time:'6 hr ago'},
+      ]
+    },
+    therapist:{
+      metrics:[
+        {value:'$12.4K',label:'Monthly revenue',trend:'↑ 8% from last month',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'94%',label:'Schedule utilization',trend:'2 open slots this week',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--amber)'},
+        {value:'3',label:'Waitlist length',trend:'Down from 8 last month',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'📅',color:'var(--red)',bg:'rgba(239,68,68,0.1)',title:'2 cancellation slots need to be filled today',desc:'Thursday 2pm and Friday 10am just opened. AI already notified your waitlist — 2 people confirmed interest.',cta:'Open Lead Management →',tab:'leads'},
+        {icon:'🎙️',color:'var(--accent)',bg:'rgba(77,166,255,0.1)',title:'New thought-leadership article is ready to publish',desc:"AI drafted a clinically appropriate piece on managing work anxiety. 420 words. Positions you as the go-to in your area.",cta:'Open Email Studio →',tab:'email'},
+        {icon:'⭐',color:'var(--green)',bg:'rgba(34,197,94,0.1)',title:"5 happy clients haven't left a review yet",desc:"Automated post-session review requests have a 34% response rate. These 5 haven't received one yet.",cta:'Open Reputation →',tab:'reputation'},
+      ],
+      activity:[
+        {icon:'📅',text:'Cancellation filled — <strong>Alex B.</strong> confirmed Thursday 2pm slot',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'14 min ago'},
+        {icon:'✉',text:'New consultation request — <strong>Jamie L.</strong>, anxiety + work stress',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'1 hr ago'},
+        {icon:'⭐',text:'New Google review — <strong>"Life-changing work. Truly exceptional."</strong>',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.08)',time:'3 hr ago'},
+        {icon:'📋',text:'Intake form received from new prospective client',bg:'rgba(255,255,255,0.02)',border:'1px solid var(--border)',time:'5 hr ago'},
+      ]
+    },
+    homeservice:{
+      metrics:[
+        {value:'$31K',label:'Revenue this month',trend:'↑ 12% from last month',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'47',label:'Jobs booked',trend:'12 this week',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--green)'},
+        {value:'4.7★',label:'Google rating',trend:'8 new reviews',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'📞',color:'var(--red)',bg:'rgba(239,68,68,0.1)',title:'4 missed calls still unclosed — potential $6,400 in jobs',desc:'AI scored them all as high-intent. Automated follow-up texts went out but 2 have had no response. Call now.',cta:'Open Lead Management →',tab:'leads'},
+        {icon:'🌤️',color:'var(--amber)',bg:'rgba(245,158,11,0.1)',title:'Heatwave forecast this weekend — launch promo now',desc:"AC tune-up campaign ready for your zip codes. AI predicts a 3× spike in call volume. Be first.",cta:'Open Social Calendar →',tab:'social'},
+        {icon:'🔄',color:'var(--green)',bg:'rgba(34,197,94,0.1)',title:'22 maintenance contracts up for renewal this month',desc:"8 haven't renewed yet. Automated renewal reminders ready to send.",cta:'Open Automation →',tab:'automate'},
+      ],
+      activity:[
+        {icon:'📞',text:'New HVAC service call booked — <strong>Kevin M.</strong>, Thursday 9am, est. $380',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'5 min ago'},
+        {icon:'💰',text:'Upsell accepted — <strong>Johnson job</strong> added $280 drain cleaning to estimate',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'1 hr ago'},
+        {icon:'⭐',text:'5-star Google review — <strong>"Fast, professional, and fair priced"</strong>',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.08)',time:'2 hr ago'},
+        {icon:'🗺️',text:'Geo-targeted ad targeting Westside — 847 impressions, 12 clicks',bg:'rgba(255,255,255,0.02)',border:'1px solid var(--border)',time:'4 hr ago'},
+      ]
+    },
+    medical:{
+      metrics:[
+        {value:'$38K',label:'Monthly production',trend:'↑ 11% from last month',color:'var(--green)',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.1)',trendColor:'var(--green)'},
+        {value:'87%',label:'Schedule utilization',trend:'3 open slots today',color:'var(--accent)',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.1)',trendColor:'var(--amber)'},
+        {value:'4.8★',label:'Patient rating',trend:'11 new reviews',color:'var(--amber)',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.1)',trendColor:'var(--green)'},
+      ],
+      priorities:[
+        {icon:'⚠️',color:'var(--red)',bg:'rgba(239,68,68,0.1)',title:'AI flagged 4 patients likely to no-show today',desc:"Based on history and patterns. Confirmation texts sent — 2 confirmed. Call the other 2 now.",cta:'Open Lead Management →',tab:'leads'},
+        {icon:'💊',color:'var(--amber)',bg:'rgba(245,158,11,0.1)',title:'6 patients have unscheduled treatment plans',desc:"They accepted the plan but never booked. $8,200 in unscheduled production. Scheduling emails ready to send.",cta:'Open Email Studio →',tab:'email'},
+        {icon:'⭐',color:'var(--green)',bg:'rgba(34,197,94,0.1)',title:'14 patients visited this week — request reviews now',desc:"Post-visit review requests get 38% response rate. Strike while the memory is fresh.",cta:'Open Reputation →',tab:'reputation'},
+      ],
+      activity:[
+        {icon:'📅',text:'New patient booked — <strong>Sarah L.</strong>, new patient exam, Monday 10am',bg:'rgba(34,197,94,0.04)',border:'1px solid rgba(34,197,94,0.08)',time:'8 min ago'},
+        {icon:'⭐',text:'5-star Google review — <strong>"The most caring team I\'ve ever seen"</strong>',bg:'rgba(245,158,11,0.04)',border:'1px solid rgba(245,158,11,0.08)',time:'45 min ago'},
+        {icon:'💊',text:'Treatment plan accepted — <strong>Crown + 2 fillings</strong>, $1,840',bg:'rgba(77,166,255,0.04)',border:'1px solid rgba(77,166,255,0.08)',time:'2 hr ago'},
+        {icon:'✉',text:'Recall campaign: 6-month checkup reminders sent to 142 patients',bg:'rgba(255,255,255,0.02)',border:'1px solid var(--border)',time:'4 hr ago'},
+      ]
+    },
+  };
+  return D[id] || D.creative;
+}
+
 buildNav();
 buildModuleGrid();
+buildIndustryTopBar();
 buildIndustryGrid();
+
+// Build home page industry quick-select grid
+(function buildHomeIndustryGrid() {
+  const grid = document.getElementById('homeIndustryGrid');
+  if (!grid) return;
+  grid.innerHTML = INDUSTRIES.map(ind => `
+    <div onclick="applyIndustry('${ind.id}')" style="padding:10px 8px;border-radius:var(--r-sm);border:1px solid rgba(167,139,250,0.12);background:rgba(167,139,250,0.04);cursor:pointer;text-align:center;transition:all 0.2s" onmouseenter="this.style.borderColor='rgba(167,139,250,0.3)';this.style.background='rgba(167,139,250,0.1)'" onmouseleave="this.style.borderColor='rgba(167,139,250,0.12)';this.style.background='rgba(167,139,250,0.04)'">
+      <div style="font-size:18px;margin-bottom:4px">${ind.icon}</div>
+      <div style="font-size:10px;font-weight:600;color:var(--text-2)">${ind.name}</div>
+    </div>`).join('');
+})();
+
 document.getElementById('tab-home').classList.add('active');
 </script>
 </body>
